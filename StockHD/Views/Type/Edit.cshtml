@@ -1,0 +1,24 @@
+﻿@model StockHD.Models.AssetType;
+
+@using StockHD.Models;
+@using StockHD.Data;
+
+
+    <form asp-action="Edit">
+
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+
+    <br />
+
+    <label asp-for="Description" class="control-label"></label>
+    <input asp-for="Description" class="form-control" /><br/>
+
+    <div>
+
+        <input id="submit" type="submit" value="Confirmer" class="btn btn-primary" />
+        <a class="btn btn-primary" asp-action="Index">Annuler</a>
+
+    </div>
+    
+    </form>

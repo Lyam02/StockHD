@@ -1,0 +1,25 @@
+﻿@model StockHD.Models.AssetType;
+
+@using StockHD.Models;
+@using StockHD.Data;
+
+    <h1>Confirmez-vous la suppression ?</h1>
+
+    <form asp-action="Delete">
+
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+
+    <br />
+
+    <label asp-for="Description" class="control-label"></label>
+    <input asp-for="Description" class="form-control" /><br />
+
+    <div>
+
+        <input type="submit" value="Supprimer" class="btn btn-danger" />
+        <a class="btn btn-success" asp-action="Index">Annuler</a>
+
+    </div>
+
+    </form>

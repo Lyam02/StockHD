@@ -1,0 +1,15 @@
+﻿@model StockHD.Models.ExtendedProperty;
+
+@using StockHD.Models;
+@using StockHD.Data;
+
+<form asp-action="Delete_prop">
+
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <br />
+
+    <input id="submit" type="submit" value="Supprimer" class="btn btn-primary" />
+    <a asp-action ="Index" class="btn btn-primary">Annuler</a>
+
+</form>

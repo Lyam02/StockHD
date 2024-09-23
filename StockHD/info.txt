@@ -1,0 +1,5 @@
+
+
+
+add-migration InitialCreate -Context StockDbContext
+Update-Database -context StockDbContext

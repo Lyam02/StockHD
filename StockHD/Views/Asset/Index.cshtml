@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StockHD.Models.Asset>
+
+@{
+    ViewData["Title"] = "Manage Asset";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Manage Assets</h1>
+
+    <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Asset")">Nouveau</a>
+
+    <table class="table" id="table">
+
+
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(Model => Model.AssetTypes)</th>
+                <th>@Html.DisplayNameFor(model => model.Manufacturer)</th>
+                <th>@Html.DisplayNameFor(Model => Model.PorpertiesValues)</th>
+                <th>@Html.DisplayNameFor(model => model.SerialNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+            </tr> 
+        </thead>
+
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@string.Join(",", item.AssetTypes.Select(a => a.Name).ToList())</td>
+                        <td>@Html.DisplayFor(modelItem => item.Manufacturer)</td>
+                        <td>@string.Join(",", item.PorpertiesValues.Select(p => p.Value).ToList())</td>
+                        <td>@Html.DisplayFor(modelItem => item.SerialNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>
+                            <a href="@Url.Action("Delete_Asset","Asset", new{id = item.Id})">Supprimer</a>
+
+                        </td>
+                    </tr>
+                }
+
+            }
+
+        </tbody>
+    </table>
+</div>

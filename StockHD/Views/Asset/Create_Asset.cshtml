@@ -1,0 +1,36 @@
+﻿@model StockHD.Models.Asset
+@using StockHD.Models
+@using StockHD.Data
+
+
+<form asp-action="Create_Asset">
+
+
+    <div id="Asset">
+
+        <label asp-for="AssetTypes" class="control-label"></label>
+        <select class="form-control onchange-submit" name="AssetTypesSelect">
+            @foreach (AssetType a in ViewBag.AssetTypes)
+        {
+            <option value="@a.Id">@a.Name</option>
+        }
+        </select>
+
+        <label asp-for="Manufacturer" class="control-label"></label>
+        <input asp-for="Manufacturer" class="form-control" />
+
+        <label asp-for="SerialNumber" class="control-label"></label>
+        <input asp-for="SerialNumber" class="form-control" />
+
+        <label asp-for="Description" class="control_label"></label>
+        <input asp-for="Description" class="form-control" />
+
+        
+
+            
+    </div>
+
+    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <a class="btn btn-success" asp-action="Index">Annuler</a>
+    
+</form>
