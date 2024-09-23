@@ -1,0 +1,14 @@
+﻿@model StockHD.Models.ExtendedProperty;
+@using StockHD.Models;
+@using StockHD.Data;
+
+<form asp-action="Edit_prop">
+
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <br />
+
+    <input id="submit" type="submit" value="Confirmer" class="btn btn-primary" />
+    <a class="btn btn-primary" asp-action="Index">Annuler</a>
+
+</form>
