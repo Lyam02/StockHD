@@ -6,15 +6,17 @@
 <form asp-action="Create_Asset">
 
 
+
     <div id="Asset">
 
         <label asp-for="AssetTypes" class="control-label"></label>
         <select class="form-control onchange-submit" name="AssetTypesSelect">
             @foreach (AssetType a in ViewBag.AssetTypes)
-        {
-            <option value="@a.Id">@a.Name</option>
-        }
-        </select>
+            {
+                <option value="@a.Id">@a.Name</option>
+            }
+        </select> 
+        
 
         <label asp-for="Manufacturer" class="control-label"></label>
         <input asp-for="Manufacturer" class="form-control" />
