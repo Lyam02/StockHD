@@ -13,9 +13,8 @@ namespace StockHD.Data.Seeders
             {
                 context.Assets.AddRange(
 
-                    new Asset() {Manufacturer = "HP", SerialNumber = "6GFVSRY9CN", Description = "",AssetTypes = new ObservableCollection<AssetType>(
-                        context.Types.Where(a => a.Name == "PC")),
-                        PorpertiesValues = new ObservableCollection<ExtendedPropertyValue>(context.PropertiesValues.Where(p => p.Value == ""))}
+                    new Asset() {Manufacturer = "HP", SerialNumber = "6GFVSRY9CN", Description = "",AssetType = context.Types.FirstOrDefault(a => a.Name == "PC")!,
+                        PropertiesValues = new ObservableCollection<ExtendedPropertyValue>(context.PropertiesValues.Where(p => p.Value == ""))}
 
                 );
                 

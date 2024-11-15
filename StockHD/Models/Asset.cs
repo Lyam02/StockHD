@@ -9,11 +9,11 @@ namespace StockHD.Models
         public int Id { get; set; }
         //public string Name { get; set; } = "";
         //[Display(AssetTypes = "Types" )]
-        public Collection<AssetType> AssetTypes { get; set; } = new Collection<AssetType>();
+        public AssetType AssetType { get; set; } = new AssetType();
         public string Manufacturer { get; set; } = "";
         public string? SerialNumber { get; set; } = "";
         public string? Description { get; set; } = "";
-        public Collection<Location> Location { get; set; } = new Collection<Location>();
-        public Collection<ExtendedPropertyValue> PorpertiesValues { get; set; } = new Collection<ExtendedPropertyValue>();
+        public Location Location { get; set; } = new Location();
+        public Collection<ExtendedPropertyValue> PropertiesValues { get; set; } = new Collection<ExtendedPropertyValue>();
     }
 }

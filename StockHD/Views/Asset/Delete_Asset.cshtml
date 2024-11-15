@@ -4,7 +4,7 @@
 
 <form asp-action="Delete_Asset">
 
-    <label asp-for="AssetTypes" class="control-label"></label>
+    <label asp-for="AssetType" class="control-label"></label>
     <select class="form-control onchange-submit" name="Asset_select">
 
         @foreach (AssetType a in ViewBag.AssetTypes)

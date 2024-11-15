@@ -38,7 +38,7 @@ namespace StockHD.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Asset>().ToTable("Assets").HasMany(e=> e.PorpertiesValues);
+            modelBuilder.Entity<Asset>().ToTable("Assets").HasMany(e=> e.PropertiesValues);
             modelBuilder.Entity<Location>().ToTable("Locations");
             modelBuilder.Entity<AssetType>().ToTable("AssetType").HasMany(e => e.Properties).WithMany(e=>e.AssetTypes);
             modelBuilder.Entity<ExtendedProperty>().ToTable("Properties");

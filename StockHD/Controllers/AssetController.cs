@@ -19,9 +19,10 @@ namespace StockHD.Controllers
             _context = context;
         }
 
+        
         public ActionResult Index()
         {
-            var Assets = _context.Assets.Include(t => t.AssetTypes);
+            var Assets = _context.Assets.Include(t => t.AssetType);
 
             return View(Assets);
         }
@@ -42,7 +43,6 @@ namespace StockHD.Controllers
         {
             var Asset = new Asset
             {
-                
                 Manufacturer = "",
 
                 SerialNumber = "",
@@ -56,18 +56,21 @@ namespace StockHD.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Asset(Asset asset)
+        public async Task<IActionResult> Create_Asset(Asset asset,int AssetTypeSelect)
         {
-            if(!ModelState.IsValid)
+            asset.AssetType = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect)!;
+            if (!ModelState.IsValid)
             {
+                Type();
                 return View(asset);
             }
 
             _context.Assets.Add(asset);
             await _context.SaveChangesAsync();
 
-            return View(asset);
+            return RedirectToAction(nameof(Index));
         }
+        
 
         /*
          --------------------------------------
@@ -111,7 +114,6 @@ namespace StockHD.Controllers
             
         }
         
-
 
          private void Type()
         {
