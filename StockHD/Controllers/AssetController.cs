@@ -111,7 +111,6 @@ namespace StockHD.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
 
-            
         }
         
 
