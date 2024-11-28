@@ -1,44 +1,44 @@
 ﻿@model StockHD.Models.Asset
 
 
-
 <!--Création d'un formulaire de création d un Asset avec un AssetType -->
 
 <form asp-action="Create_Asset">
 
 
-    <div id="Asset">
+    <div class="mb-3">
 
-        <label asp-for="AssetType" class="control-label"></label>
-        <select class="form-control onchange-submit" name="AssetTypeSelect">
+        <label asp-for="AssetType"></label>
+        <select class="form-control" name="AssetTypeSelect">
             @foreach (AssetType a in ViewBag.AssetTypes)
             {
                 <option value="@a.Id">@a.Name</option>
             }
-        </select> 
+        </select><br />
 
-       @*  <label asp-for="PropertiesValues" class="control-label"></label>
+      @*<label asp-for="PropertiesValues" class="control-label"></label>
         <select class="form-control onchange-submit" name="PropertiesSelect">
             @foreach (ExtendedProperty e in ViewBag.PropertiesValues)
             {
                 <option value="@e.Id">@e.Name</option>
             }
-        </select>  *@       
+        </select>*@
+        
         <div class="form-floating mb-3">
-        <label asp-for="Manufacturer" class="control-label"></label>
-        <input asp-for="Manufacturer" class="form-control" />
+        <input asp-for="Manufacturer" class="form-control" placeholder=""/>
+        <label asp-for="Manufacturer" for="Constructeur"></label>
         <span asp-validation-for="Manufacturer" class="text-danger"></span>
         </div>
         <div class="form-floating mb-3">
-        <label asp-for="SerialNumber" class="control-label"></label>
-        <input asp-for="SerialNumber" class="form-control" />
+        <input asp-for="SerialNumber" class="form-control" placeholder="" />
+        <label asp-for="SerialNumber" for="Numéro de série"></label>
         <span asp-validation-for="SerialNumber" class="text-danger"></span>
         </div>
 
         <div class="form-floating mb-3">
 
-         <label asp-for="Description" class="control_label"></label>
-        <input asp-for="Description" class="form-control" />
+        <input asp-for="Description" class="form-control" placeholder="" />
+        <label asp-for="Description" for="Description"></label>
         <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         
