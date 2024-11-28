@@ -100,13 +100,16 @@ namespace StockHD.Controllers
 
         [HttpPost, ActionName("Delete_Asset")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete_Asset(Asset asset)
+        public async Task<IActionResult> Delete_Asset(int Id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(asset);
-            }
 
+            Asset? asset = await _context.Assets.FindAsync(Id);
+
+            if (asset == null)
+            {
+                return NotFound();
+            }
+                
             _context.Remove(asset);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -117,7 +120,10 @@ namespace StockHD.Controllers
          private void Type()
         {
             ViewData["AssetTypes"] = _context.Types.ToList();
+            ViewData["ExtendedProperty"] = _context.PropertiesValues.ToList();
         }
+
+
 
     }
 }

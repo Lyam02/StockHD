@@ -2,28 +2,39 @@
 @using StockHD.Models;
 @using StockHD.Data;
 
+
+
+ <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetType.Name) @* dt : pour afficher le nom du champ, ici il affichera 'Nom' *@
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AssetType.Name) @* dd : permet d'afficher la valeur du champ, ici il affichera 'PC' *@
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Manufacturer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SerialNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PropertiesValues)
+        </dt>
+        <dd>
+
+        </dd>
+        
+ </dl>
+
+
 <form asp-action="Delete_Asset">
-
-    <label asp-for="AssetType" class="control-label"></label>
-    <select class="form-control onchange-submit" name="Asset_select">
-
-        @foreach (AssetType a in ViewBag.AssetTypes)
-        {
-            <option  value="@a.Id">@a.Name</option>
-        }
-
-    </select>
-
-    <label asp-for="Manufacturer" class="control-label"></label>
-    <input asp-for="Manufacturer" class="form-control" />
-
-    <label asp-for="SerialNumber" class="control-label"></label>
-    <input asp-for="SerialNumber" class="form-control" />
-    
-    <label asp-for="Description" class="control-label"></label>
-    <input asp-for="Description" class="form-control" /><br />
-
-    <input id="submit" type="submit" value="Supprimer" class="btn btn-primary" />
-    <a class="btn btn-success" asp-action="Index">Annuler</a>
-
-</form>
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Supprimer" class="btn btn-danger" /> |
+        <a class="btn btn-success" asp-action="Index">Annuler</a>
+    </form>

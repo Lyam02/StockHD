@@ -7,13 +7,14 @@ namespace StockHD.Models
     public class Asset
     {
         public int Id { get; set; }
-        //public string Name { get; set; } = "";
         //[Display(AssetTypes = "Types" )]
         public AssetType AssetType { get; set; } = new AssetType();
         public string Manufacturer { get; set; } = "";
+        [Display(Name = "Numéro de série")]
         public string? SerialNumber { get; set; } = "";
         public string? Description { get; set; } = "";
-        public Location Location { get; set; } = new Location();
+        public Location? Location { get; set; } 
         public Collection<ExtendedPropertyValue> PropertiesValues { get; set; } = new Collection<ExtendedPropertyValue>();
+        
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace StockHD.Models
 {
-    public class interaction
+    public class Interaction
     {
         
     }

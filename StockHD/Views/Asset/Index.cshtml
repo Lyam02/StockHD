@@ -27,13 +27,18 @@
                 foreach (var item in Model)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem =>item.AssetType.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.AssetType.Name)</td>  
                         <td>@Html.DisplayFor(modelItem => item.Manufacturer)</td>
                         <td>@string.Join(",", item.PropertiesValues.Select(p => p.Value).ToList())</td>
                         <td>@Html.DisplayFor(modelItem => item.SerialNumber)</td>
                         <td>@Html.DisplayFor(modelItem => item.Description)</td>
                         <td>
-                            <a href="@Url.Action("Delete_Asset","Asset", new{id = item.Id})">Supprimer</a>
+
+                            <a href="@Url.Action("Delete_Asset", "Asset", new{id = item.Id})">Supprimer</a> 
+                            @* 
+                            Permet d'indiquer l'action, le controlleur et la valeur
+                            ca crée ensuite une url en fonction de la nomenclature du Startup
+                            *@
 
                         </td>
                     </tr>
