@@ -31,6 +31,9 @@
                         <td>@Html.DisplayFor(modelItem => item.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.Description)</td>
                         <td>@string.Join(",", item.Assets.Select(p => p.AssetType.Name).ToList())</td>
+                        <td>
+                            <a href="@Url.Action("Edit_Loc", "Localisation", new { id = item.Id })">Modifier</a> |
+                            <a href="@Url.Action("Delete_Loc", "Localisation", new { id = item.Id })">Supprimer</a>
                     </tr>
                 }
             }

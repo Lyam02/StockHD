@@ -1,5 +1,25 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model StockHD.Models.Location;
+@using StockHD.Models;
+@using StockHD.Data;
+
+
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Description)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+</dl>
+
+<form asp-action="Delete_Loc">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Supprimer" class="btn btn-danger" /> |
+    <a class="btn btn-success" asp-action="Index">Annuler</a>
+</form>

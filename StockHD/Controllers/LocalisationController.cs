@@ -76,7 +76,7 @@ namespace StockHD.Controllers
 
         //GET
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete_Loc(int? id)
         {
             if (id == null)
             {
@@ -90,5 +90,21 @@ namespace StockHD.Controllers
             }
             return View(Location);
         }
+
+        //POST
+        [HttpPost, ActionName("Delete_Loc")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete_Loc(Location location)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(location);
+            }
+
+            _context.Remove(location);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
