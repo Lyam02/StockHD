@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using StockHD.Data;
 using StockHD.Models;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace StockHD.Controllers
 {
@@ -19,7 +17,7 @@ namespace StockHD.Controllers
             _context = context;
         }
 
-        
+
         public ActionResult Index()
         {
             var Assets = _context.Assets.Include(t => t.AssetType);
@@ -56,7 +54,7 @@ namespace StockHD.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Asset(Asset asset,int AssetTypeSelect)
+        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect)
         {
             asset.AssetType = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect)!;
             if (!ModelState.IsValid)
@@ -70,7 +68,7 @@ namespace StockHD.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        
+
 
         /*
          --------------------------------------
@@ -109,21 +107,17 @@ namespace StockHD.Controllers
             {
                 return NotFound();
             }
-                
+
             _context.Remove(asset);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
 
         }
-        
 
-         private void Type()
+        private void Type()
         {
             ViewData["AssetTypes"] = _context.Types.ToList();
             ViewData["ExtendedProperty"] = _context.PropertiesValues.ToList();
         }
-
-
-
     }
 }

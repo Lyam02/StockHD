@@ -1,0 +1,29 @@
+﻿@model StockHD.Models.Location;
+@using StockHD.Models;
+@using StockHD.Data;
+
+
+<form asp-action="Create_Loc">
+
+    <div class="mb-3">
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Name" class="form-control" placeholder="" />
+            <label asp-for="Name">Localisation</label>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Description" class="form-control" placeholder=""/>
+            <label asp-for="Description" ></label>
+
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <a class="btn btn-success" asp-action="Index">Annuler</a>
+
+</form>

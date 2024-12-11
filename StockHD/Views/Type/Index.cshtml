@@ -37,8 +37,8 @@
                         <td>@Html.DisplayFor(modelItem => item.Description)</td>
                         <td>@string.Join(",", item.Properties.Select(p => p.Name).ToList())</td>
                         <td>
-                            <a href="@Url.Action("Edit","Type",new{id=item.Id})"> Modifier </a> <br />
-                            <a href="@Url.Action("Delete","Type",new{id=item.Id})">Supprimer</a> <br />
+                            <a href="@Url.Action("Edit","Type",new{id=item.Id})">Modifier</a> |
+                            <a href="@Url.Action("Delete","Type",new{id=item.Id})">Supprimer</a> 
                         </td>
 
                     </tr>

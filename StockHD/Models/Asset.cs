@@ -13,7 +13,7 @@ namespace StockHD.Models
         [Display(Name = "Numéro de série")]
         public string? SerialNumber { get; set; } = "";
         public string? Description { get; set; } = "";
-        public Location? Location { get; set; }
+        public Location Location { get; set; }
         [Display(Name = "Propriétés")]
         public Collection<ExtendedPropertyValue> PropertiesValues { get; set; } = new Collection<ExtendedPropertyValue>();
         

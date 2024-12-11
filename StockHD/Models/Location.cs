@@ -10,7 +10,7 @@ namespace StockHD.Models
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Code { get; set; } = string.Empty;
-        public Collection<Asset> Assets { get; set; } = new Collection<Asset>();
+        public Collection<Asset>? Assets { get; set; } = new Collection<Asset>();
 
     }
 }
