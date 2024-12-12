@@ -2,3 +2,38 @@
 @using StockHD.Models
 @using StockHD.Data
 
+<form asp-action="Edit_Asset">
+    <div class="mb-3">
+
+        <div class="mb-3">
+            <label asp-for="AssetType"></label>
+            <select class="form-control" name="AssetTypeSelect">
+                @foreach (AssetType a in ViewBag.AssetTypes)
+                {
+                    <option value="@a.Id">@a.Name</option>
+
+                }
+            </select>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Manufacturer" class="form-control" placeholder="" />
+            <label asp-for="Manufacturer">Constructeur</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="SerialNumber" class="form-control" placeholder="" />
+            <label asp-for="SerialNumber">Numéro de série</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Description" class="form-control" placeholder="" />
+            <label asp-for="Description">Description</label>
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Modifier" class="btn btn-success" />
+    <a class="btn btn-danger" asp-action="Index">Annuler</a>
+
+</form>

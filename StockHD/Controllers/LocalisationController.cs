@@ -31,8 +31,8 @@ namespace StockHD.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }      
-        
+        }
+
         //----------------------------
 
         // Create Location
@@ -45,7 +45,7 @@ namespace StockHD.Controllers
         {
             var Location = new Location
             {
-                Name ="",
+                Name = "",
                 Description = "",
             };
 
@@ -94,17 +94,57 @@ namespace StockHD.Controllers
         //POST
         [HttpPost, ActionName("Delete_Loc")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete_Loc(Location location)
+        public async Task<IActionResult> Delete_Loc(int Id)
         {
-            if(!ModelState.IsValid)
+            Location? location = await _context.Locations.FindAsync(Id);
+
+            if (location == null)
             {
-                return View(location);
+                return NotFound();
             }
 
             _context.Remove(location);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
+        //------------------
+
+        // Edit Location
+
+        //------------------
+
+        //GET
+        public async Task<IActionResult> Edit_Loc(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var location = await _context.Locations.SingleOrDefaultAsync(l => l.Id == id);
+            if (location == null)
+            {
+                return NotFound();
+            }
+            return View(location);
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Edit_Loc(Location location)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(location);
+            }
+
+            _context.Update(location);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+
+        }
     }
 }

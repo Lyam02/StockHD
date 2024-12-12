@@ -114,6 +114,47 @@ namespace StockHD.Controllers
 
         }
 
+        //-----------------------
+
+        // Edit Asset
+
+        //-----------------------
+
+        //GET
+        public async Task<IActionResult> Edit_Asset(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var Asset = await _context.Assets.SingleOrDefaultAsync(a => a.Id == id);
+
+            if (Asset == null)
+            {
+                return NotFound();
+            }
+
+            Type();
+            return View(Asset);
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit_Asset(Asset asset)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(asset);
+            }
+
+            _context.Update(asset);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+
         private void Type()
         {
             ViewData["AssetTypes"] = _context.Types.ToList();

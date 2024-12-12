@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model StockHD.Models.Location;
+@using StockHD.Models;
+@using StockHD.Data;
+
+
+<form asp-action="Edit_Loc">
+
+    <div class="mb-3">
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Name" class="form-control" placeholder="" />
+            <label asp-for="Name">Localisation</label>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Description" class="form-control" placeholder="" />
+            <label asp-for="Description"></label>
+
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Confirmer" class="btn btn-primary" />
+    <a class="btn btn-success" asp-action="Index">Annuler</a>
+
+</form>
