@@ -10,8 +10,32 @@
             <select class="form-control" name="AssetTypeSelect">
                 @foreach (AssetType a in ViewBag.AssetTypes)
                 {
-                    <option value="@a.Id">@a.Name</option>
+                    if (Model.AssetType.Id == a.Id)
+                    {
 
+                        <option value="@a.Id" selected>@a.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@a.Id">@a.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Location"></label>
+            <select class="form-control" name="LocationSelect">
+                @foreach (Location l in ViewBag.Locations)
+                {
+                    if (Model.Location.Id == l.Id)
+                    {
+                        <option value="@l.Id" selected>@l.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@l.Id">@l.Name</option>
+                    }
                 }
             </select>
         </div>

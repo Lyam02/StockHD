@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using StockHD.Data;
 using StockHD.Models;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace StockHD.Controllers
 {
@@ -17,12 +18,12 @@ namespace StockHD.Controllers
             _context = context;
         }
 
-
         public ActionResult Index()
-        {
-            var Assets = _context.Assets.Include(t => t.AssetType);
+        { 
+            var Assets = _context.Assets.Include(t => t.AssetType).Include(l => l.Location);
 
             return View(Assets);
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -37,6 +38,7 @@ namespace StockHD.Controllers
 
         //--------------------------------------------------
 
+        //GET
         public IActionResult Create_Asset()
         {
             var Asset = new Asset
@@ -51,11 +53,13 @@ namespace StockHD.Controllers
             return View(Asset);
 
         }
-        //POST
+        //POST Asset
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect)
+        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect)
         {
+            asset.Location = _context.Locations.SingleOrDefault(l => l.Id == LocationSelect)!;
+
             asset.AssetType = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect)!;
             if (!ModelState.IsValid)
             {
@@ -64,7 +68,7 @@ namespace StockHD.Controllers
             }
 
             _context.Assets.Add(asset);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); //Sauvegarde des changements
 
             return RedirectToAction(nameof(Index));
         }
@@ -142,23 +146,76 @@ namespace StockHD.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit_Asset(Asset asset)
+        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, int id)
         {
-            if (!ModelState.IsValid)
+            if (id != asset.Id)
             {
-                return View(asset);
+                return NotFound();
             }
 
-            _context.Update(asset);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (AssetTypeSelect > 0)
+                    {
+                        AssetType type = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect);
+
+                        if (type != null)
+                        {
+                            asset.AssetType = type;
+                        }
+                    }
+
+                    if (LocationSelect > 0)
+                    {
+                        Location location = _context.Locations.SingleOrDefault(l => l.Id == LocationSelect);
+
+                        if (location != null)
+                        {
+                            asset.Location = location;
+                        }
+                    }
+                    _context.Update(asset);
+                    await _context.SaveChangesAsync();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AssetExists(asset.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+
+
+                /*if (!ModelState.IsValid)
+                {
+                    return View(asset);
+                }
+
+                _context.Update(asset);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");*/
+            }
+            Type();
+            return View(asset);
         }
 
+        private bool AssetExists(int id)
+        {
+            return _context.Assets.Any(e => e.Id == id);
+        }
 
         private void Type()
         {
+            ViewData["Locations"] = _context.Locations.ToList();
             ViewData["AssetTypes"] = _context.Types.ToList();
-            ViewData["ExtendedProperty"] = _context.PropertiesValues.ToList();
         }
     }
 }
