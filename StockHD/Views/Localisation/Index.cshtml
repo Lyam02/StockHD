@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<StockHD.Models.Location>
 
 @{
+    ViewData["Title"] = "Emplacement";
 }
 <div class="text-center">
-    <h1 class="display-4">Localisation</h1>
+    <h1 class="display-4">Emplacement</h1>
 
     <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Loc")">Nouveau</a>
     <br />
     <br />
 
-    <table class="table" id="table">
+    <table class="table table-striped">
 
 
         <thead>

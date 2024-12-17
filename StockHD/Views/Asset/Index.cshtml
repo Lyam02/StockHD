@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<StockHD.Models.Asset>
 
 @{
-    ViewData["Title"] = "Manage Assets";
+    ViewData["Title"] = "Matériels";
 }
 
 <div class="text-center">
@@ -11,15 +11,15 @@
     <br />
     <br />
 
-    <table class="table" id="table">
+    <table class="table table-striped">
 
 
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(Model => Model.AssetType.Name)</th>
                 <th>@Html.DisplayNameFor(model => model.Manufacturer)</th>
-                <th>@Html.DisplayNameFor(model => model.SerialNumber)</th>
                 <th>@Html.DisplayNameFor(Model => Model.PropertiesValues)</th>
+                <th>@Html.DisplayNameFor(model => model.SerialNumber)</th>
                 <th>@Html.DisplayNameFor(Model => Model.Location.Name)</th>
                 <th>@Html.DisplayNameFor(model => model.Description)</th>
                 <th>
@@ -35,8 +35,8 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.AssetType.Name)</td>  
                         <td>@Html.DisplayFor(modelItem => item.Manufacturer)</td>
-                        <td>@Html.DisplayFor(modelItem => item.SerialNumber)</td>
                         <td>@string.Join(",", item.PropertiesValues.Select(p => p.Value).ToList())</td>
+                        <td>@Html.DisplayFor(modelItem => item.SerialNumber)</td>
                         <td>@Html.DisplayFor(modelItem => item.Location.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.Description)</td>
                         <td>

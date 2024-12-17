@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
+using NuGet.ContentModel;
 using StockHD.Data;
 using StockHD.Models;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace StockHD.Controllers
@@ -46,18 +48,29 @@ namespace StockHD.Controllers
 
                 
             };
-
+            Prop();
             return View(assetType);
         }
 
-        
-        // POST: Type/Create
+
+        // POST : Type/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AssetType assetType)
+        public async Task<IActionResult> Create(AssetType assetType, int TypeSelect)
         {
+            var selectedProperty = _context.Properties.SingleOrDefault(p => p.Id == TypeSelect);
+            if (selectedProperty != null)
+            {
+                assetType.Properties = new Collection<ExtendedProperty> { selectedProperty };
+            }
+            else
+            {
+                assetType.Properties = new Collection<ExtendedProperty>();
+            }
+
             if (!ModelState.IsValid)
             {
+                Prop();
                 return View(assetType);
             }
 
@@ -65,7 +78,7 @@ namespace StockHD.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -95,7 +108,7 @@ namespace StockHD.Controllers
             return View(AssetType);
         }
 
-        //POST : Type/Edit
+        //POST : Type/Edit  
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AssetType assetType)
@@ -149,6 +162,10 @@ namespace StockHD.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
 
+        }
+        private void Prop()
+        {
+            ViewData["ExtendedProperty"] = _context.Properties.ToList();
         }
     }
 }

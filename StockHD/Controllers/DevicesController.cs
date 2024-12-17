@@ -11,7 +11,7 @@ namespace StockHD.Controllers
     public class DevicesController : Controller
     {
 
-
+       
 
         public IActionResult Index()
         {
