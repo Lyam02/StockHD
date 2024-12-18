@@ -22,7 +22,7 @@
         <span asp-validation-for="Properties" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 Prop">
         <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="right" 
         data-bs-title="Vous pouvez ajoutez d'autres Propriété en cliquant ici !">
             +
@@ -44,6 +44,32 @@
     <script>
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+
+                            $(document).ready(function() {
+        //Ajouter l'élément
+        $("#Prop").click(function() {
+            $("div").append("
+
+            <div class="form-floating mb-3 PropDelete">
+            <select class="form-control" name="TypeSelect" placeholder="">
+            <option selected=""></option>
+            @foreach (ExtendedProperty p in ViewBag.ExtendedProperty)
+            {
+                    <option value="@p.Id">@p.Name</option>
+            }
+            </select>
+            <label asp-for="Properties"></label>
+            <span asp-validation-for="Properties" class="text-danger"></span>
+            </div>
+
+            ");
+        });
+        //Supprimer l'élément
+        $(document).on("click", "PropDelete", function() {
+            $(this).parent().remove();
+        });
+    });
 
 
     </script>
