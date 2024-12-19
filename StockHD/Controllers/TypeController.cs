@@ -50,6 +50,14 @@ namespace StockHD.Controllers
             };
             Prop();
             return View(assetType);
+
+        }
+
+        [HttpGet]
+        public JsonResult GetProperties()
+        {
+            var properties = _context.Properties.Select(p => p.Id).ToList();
+            return Json(properties);
         }
 
 
