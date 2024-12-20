@@ -64,7 +64,7 @@
         
              //Ajouter les options du menu déroulant
             $.each(properties, function(index, properties){
-            select += '<option value=" + properties.Id + "> + properties.Name + </option>';
+            select += '<option value=' + properties.Id + '>' + properties.Name + '</option>';
             });
              select += '</select>' +
                        '<label asp-for="Properties"></label>' +
@@ -75,4 +75,5 @@
 
    });
     </script>
+
 

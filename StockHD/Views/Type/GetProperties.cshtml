@@ -1,0 +1,19 @@
+﻿@model StockHD.Models.AssetTypes;
+
+<!--Création d'un champ de formulaire AssetType pour les Proprties.
+    Ce champ est dynamique et peut être ajouté ou supprimé au clic d'un bouton
+    grace a un script jQuery dans le fichier Create.cshtml
+-->
+
+
+<div class="form-floating mb-3">
+    <select class="form-control" name="TypeSelect" placeholder="">
+        <option selected=""></option>
+        @foreach (ExtendedProperty p in ViewBag.ExtendedProperty)
+        {
+            <option value="@p.Id">@p.Name</option>
+        }
+    </select>
+    <label asp-for="Properties"></label>
+    <span asp-validation-for="Properties" class="text-danger"></span>
+</div>
