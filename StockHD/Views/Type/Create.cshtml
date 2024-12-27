@@ -44,36 +44,25 @@
      
     </form>
 
+    @* For bootstrap tooltips button *@
     <script>
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
     
+    @* For button add new properties *@
     <script>
-   $(document).ready(function (){
-        
-            var properties = [];
-        $.getJSON('@Url.Action("GetProperties", "Type")', function(data){
-            properties = data;
-        });
+        $(document).ready(function(){
+            $("#Prop").click(function(){
 
-        //Ajouter un champ dynamique au clic du bouton
-         $('#Prop').click(function(){
-        var select = '<div class="form-floating mb-3">' +
-                     '<select class="form-control" name="TypeSelect" placeholder="">';
+             $.get('@Url.Action("GetProperties")',function (data) {
+            $("#PropDiv").append(data);
+        });
+       
         
-             //Ajouter les options du menu déroulant
-            $.each(properties, function(index, properties){
-            select += '<option value=' + properties.Id + '>' + properties.Name + '</option>';
+    });
             });
-             select += '</select>' +
-                       '<label asp-for="Properties"></label>' +
-                       '<span asp-validation-for="Properties" class="text-danger"></span>' +
-                       '</div>';
-         $('#PropDiv').append(select);
-        });
-
-   });
     </script>
+
 
 

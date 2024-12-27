@@ -54,10 +54,12 @@ namespace StockHD.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult GetProperties()
+        public IActionResult GetProperties()
         {
-            var properties = _context.Properties.Select(p => p.Id).ToList();
+            var properties = _context.Properties.ToList();
+            
             return PartialView(properties);
+            
         }
 
 
