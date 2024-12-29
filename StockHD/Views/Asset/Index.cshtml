@@ -4,12 +4,12 @@
     ViewData["Title"] = "Matériels";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Matériels</h1>
+<div class="">
+    <h1 class="display-4 texte-center">Matériels</h1>
 
+    <div class="p-0 m-1">
     <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Asset")">Nouveau</a>
-    <br />
-    <br />
+    </div>
 
     <table class="table table-striped">
 
@@ -22,9 +22,7 @@
                 <th>@Html.DisplayNameFor(model => model.SerialNumber)</th>
                 <th>@Html.DisplayNameFor(Model => Model.Location.Name)</th>
                 <th>@Html.DisplayNameFor(model => model.Description)</th>
-                <th>
-
-                </th>
+                <th></th>
             </tr> 
         </thead>
 
