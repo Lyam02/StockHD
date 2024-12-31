@@ -47,6 +47,7 @@ namespace StockHD.Controllers
             var properties = new ExtendedProperty
             {
                 Name = "",
+                Description = ""
 
             };
          
@@ -59,6 +60,7 @@ namespace StockHD.Controllers
         {
             if (!ModelState.IsValid)
             {
+                
                 return View(properties);
             }
 

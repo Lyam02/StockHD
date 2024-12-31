@@ -3,7 +3,7 @@
         <div class="sticky-top p-2 border border-2 rounded rounded-3 border-black fw-bolder">
         
         <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-5 d-none d-sm-inline" style="color:black">Menu</span>
+            <span class="fs-5 d-none d-sm-inline" style="color:black">-StockHD</span>
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" >
             
@@ -16,15 +16,22 @@
                 </a>
            
             </li>
-            <li class="nav-item"></li>
-                <a class="nav-link text-dark align-middle px-0" asp-area="" asp-controller="Asset" asp-action="Index" style="color:black !important;">
-                    <i class="bi bi-box-seam"></i> <span class="ms-1 d-none d-sm-inline">Matériels</span>
+            <li class="nav-item">
+                <a class="nav-link text-dark align-middle px-0" asp-area="" asp-controller="Asset" asp-action="Index" style="color:black">
+                        <i class="fs-4 bi-box-seam"></i> <span class="ms-1 d-none d-sm-inline">Matériels</span>
+                    </a>
+                </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-dark align-middle px-0" asp-area="" asp-controller="" asp-action="" style="color:black">
+                        <i class="fs-4 bi-person-badge"></i> <span class="ms-1 d-none d-sm-inline">Assignation</span>
                 </a>
+            </li>
 
             <li>
-                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color:black">
-                    <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span></a>
-
+                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color:black">
+                        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                    </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                     <li class="w-100"><a class="nav-link px-0" asp-area="" asp-controller="Type" asp-action="Index" style="color:black"> <span class="d-none d-sm-inline">Type</span></a></li>
                     <li class="w-100"> <a class="nav-link px-0" asp-area="" asp-controller="Property" asp-action="Index"> <span class="d-none d-sm-inline" style="color:black">Propieté</span> </a></li>
@@ -63,22 +70,20 @@
                 </a>
             </li>  *@
         </ul>
-        <hr>
-        @* <div class="dropdown pb-4">
-                                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                    <span class="d-none d-sm-inline mx-1">loser</span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                                </ul>
-                            </div> *@
+        <hr style="margin-top: 200px">
+            <div class="dropdown pb-4">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    System
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Numéros de séries</a></li>
+                    <hr>
+                    <li><a class="dropdown-item" href="#">Utilisateurs</a></li>
+                    <hr>
+                    <li><a class="dropdown-item" href="#">Droits et accès</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

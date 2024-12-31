@@ -68,6 +68,7 @@ namespace StockHD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AssetType assetType, int TypeSelect)
         {
+            
             var selectedProperty = _context.Properties.SingleOrDefault(p => p.Id == TypeSelect);
             if (selectedProperty != null)
             {
