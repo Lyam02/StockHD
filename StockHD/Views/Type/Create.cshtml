@@ -25,12 +25,15 @@
 
     </div>
 
+
     <div class="mb-3">
         <button type="button" id="Prop" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="right"
                 data-bs-title="Vous pouvez ajoutez d'autres Propriété en cliquant ici !">
             +
         </button>
     </div>
+
+    <input type="hidden" />
 
     <div class="form-floating mb-3">
     <input asp-for="Description" class="form-control" placeholder="" />
@@ -39,7 +42,7 @@
     </div>
 
 
-    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <input id="submit" value="Ajouter" class="btn btn-primary" />
     <a class="btn btn-danger" asp-action="Index">Annuler</a>
      
     </form>
@@ -67,8 +70,16 @@
     @*For Send Json with the properties data*@
     <script>
         $(document).ready(function(){
+        $("#Prop").click(function(){
+            var PropData = [];
+            $('<select class="form-control" name="TypeSelect" placeholder="">').each(function(){
             
-        })
+        });
+        });
+    });
     </script>
 
+@*Faire en sorte que le bouton lance seulement le script jquery et donc enlever le type submit pour que jquery le fasse lui a la fin du script.
+  Faire un json et le mettre dans un champ hidden.
+*@
 
