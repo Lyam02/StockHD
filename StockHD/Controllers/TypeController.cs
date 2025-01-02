@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
+using Newtonsoft.Json;
 using NuGet.ContentModel;
 using StockHD.Data;
 using StockHD.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace StockHD.Controllers
 {
@@ -63,21 +66,33 @@ namespace StockHD.Controllers
         }
 
 
+        private class Props
+        {
+            public List<int> Properties= new List<int>();
+        }
+
         // POST : Type/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AssetType assetType, int TypeSelect)
+        public async Task<IActionResult> Create(AssetType assetType, string jsonProp)
         {
-            
-            var selectedProperty = _context.Properties.SingleOrDefault(p => p.Id == TypeSelect);
-            if (selectedProperty != null)
+
+            Props props =  JsonConvert.DeserializeObject<Props>(jsonProp);
+
+            assetType.Properties = new Collection<ExtendedProperty>();
+            _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList()
+            .ForEach(assetType.Properties.Add);
+
+            //Manière non factorisé de faire :
+            /*List<ExtendedProperty> ExProps = _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList();
+
+            foreach (var ExProp in ExProps)
             {
-                assetType.Properties = new Collection<ExtendedProperty> { selectedProperty };
-            }
-            else
-            {
-                assetType.Properties = new Collection<ExtendedProperty>();
-            }
+                assetType.Properties.Add(ExProp);
+            }*/
+
+
+
 
             if (!ModelState.IsValid)
             {

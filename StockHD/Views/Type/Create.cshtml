@@ -4,7 +4,7 @@
 @using StockHD.Data;
 
 
-    <form asp-action="Create">
+    <form asp-action="Create" id="formData">
 
     <div class="form-floating mb-3">
     <input asp-for="Name" class="form-control" placeholder="" />
@@ -13,7 +13,7 @@
 
     <div id="PropDiv">
         <div class="form-floating mb-3">
-            <select class="form-control" name="TypeSelect" placeholder="">
+            <select class="form-control typeProp" name="TypeSelect" placeholder="">
             <option selected=""></option>
             @foreach (ExtendedProperty p in ViewBag.ExtendedProperty){
                 <option value="@p.Id">@p.Name</option>
@@ -33,7 +33,7 @@
         </button>
     </div>
 
-    <input type="hidden" />
+    <input type="hidden" name="jsonProp" id="jsonProp" />
 
     <div class="form-floating mb-3">
     <input asp-for="Description" class="form-control" placeholder="" />
@@ -42,7 +42,7 @@
     </div>
 
 
-    <input id="submit" type="button" value="Ajouter" class="btn btn-primary" />
+    <input type="button" value="Ajouter" class="btn btn-primary" onclick="submitForm();" />
     <a class="btn btn-danger" asp-action="Index">Annuler</a>
      
     </form>
@@ -69,15 +69,26 @@
 
     @*For Send Json with the properties data*@
     <script>
-        $(document).ready(function(){
-        $("#Prop").click(function(){
-            var PropData = [];
-            $('<select class="form-control" name="TypeSelect" placeholder="">').each(function(){
-            
+        
+        function submitForm(){
+
+
+
+            var PropData = new Object();
+            PropData.Properties = [];
+
+            $('.typeProp').each(function(){
+                 var optVal= $(this).find('option:selected').val()
+                 PropData.Properties.push(optVal);
             });
-        });
-        });
-    });
+            var jsonStr = JSON.stringify(PropData)
+            $('#jsonProp').val(jsonStr);
+
+            $('#formData').submit();
+
+
+        
+    }
     </script>
 
 @*Faire en sorte que le bouton lance seulement le script jquery et donc enlever le type submit pour que jquery le fasse lui a la fin du script.
