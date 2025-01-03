@@ -73,3 +73,8 @@ body {
 footer{
     color : gray
 }
+
+form {
+    margin-right : 70%; 
+    margin-top : 60px;
+}
