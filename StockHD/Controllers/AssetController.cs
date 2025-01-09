@@ -160,13 +160,13 @@ namespace StockHD.Controllers
                     if (AssetTypeSelect > 0)
                     {
                         AssetType type = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect);
-
+                        
                         if (type != null)
                         {
                             asset.AssetType = type;
                         }
                     }
-
+                    
                     if (LocationSelect > 0)
                     {
                         Location location = _context.Locations.SingleOrDefault(l => l.Id == LocationSelect);

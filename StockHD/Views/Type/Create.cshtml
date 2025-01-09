@@ -15,7 +15,7 @@
         <div class="form-floating mb-3">
             <select class="form-control typeProp" name="TypeSelect" placeholder="">
             <option selected=""></option>
-            @foreach (ExtendedProperty p in ViewBag.ExtendedProperty){
+            @foreach (ExtendedProperty p in ViewBag.ExtendedProperties){
                 <option value="@p.Id">@p.Name</option>
             }
             </select>

@@ -126,28 +126,49 @@ namespace StockHD.Controllers
                 return NotFound();
             }
 
-            var AssetType = await _context.Types.SingleOrDefaultAsync(t => t.Id == id);
+            var AssetType = await _context.Types.Include(t=>t.Properties).SingleOrDefaultAsync(t => t.Id == id);
             if (AssetType == null) {
 
                 return NotFound();
             }
+            Prop();
             return View(AssetType);
         }
 
         //POST : Type/Edit  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(AssetType assetType)
+        public async Task<IActionResult> Edit(AssetType assetType, int PropSelect)
         {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (PropSelect > 0)
+                    {
+                        ExtendedProperty prop = _context.Properties.SingleOrDefault(p => p.Id == PropSelect);
 
-            if (!ModelState.IsValid)
+                        if (prop != null)
+                        {
+                            assetType.Properties = prop;
+                        }
+                    }
+                }
+                catch ()
+                {
+
+                }
+
+            }
+
+            /*if (!ModelState.IsValid)
             {
                 return View(assetType);
             }
 
             _context.Update(assetType);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));*/
 
         }
 
@@ -191,7 +212,7 @@ namespace StockHD.Controllers
         }
         private void Prop()
         {
-            ViewData["ExtendedProperty"] = _context.Properties.ToList();
+            ViewData["ExtendedProperties"] = _context.Properties.ToList();
         }
     }
 }

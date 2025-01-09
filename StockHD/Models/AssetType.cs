@@ -13,7 +13,7 @@ namespace StockHD.Models
         public Collection<Asset> Assets { get; set; } = new Collection<Asset>();
         public Collection<ExtendedProperty> Properties { get; set; }= new Collection<ExtendedProperty>();
     }
-
+    
     public class ExtendedProperty
     {
         public int Id { get; set; }
