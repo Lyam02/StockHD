@@ -57,12 +57,20 @@ namespace StockHD.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProperties()
+        public IActionResult GetPropertiesCreate()
         {
             var properties = _context.Properties.ToList();
-            
+
             return PartialView(properties);
-            
+
+        }
+
+        [HttpGet]
+        public IActionResult GetPropertiesEdit()
+        {
+            var properties = _context.Properties.ToList();
+
+            return PartialView(properties);
         }
 
 
@@ -74,25 +82,25 @@ namespace StockHD.Controllers
         // POST : Type/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AssetType assetType, string jsonProp)
+        public async Task<IActionResult> Create(AssetType assetType, string jsonPropCreate)
         {
 
-            Props props =  JsonConvert.DeserializeObject<Props>(jsonProp);
+            Props props =  JsonConvert.DeserializeObject<Props>(jsonPropCreate);
 
             assetType.Properties = new Collection<ExtendedProperty>();
             _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList()
             .ForEach(assetType.Properties.Add);
 
             //Manière non factorisé de faire :
-            /*List<ExtendedProperty> ExProps = _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList();
+
+            /*Props props = JsonConvert.DeserializeObject<Props>(jsonProp);
+
+            List<ExtendedProperty> ExProps = _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList();
 
             foreach (var ExProp in ExProps)
             {
                 assetType.Properties.Add(ExProp);
             }*/
-
-
-
 
             if (!ModelState.IsValid)
             {
@@ -140,43 +148,24 @@ namespace StockHD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AssetType assetType, int PropSelect)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    if (PropSelect > 0)
-                    {
-                        ExtendedProperty prop = _context.Properties.SingleOrDefault(p => p.Id == PropSelect);
 
-                        if (prop != null)
-                        {
-                            assetType.Properties = prop;
-                        }
-                    }
-                }
-                catch ()
-                {
 
-                }
-
-            }
-
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(assetType);
             }
 
             _context.Update(assetType);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));*/
-
+            return RedirectToAction(nameof(Index));
         }
 
-        //--------------------------------------------------
-
-        // Delete AssetType
 
         //--------------------------------------------------
+
+            // Delete AssetType
+
+            //--------------------------------------------------
 
         public async Task<IActionResult> Delete(int? id)
         {

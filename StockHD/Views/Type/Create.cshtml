@@ -33,7 +33,7 @@
         </button>
     </div>
 
-    <input type="hidden" name="jsonProp" id="jsonProp" />
+    <input type="hidden" name="jsonPropCreate" id="jsonPropCreate" />
 
     <div class="form-floating mb-3">
     <input asp-for="Description" class="form-control" placeholder="" />
@@ -56,15 +56,12 @@
     @* For button add new properties *@
     <script>
         $(document).ready(function(){
-            $("#Prop").click(function(){
-
-             $.get('@Url.Action("GetProperties")',function (data) {
-            $("#PropDiv").append(data);
-        });
-       
-        
-    });
+          $("#Prop").click(function(){
+            $.get('@Url.Action("GetPropertiesCreate")',function (data) {
+               $("#PropDiv").append(data); // data contient la réponse du serveur, c'est a dire le contenue de la PartialView
             });
+          });
+        });
     </script>
 
     @*For Send Json with the properties data*@
@@ -79,7 +76,7 @@
                  PropData.Properties.push(optVal);
             });
             var jsonStr = JSON.stringify(PropData)
-            $('#jsonProp').val(jsonStr);
+            $('#jsonPropCreate').val(jsonStr);
 
             $('#formData').submit();
     }

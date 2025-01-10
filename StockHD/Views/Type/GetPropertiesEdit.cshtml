@@ -1,0 +1,16 @@
+﻿@model IEnumerable<StockHD.Models.ExtendedProperty>
+
+
+
+
+<div class="form-floating mb-3">
+    <select class="form-control typeProp" name="PropSelect" placeholder="">
+        <option selected=""></option>
+        @foreach (ExtendedProperty p in Model)
+        {
+            <option value="@p.Id">@p.Name</option>
+        }
+
+    </select>
+    <label for="TypeSelect">Properties</label>
+</div>
