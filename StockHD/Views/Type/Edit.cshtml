@@ -13,8 +13,8 @@
     <div id="Propdiv">
         @foreach (ExtendedProperty item in Model.Properties)
         {
-            <div class="form-floating mb-3 ">
-            
+            <div class="form-floating mb-3 hover-div propItem" >
+                <button type="button" class="btn-close hover-button" aria-label="Close" onclick="$(this).closest('.propItem').remove();"></button>
                 <select class="form-control typeProp" name="PropSelect" placeholder="">
                     @foreach (ExtendedProperty p in ViewBag.ExtendedProperties)
                     {
@@ -50,7 +50,7 @@
         <label asp-for="Description" class="control-label"></label>
     </div>
 
-    <input id="submit" type="button" value="Confirmer" class="btn btn-primary" onclick="submitFormEdit();" />
+    <input type="button" value="Confirmer" class="btn btn-primary" onclick="submitFormEdit();" />
         <a class="btn btn-danger" asp-action="Index">Annuler</a>
 
     </form>
@@ -77,10 +77,25 @@
 
 @*For Send Json with the properties data*@
 <script>
+    function rmProp(elt)
+    {
+        $(elt).remove();
+    }
+
+
     function submitFormEdit(){
         var JsonData = new Object();
         JsonData.Properties = [];
 
+        $(".typeProp").each(function(){
+            var ContProp = $(this).find("option:selected").val()
+            JsonData.Properties.push(ContProp);
+        });
+
+        var JsonStr = JSON.stringify(JsonData)
+        $("#jsonPropEdit").val(JsonStr);
+        $("#EditFormData").submit();
     }
+
 </script>
 

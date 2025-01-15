@@ -7,7 +7,8 @@
 -->
 
 
-<div class="form-floating mb-3">
+<div class="form-floating mb-3 hover-div propItem">
+    <button type="button" class="btn-close hover-button" aria-label="Close" onclick="$(this).closest('.propItem').remove();"></button>
     <select class="form-control typeProp" name="TypeSelect" placeholder="">
         <option selected=""></option>
         @foreach (ExtendedProperty p in Model)

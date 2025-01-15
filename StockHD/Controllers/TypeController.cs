@@ -65,14 +65,6 @@ namespace StockHD.Controllers
 
         }
 
-        [HttpGet]
-        public IActionResult GetPropertiesEdit()
-        {
-            var properties = _context.Properties.ToList();
-
-            return PartialView(properties);
-        }
-
 
         private class Props
         {
@@ -88,8 +80,7 @@ namespace StockHD.Controllers
             Props props =  JsonConvert.DeserializeObject<Props>(jsonPropCreate);
 
             assetType.Properties = new Collection<ExtendedProperty>();
-            _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList()
-            .ForEach(assetType.Properties.Add);
+            _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList().ForEach(assetType.Properties.Add);
 
             //Manière non factorisé de faire :
 
@@ -143,25 +134,55 @@ namespace StockHD.Controllers
             return View(AssetType);
         }
 
+        [HttpGet]
+        public IActionResult GetPropertiesEdit()
+        {
+            var properties = _context.Properties.ToList();
+
+            return PartialView(properties);
+        }
+
         //POST : Type/Edit  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(AssetType assetType, int PropSelect)
+        public async Task<IActionResult> Edit(AssetType assetType, string jsonPropEdit)
         {
+            Props editProp = JsonConvert.DeserializeObject<Props>(jsonPropEdit);
+            AssetType aType = await _context.Types.Include(t => t.Properties).SingleAsync(t => t.Id == assetType.Id);
+
+           // assetType.Properties = new Collection<ExtendedProperty>();
+
+            if (editProp != null && editProp.Properties.Count() > 0)
+            {
+                _context.Properties.Where(p => editProp.Properties.Contains(p.Id) && !aType.Properties.Contains(p)).ToList()
+                    .ForEach(aType.Properties.Add);
+
+                foreach (var prop in aType.Properties.ToList().Where(p => !editProp.Properties.Contains(p.Id)).ToList())
+                {
+                    aType.Properties.Remove(prop);
+                }
+            }
+            else
+            {
+                foreach (var prop in aType.Properties.ToList())
+                {
+                    aType.Properties.Remove(prop);
+                }
+            }
 
 
             if (!ModelState.IsValid)
             {
-                return View(assetType);
+                return View(aType);
             }
 
-            _context.Update(assetType);
+            _context.Update(aType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
 
-        //--------------------------------------------------
+            //--------------------------------------------------
 
             // Delete AssetType
 

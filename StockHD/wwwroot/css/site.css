@@ -14,7 +14,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #F0F0F0;
 }
 
 
@@ -77,4 +78,14 @@ footer{
 form {
     margin-right : 70%; 
     margin-top : 60px;
+}
+
+.hover-button{
+    display: none;
+    margin-left: 100%;
+    position: absolute;
+}
+
+.hover-div:hover .hover-button{
+    display: block;
 }
