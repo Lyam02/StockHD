@@ -72,3 +72,21 @@
         });
     }
 </script>
+
+@*For Send Json with the ExtendedPropertyValue data*@
+<script>
+
+        function submitForm(){
+            var exPropData = new Object();
+            PropData.exProperties = [];
+
+            $('.typeProp').each(function(){
+                 var optVal= $(this).find('option:selected').val()
+                 PropData.Properties.push(optVal);
+            });
+            var jsonStr = JSON.stringify(PropData)
+            $('#jsonPropCreate').val(jsonStr);
+
+            $('#formData').submit();
+    }
+</script>

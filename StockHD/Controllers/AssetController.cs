@@ -52,6 +52,9 @@ namespace StockHD.Controllers
             if (aType == null) return NotFound();
 
             List<ExtendedPropertyValue> pValues = aType.Properties.Select(p => new ExtendedPropertyValue() { Property = p, Value = "" }).ToList();
+            /*
+            Ici on met dans une liste les ExtendedPropertyValue de chaque Objet Properties qui se trouve dans aType.                        
+            */
 
             return PartialView(pValues);
         }
