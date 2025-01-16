@@ -22,4 +22,11 @@
     <None Include="wwwroot\css\picture\clippy.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Asset\GetPropertiesEx.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

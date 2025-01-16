@@ -20,10 +20,10 @@ namespace StockHD.Controllers
         // [ActionName("Index")]  // permet de raccoursir le nom du chemin dans le Web. Donc le RedirectToAction doit porter le même nom que ActionName
         // car c'est une redirection, ou alors utiliser un nameof et mettre le nom de la class (ici Indextest) 
         // public IActionResult Indextest()
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
-            var Properties = _context.Properties.Include(e => e.AssetTypes);
+            var Properties = await _context.Properties.Include(e => e.AssetTypes).ToListAsync();
 
 
             return View(Properties);

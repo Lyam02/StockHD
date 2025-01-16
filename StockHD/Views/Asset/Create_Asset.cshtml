@@ -1,7 +1,7 @@
 ﻿@model StockHD.Models.Asset
 
 
-<!--Création d'un formulaire de création d un Asset avec un AssetType -->
+<!--Création d'un formulaire de création d'un Asset avec un AssetType -->
 
 <form asp-action="Create_Asset">
 
@@ -10,7 +10,7 @@
 
         <div class="form-floating mb-3">
 
-            <select class="form-control" name="AssetTypeSelect" placeholder="">
+            <select class="form-control" name="AssetTypeSelect" onchange="chAssetType(this);" placeholder="">
             <option selected=""></option>
             @foreach (AssetType a in ViewBag.AssetTypes)
             {
@@ -21,19 +21,9 @@
             <span asp-validation-for="AssetType" class="text-danger"></span>
         </div>
 
-       @*  <div id="PropDiv">
-            <div class="form-floating mb-3 hover-div propItem">
-                <button type="button" class="btn-close hover-button" aria-label="Close" onclick="$(this).closest('.propItem').remove();"></button>
-                <select class="form-control typeProp" name="TypeSelect" placeholder="">
-                    <option selected=""></option>
-                    @foreach (ExtendedProperty p in ViewBag.ExtendedProperties)
-                    {
-                        <option value="@p.Id">@p.Name</option>
-                    }
-                </select>
-                <label asp-for="Properties"></label>
-                <span asp-validation-for="Properties" class="text-danger"></span>
-                </div> *@
+        <div class="mb-3" id="propValue">
+
+        </div>
 
         <div class="form-floating mb-3">
         <input asp-for="Manufacturer" class="form-control" placeholder=""/>
@@ -72,3 +62,13 @@
     <a class="btn btn-danger" asp-action="Index">Annuler</a>
     
 </form>
+
+
+<script>
+    function chAssetType (elt)
+    {
+        $.get('@Url.Action("GetPropertiesEx")',{Id: $(elt).find(":selected").val()},function (data) {
+               $("#propValue").html(data); // data contient la réponse du serveur, c'est a dire le contenue de la PartialView
+        });
+    }
+</script>

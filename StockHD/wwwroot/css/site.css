@@ -89,3 +89,8 @@ form {
 .hover-div:hover .hover-button{
     display: block;
 }
+
+#Lion{
+    width: 60px;
+    height: 85px;
+}

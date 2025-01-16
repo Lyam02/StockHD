@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Newtonsoft.Json;
 using StockHD.Data;
 using StockHD.Models;
 using System.Diagnostics;
@@ -20,9 +23,9 @@ namespace StockHD.Controllers
 
         public ActionResult Index()
         { 
-            var Assets = _context.Assets.Include(t => t.AssetType).Include(l => l.Location);
+            var assets = _context.Assets.Include(t => t.AssetType).Include(l => l.Location).ToList();
 
-            return View(Assets);
+            return View(assets);
 
         }
 
@@ -39,8 +42,24 @@ namespace StockHD.Controllers
         //--------------------------------------------------
 
         //GET
+
+        public async Task<IActionResult> GetPropertiesEx(int Id = 0)
+        {
+            if (Id == 0) return NotFound();
+
+            var aType = await _context.Types.Include(p => p.Properties).SingleOrDefaultAsync(t => t.Id == Id);
+
+            if (aType == null) return NotFound();
+
+            List<ExtendedPropertyValue> pValues = aType.Properties.Select(p => new ExtendedPropertyValue() { Property = p, Value = "" }).ToList();
+
+            return PartialView(pValues);
+        }
+
         public IActionResult Create_Asset()
         {
+            
+
             var Asset = new Asset
             {
                 Manufacturer = "",
