@@ -3,14 +3,14 @@
 
 <!--Création d'un formulaire de création d'un Asset avec un AssetType -->
 
-<form asp-action="Create_Asset">
+<form asp-action="Create_Asset" id="formData">
 
 
     <div class="mb-3 MargTop">
 
         <div class="form-floating mb-3">
-
-            <select class="form-control" name="AssetTypeSelect" onchange="chAssetType(this);" placeholder="">
+            
+            <select class="form-control assetType" name="AssetTypeSelect" onchange="chAssetType(this);" placeholder="">
             <option selected=""></option>
             @foreach (AssetType a in ViewBag.AssetTypes)
             {
@@ -56,9 +56,11 @@
         <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
+        <input type="hidden" name="jsonPropValCreate" id="jsonPropValCreate"/>
+
     </div>
 
-    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <input type="button" value="Ajouter" class="btn btn-primary" onclick="submitForm();" />
     <a class="btn btn-danger" asp-action="Index">Annuler</a>
     
 </form>
@@ -77,15 +79,19 @@
 <script>
 
         function submitForm(){
-            var exPropData = new Object();
-            PropData.exProperties = [];
+            var exPropData = [];
 
-            $('.typeProp').each(function(){
-                 var optVal= $(this).find('option:selected').val()
-                 PropData.Properties.push(optVal);
+            $('.divPropValue').each(function(){
+
+                var exProp = new Object();
+                exProp.Id = $(this).find('.hiddenId').val();
+                exProp.Value = $(this).find('.propValue').val();
+                exPropData.push(exProp);
+
             });
-            var jsonStr = JSON.stringify(PropData)
-            $('#jsonPropCreate').val(jsonStr);
+
+            var jsonStr = JSON.stringify(exPropData)
+            $('#jsonPropValCreate').val(jsonStr);
 
             $('#formData').submit();
     }

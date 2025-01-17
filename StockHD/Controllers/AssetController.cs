@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Newtonsoft.Json;
 using StockHD.Data;
 using StockHD.Models;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace StockHD.Controllers
@@ -75,11 +77,25 @@ namespace StockHD.Controllers
             return View(Asset);
 
         }
+
+        public class PropValue
+        {
+            public int Id;
+            public string Value = "";
+        }
+
         //POST Asset
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect)
+        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string jsonPropValCreate)
         {
+
+            List<PropValue> pValues = JsonConvert.DeserializeObject<List<PropValue>>(jsonPropValCreate);
+
+            asset.PropertiesValues = new Collection<ExtendedPropertyValue>();
+            /*_context.PropertiesValues.Where(p => pValues.Contains(v => v.Id == p.Id)).ToList().ForEach(asset.PropertiesValues.Add);*/
+
+
             asset.Location = _context.Locations.SingleOrDefault(l => l.Id == LocationSelect)!;
 
             asset.AssetType = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect)!;

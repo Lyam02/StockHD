@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<StockHD.Models.ExtendedPropertyValue>;
 
 <!--
-    Création d'un champ de formulaire AssetType pour les Proprties.
-    Ce champ est dynamique et peut être ajouté ou supprimé au clic d'un bouton
-    grace a un script jQuery dans le fichier Create.cshtml
+    Création d'un champ de formulaire Asset pour les ProprtiValue.
 -->
 
 @foreach (ExtendedPropertyValue item in Model){
 
-    <div class="form-floating mb-3">
+    <div class="form-floating mb-3 divPropValue">
 
-        <input type="hidden" name="propId" value="@item.Property.Id" />
+        <input type="hidden" class="hiddenId" name="propId" value="@item.Property.Id" />
 
-        <input type="text" class="form-control" id="floatingInput" >
+        <input type="text" class="form-control propValue" id="floatingInput" >
         <label for="floatingInput">@item.Property.Name</label>
 
     </div>
