@@ -93,8 +93,23 @@ namespace StockHD.Controllers
             List<PropValue> pValues = JsonConvert.DeserializeObject<List<PropValue>>(jsonPropValCreate);
 
             asset.PropertiesValues = new Collection<ExtendedPropertyValue>();
+            
+            foreach (var propValues in pValues)
+            {
+
+                ExtendedPropertyValue extendedPropValues = new ExtendedPropertyValue
+                {
+                    Property = _context.Properties.SingleOrDefault(p=>p.Id == propValues.Id),
+                    Value = propValues.Value,
+                };
+
+                asset.PropertiesValues.Add(extendedPropValues);
+                // await _context.SaveChangesAsync();
+            }
+                
             /*_context.PropertiesValues.Where(p => pValues.Contains(v => v.Id == p.Id)).ToList().ForEach(asset.PropertiesValues.Add);*/
 
+            
 
             asset.Location = _context.Locations.SingleOrDefault(l => l.Id == LocationSelect)!;
 

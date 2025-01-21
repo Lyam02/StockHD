@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StockHD.Models
 {
-    public class AssetType
+    public class AssetType // Catégorie
     {
         public int Id { get; set; }
 
@@ -14,7 +14,7 @@ namespace StockHD.Models
         public Collection<ExtendedProperty> Properties { get; set; }= new Collection<ExtendedProperty>();
     }
     
-    public class ExtendedProperty
+    public class ExtendedProperty // Propriété 
     {
         public int Id { get; set; }
 
@@ -24,7 +24,7 @@ namespace StockHD.Models
         public Collection<AssetType> AssetTypes { get; set; } = new Collection<AssetType>();
     }
 
-    public class ExtendedPropertyValue
+    public class ExtendedPropertyValue // Valeurs des propriétés
     {
         public int Id { get; set; }
  

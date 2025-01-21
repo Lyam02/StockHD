@@ -9,7 +9,7 @@ namespace StockHD.Data.Seeders
         public static void Seed(StockDbContext context)
         {
 
-            if (!context.Assets.Any())
+           /* if (!context.Assets.Any())
             {
                 context.Assets.AddRange(
 
@@ -23,7 +23,7 @@ namespace StockHD.Data.Seeders
                 );
                 
                 context.SaveChanges();
-            }
+            }*/
         }
     }
 }
