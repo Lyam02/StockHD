@@ -25,7 +25,9 @@ namespace StockHD.Controllers
 
         public ActionResult Index()
         { 
-            var assets = _context.Assets.Include(t => t.AssetType).Include(l => l.Location).ToList();
+            var assets = _context.Assets.Include(t => t.AssetType)
+                                .Include(l => l.Location)
+                                .Include(a=>a.PropertiesValues).ToList();
 
             return View(assets);
 
