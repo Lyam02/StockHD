@@ -31,9 +31,6 @@ namespace StockHD.Data
         public DbSet<ExtendedPropertyValue> PropertiesValues { get; set; }
 
 
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -46,6 +43,6 @@ namespace StockHD.Data
 
         }
 
-        }
-
     }
+
+}
