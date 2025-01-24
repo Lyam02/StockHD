@@ -1,8 +1,6 @@
-﻿
-
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
 using StockHD.Data;
 
 
@@ -53,8 +51,6 @@ namespace StockHD
 
             app.UseRouting();
             app.UseAuthorization();
-
-            
 
             app.UseEndpoints(endpoints =>
             {

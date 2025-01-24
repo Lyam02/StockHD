@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using StockHD.Data;
 using StockHD.Data.Seeders;
+using Microsoft.AspNetCore.Identity;
 
 namespace StockHD
 {
@@ -14,15 +15,12 @@ namespace StockHD
         {
 
             var app = CreateHostBuilder(args).Build();
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = new System.Globalization.CultureInfo("fr-FR");
 
-
+            // _________________________________________________________________________________________________________________________________________________
             // Add services to the container.
-           // builder.Services.AddControllersWithViews();
-
-           //var app = builder.Build();
-
-
-
+            // builder.Services.AddControllersWithViews();
+            //var app = builder.Build();
             // Configure the HTTP request pipeline.
             //if (!app.Environment.IsDevelopment())
             //{
@@ -30,6 +28,7 @@ namespace StockHD
             //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             //    app.UseHsts();
             //}
+            // _________________________________________________________________________________________________________________________________________________
 
 
             using (var scope = app.Services.CreateScope())
@@ -42,10 +41,9 @@ namespace StockHD
                     using (var serviceScope = services.GetService<IServiceScopeFactory>().CreateScope())
                     {
                         var context = services.GetRequiredService<StockDbContext>();
+                        
 
                        // context.Database.Migrate();
-
-                        
 
 
                     }
@@ -57,10 +55,6 @@ namespace StockHD
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-
-
-
-
 
             //app.UseHttpsRedirection();
             //app.UseStaticFiles();

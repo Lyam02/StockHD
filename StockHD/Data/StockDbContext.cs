@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-
-
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+//using NuGet.ContentModel;
 using StockHD.Data.Seeders;
 using StockHD.Models;
-
-
-//test git
-
 
 namespace StockHD.Data
 {
@@ -31,7 +26,10 @@ namespace StockHD.Data
         public DbSet<ExtendedPropertyValue> PropertiesValues { get; set; }
 
 
-
+        // Identity
+        public DbSet<IdentityRole> Roles { get; set; }
+        public DbSet<IdentityUser> Users { get; set; }
+        // public DbSet<IdentityUserAsset> UserAssets { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,8 +42,11 @@ namespace StockHD.Data
             modelBuilder.Entity<ExtendedProperty>().ToTable("Properties");
             modelBuilder.Entity<ExtendedPropertyValue>().ToTable("PropertiesValues");
 
-        }
+            // Identity
+
+            modelBuilder.Entity<IdentityRole>().ToTable("Role");
+            modelBuilder.Entity<IdentityUser>().ToTable("User");
 
         }
-
     }
+}
