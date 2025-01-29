@@ -37,17 +37,14 @@ namespace StockHD
 
                 try
                 {
-
                     using (var serviceScope = services.GetService<IServiceScopeFactory>().CreateScope())
                     {
                         var context = services.GetRequiredService<StockDbContext>();
+                        var userManager = (UserManager<IdentityUser>)serviceScope.ServiceProvider.GetService(typeof(UserManager<IdentityUser>));
                         
-
-                       // context.Database.Migrate();
-
+                        context.Database.Migrate();
 
                     }
-
                 }
                 catch (Exception ex)
                 {
