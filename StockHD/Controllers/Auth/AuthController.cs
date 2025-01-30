@@ -34,9 +34,40 @@ namespace StockHD.Controllers.Auth
         }
 
         // Register
+        //***************************************************************************************//
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register (Authentication auth)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = auth.Name, Email = auth.Email };
+                var result = await _UserManager.CreateAsync(user, auth.Password);
+                if (result.Succeeded)
+                { 
+                    return RedirectToAction("Home", "Index");
+                }
+            }
+            return View(auth);
+        }
+        //***************************************************************************************//
 
-        
+
+        // Login
+
+
+
+        // Logout
+
+
+
+
+
     }
 }

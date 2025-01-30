@@ -10,13 +10,8 @@ namespace StockHD.Models.Auth
     {
         [PersonalData]
         [DataType(DataType.Text)]
-        [Display(Name = "Prenom")]
-        public string FirstName { get; set; }
-
-        [PersonalData]
-        [DataType(DataType.Text)]
-        [Display(Name = "Nom")]
-        public string LastName { get; set; }
+        [Display(Name = "Nom complet")]
+        public string Name { get; set; }
 
         [PersonalData]
         [DataType(DataType.EmailAddress)]

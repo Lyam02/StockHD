@@ -36,7 +36,7 @@ namespace StockHD
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddIdentity<StockUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StockDbContext>();
 
@@ -93,7 +93,7 @@ namespace StockHD
                 endpoints.MapControllerRoute(
                     name: "default",
                    // pattern: "{controller=Home}/{action=Index}/{id?}"
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                    pattern: "{controller=Auth}/{action=Register}/{id?}"
                     );
               //  endpoints.MapRazorPages();
 
