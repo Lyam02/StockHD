@@ -4,6 +4,7 @@ using StockHD.Data;
 using StockHD.Models;
 using System.Diagnostics;
 
+
 namespace StockHD.Controllers
 {
     public class HomeController : Controller

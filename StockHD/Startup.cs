@@ -93,7 +93,7 @@ namespace StockHD
                 endpoints.MapControllerRoute(
                     name: "default",
                    // pattern: "{controller=Home}/{action=Index}/{id?}"
-                    pattern: "{controller=Auth}/{action=Register}/{id?}"
+                    pattern: "{controller=Auth}/{action=SignInUser}/{id?}"
                     );
               //  endpoints.MapRazorPages();
 
