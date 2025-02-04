@@ -2,7 +2,6 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Newtonsoft.Json;
 using StockHD.Data;
 using StockHD.Models;
 using System.Collections.ObjectModel;
@@ -15,6 +14,7 @@ using StockHD.Models.Auth;
 using System.ComponentModel;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace StockHD.Controllers.Auth
 {
@@ -75,8 +75,15 @@ namespace StockHD.Controllers.Auth
         {
             if (ModelState.IsValid)
             {
-                
-                
+                var user = await _UserManager.FindByEmailAsync(sUser.Email);
+
+                if (user != null && await _UserManager.CheckPasswordAsync(user, sUser.Password)){
+                    await _SignInManager.SignInAsync(user, false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Une Erreur est survenu lors de la connexion");
+                }
             }
             return View(sUser);
         }

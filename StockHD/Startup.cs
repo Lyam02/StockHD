@@ -40,13 +40,14 @@ namespace StockHD
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StockDbContext>();
 
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Default Password settings.
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
+                options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 4;
                 options.Password.RequiredUniqueChars = 1;
             });
@@ -85,6 +86,8 @@ namespace StockHD
                 {
                     response.Redirect($"/Identity/Account/AccessDenied");
                 }
+
+                
             });
 
 

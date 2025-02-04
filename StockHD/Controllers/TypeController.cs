@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -13,6 +14,7 @@ using System.Runtime.CompilerServices;
 
 namespace StockHD.Controllers
 {
+    [Authorize]
     public class TypeController : Controller
     {
         private readonly ILogger<TypeController> _logger;
