@@ -1,4 +1,13 @@
 ﻿@using StockHD
 @using StockHD.Models
 @using StockHD.Data
+@using Microsoft.AspNetCore.Identity
+
+
+@inject SignInManager<StockUser> SignInManager
+@inject UserManager<StockUser> UserManager
+
+
+
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

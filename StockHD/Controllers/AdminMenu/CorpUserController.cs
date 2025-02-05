@@ -10,7 +10,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
-namespace StockHD.Controllers
+namespace StockHD.Controllers.AdminMenu
 {
-    
+    public class CorpUserController : Controller
+    {
+        // GET: User
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
 }

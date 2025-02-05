@@ -1,4 +1,10 @@
-﻿<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " style="background-color:#FF6200;">
+﻿@{
+    StockUser CurrentUser = await UserManager.GetUserAsync(User);
+
+
+}
+
+<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " style="background-color:#FF6200;">
     <div class="d-flex flex-column flex-fill px-3 pt-2 text-white min-vh-100" style="color:black;">
         <div class="sticky-top p-2 border border-2 rounded rounded-3 border-black fw-bolder">
         
@@ -9,8 +15,8 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" >
             
             <li class="nav-item ">
-               
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link align-middle px-0" style="color:black !important;">
+
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link align-middle px-0 text-black">
                     
                         <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                     
@@ -18,20 +24,20 @@
            
             </li>
             <li class="nav-item">
-                <a class="nav-link text-dark align-middle px-0" asp-area="" asp-controller="Asset" asp-action="Index" style="color:black">
+                    <a class="nav-link text-dark align-middle px-0 text-black" asp-area="" asp-controller="Asset" asp-action="Index">
                         <i class="fs-4 bi-box-seam"></i> <span class="ms-1 d-none d-sm-inline">Matériels</span>
                     </a>
                 </li>
 
             <li class="nav-item">
-                <a class="nav-link text-dark align-middle px-0" asp-area="" asp-controller="" asp-action="" style="color:black">
+                    <a class="nav-link text-dark align-middle px-0 text-black" asp-area="" asp-controller="" asp-action="">
                         <i class="fs-4 bi-person-badge"></i> <span class="ms-1 d-none d-sm-inline">Assignation</span>
                 </a>
             </li>
 
             <li>
-                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color:black">
-                        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-black">
+                        <i class="fs-4 bi-layers"></i> <span class="ms-1 d-none d-sm-inline">Attribut</span>
                     </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                         <li class="w-100"><a class="nav-link px-0" asp-area="" asp-controller="Type" asp-action="Index" style="color:black"> <span class="d-none d-sm-inline">Catégories</span></a></li>
@@ -70,20 +76,40 @@
                     <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
                 </a>
             </li>  *@
+            <p>@ViewBag.UserName</p>
         </ul>
-        <hr style="margin-top: 200px">
-            <div class="dropdown pb-4">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    System
-                </a>
+            <div style="margin-top: 200px">
+                <div class="dropdown pb-4">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        System
+                    </a>
 
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Numéros de séries</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-controller="SrNumber" asp-action="Index">Numéros de séries</a></li>
+                        <hr>
+                        <li><a class="dropdown-item" asp-controller="CorpUser" asp-action="Index">Utilisateurs</a></li>
+                        <hr>
+                        <li><a class="dropdown-item" href="#">Droits et accès</a></li>
+                    </ul>
+                    
                     <hr>
-                    <li><a class="dropdown-item" href="#">Utilisateurs</a></li>
-                    <hr>
-                    <li><a class="dropdown-item" href="#">Droits et accès</a></li>
-                </ul>
+
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            @* <i class="fs-4 bi-person-circle"></i> *@
+                            <img src="~/css/picture/utilisateur2.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">@CurrentUser.Surname @CurrentUser.Name</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            @* <li><a class="dropdown-item" href="#">Paramètre</a></li> *@
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" asp-controller="Auth" asp-action="LogoutUser">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

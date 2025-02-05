@@ -22,11 +22,11 @@ namespace StockHD.Controllers.Auth
     {
         private readonly ILogger<AuthController> _logger;
         private readonly StockDbContext _context;
-        protected UserManager<IdentityUser> _UserManager { get; }
+        protected UserManager<StockUser> _UserManager { get; }
         protected RoleManager<IdentityRole> _RoleManager { get; }
-        protected SignInManager<IdentityUser> _SignInManager { get; }
+        protected SignInManager<StockUser> _SignInManager { get; }
 
-        public AuthController(ILogger<AuthController> logger, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, StockDbContext context)
+        public AuthController(ILogger<AuthController> logger, UserManager<StockUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<StockUser> signInManager, StockDbContext context)
         {
             _logger = logger;
             _RoleManager = roleManager;
@@ -49,7 +49,7 @@ namespace StockHD.Controllers.Auth
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = $"{rUser.Surname}.{rUser.Name}", Email = rUser.Email };
+                var user = new StockUser { UserName = $"{rUser.Surname}.{rUser.Name}", Email = rUser.Email, Surname = rUser.Surname, Name = rUser.Name};
                 var result = await _UserManager.CreateAsync(user, rUser.Password);
                 if (result.Succeeded)
                 { 
@@ -96,9 +96,6 @@ namespace StockHD.Controllers.Auth
         }
 
         //***************************************************************************************//
-
-
-
 
     }
 }

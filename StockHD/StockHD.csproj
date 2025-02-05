@@ -33,15 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\AdminMenu\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EditorConfigFiles Remove="C:\Users\ED37WD\Visual_Studio\StockHD\StockHD\.editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Views\Auth\richelieu.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\AdminMenu\" />
   </ItemGroup>
 
 </Project>
