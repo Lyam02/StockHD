@@ -7,8 +7,8 @@
 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " style="background-color:#FF6200;">
     <div class="d-flex flex-column flex-fill px-3 pt-2 text-white min-vh-100" style="color:black;">
         <div class="sticky-top p-2 border border-2 rounded rounded-3 border-black fw-bolder">
-        
-        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+
+            <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <img id="Lion" src="/css/picture/imageL.png" />
                 <span class="fs-5 d-none d-sm-inline m-lg-2" style="color:black"  >  -StockHD</span>
         </a>
@@ -87,7 +87,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" asp-controller="SrNumber" asp-action="Index">Numéros de séries</a></li>
                         <hr>
-                        <li><a class="dropdown-item" asp-controller="CorpUser" asp-action="Index">Utilisateurs</a></li>
+                        <li><a class="dropdown-item" asp-controller="CorpUser" asp-action="Index">Utilisateurs ING</a></li>
                         <hr>
                         <li><a class="dropdown-item" href="#">Droits et accès</a></li>
                     </ul>

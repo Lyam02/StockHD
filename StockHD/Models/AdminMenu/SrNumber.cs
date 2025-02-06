@@ -7,7 +7,7 @@ namespace StockHD.Models
     public class SrNumber
     {
         [Display(Name = "Numéro de série")]
-        public string? SerialNumber { get; set; }
+        public string SerialNumber { get; set; }
         public string? Description { get; set; }
 
     }

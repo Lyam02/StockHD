@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model StockHD.Models.SrNumber;
+@using StockHD.Models;
+@using StockHD.Data;
+
+
+<form asp-action="Create_SrNumber">
+
+    <div class="mb-3 MargTop">
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="SerialNumber" class="form-control" placeholder="" />
+            <label asp-for="SerialNumber">Numéro de Série</label>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Description" class="form-control" placeholder="" />
+            <label asp-for="Description"></label>
+
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <a class="btn btn-danger" asp-action="Index">Annuler</a>
+
+</form>

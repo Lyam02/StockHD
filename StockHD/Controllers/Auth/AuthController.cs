@@ -66,6 +66,7 @@ namespace StockHD.Controllers.Auth
         [HttpGet]
         public IActionResult SignInUser()
         {
+            ViewData["ErrMsg"] = "";
             return View();
         }
 
@@ -82,11 +83,13 @@ namespace StockHD.Controllers.Auth
                     return RedirectToAction("Index", "Home");
                 }
                 else{
-                    ModelState.AddModelError(string.Empty, "Une Erreur est survenu lors de la connexion");
+                    ViewData["ErrMsg"] = "Une Erreur est survenu, vérifiez vos identifiants";
+                   // ModelState.AddModelError(string.Empty, "Une Erreur est survenu lors de la connexion");
                 }
             }
             return View(sUser);
         }
+
         // Logout
         //***************************************************************************************//
         public async Task<IActionResult> LogoutUser()

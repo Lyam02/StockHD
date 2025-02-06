@@ -94,7 +94,7 @@ namespace StockHD.Controllers
         }
 
         //POST
-        [HttpPost, ActionName("Delete_Loc")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete_Loc(int Id)
         {
