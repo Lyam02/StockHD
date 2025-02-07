@@ -32,9 +32,16 @@
         </div>
 
         <div class="form-floating mb-3">
-        <input asp-for="SerialNumber" class="form-control" placeholder="" />
-        <label asp-for="SerialNumber" for="Numéro de série"></label>
-        <span asp-validation-for="SerialNumber" class="text-danger"></span>
+
+            <select class="form-control" name="SrNumberSelect" placeholder="">
+                <option selected=""></option>
+                @foreach (SrNumber l in ViewBag.SrNumber)
+                {
+                    <option value="@l.SerialNumber">@l.SerialNumber</option>
+                }
+            </select>
+            <label asp-for="SrNumber"></label>
+            <span asp-validation-for="SrNumber" class="text-danger"></span>
         </div>
 
         <div class="form-floating mb-3">

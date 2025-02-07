@@ -7,10 +7,12 @@
 
     <div class="mb-3 MargTop">
 
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 ms-3" style="text-align: center;">
 
-            <input asp-for="CK" class="form-control" placeholder="" />
-            <label asp-for="CK"></label>
+            <h2><strong>@Html.DisplayFor(model => model.CK)</strong></h2>
+
+            @* <input asp-for="CK" class="form-control" placeholder="" />
+            <label asp-for="CK"></label> *@
 
         </div>
 

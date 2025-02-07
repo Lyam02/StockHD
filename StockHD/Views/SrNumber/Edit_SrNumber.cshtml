@@ -7,10 +7,13 @@
 
     <div class="mb-3 MargTop">
 
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 ms-3" style="text-align: center;">
 
-            <input asp-for="SerialNumber" class="form-control" placeholder="" />
-            <label asp-for="SerialNumber">Numéro de Serie</label>
+            <h2><strong>@Html.DisplayFor(model => model.SerialNumber)</strong></h2>
+
+            <div>
+                <input asp-for="SerialNumber" type="hidden" class="form-control" />
+            </div>
 
         </div>
 

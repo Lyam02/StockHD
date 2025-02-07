@@ -1,0 +1,55 @@
+﻿@model IEnumerable<StockHD.Models.Auth.RolesModel>
+
+
+@{
+    ViewData["Title"] = "Rôles Manager";
+}
+
+<div class="mb-5 me-5 m-3">
+
+    <h1 class="display-4 text-center">Rôles Manager</h1>
+
+</div>
+
+<hr class="mb-5" />
+
+<div class="mt-3" style="display:inline">
+    <div class="mb-4" style="margin-right:95%>
+
+        <div class="p-0 m-1 mb-3" style="float: right">
+            <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Roles")">Nouveau</a>
+        </div>
+    </div>
+
+    <div style="margin-right:30%">
+        <table class="table table-striped">
+
+
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(Model => Model.Name)</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>
+                                <a href="@Url.Action("Delete_Roles", "Roles", new{id = item.Id})">Supprimer</a>
+                            @* 
+                            Permet d'indiquer l'action, le controlleur et la valeur
+                            ca crée ensuite une url en fonction de la nomenclature du Startup
+                            *@
+                            </td>
+                        </tr>
+                }
+            }
+
+            </tbody>
+        </table>
+    </div>
+</div>

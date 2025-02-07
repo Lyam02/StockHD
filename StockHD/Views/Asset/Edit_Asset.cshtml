@@ -45,9 +45,22 @@
             <label asp-for="Manufacturer">Constructeur</label>
         </div>
 
-        <div class="form-floating mb-3">
-            <input asp-for="SerialNumber" class="form-control" placeholder="" />
-            <label asp-for="SerialNumber">Numéro de série</label>
+        <div class="mb-3">
+            <label asp-for="SrNumber"></label>
+            <select class="form-control" name="SrNumberSelect">
+                @foreach (SrNumber a in ViewBag.SrNumber)
+                {
+                    if (Model.SrNumber.SerialNumber == a.SerialNumber)
+                    {
+
+                        <option value="@a.SerialNumber" selected>@a.SerialNumber</option>
+                    }
+                    else
+                    {
+                        <option value="@a.SerialNumber">@a.SerialNumber</option>
+                    }
+                }
+            </select>
         </div>
 
         <div class="form-floating mb-3">

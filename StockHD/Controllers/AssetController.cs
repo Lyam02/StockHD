@@ -27,10 +27,11 @@ namespace StockHD.Controllers
         }
 
         public ActionResult Index()
-        { 
+        {
             var assets = _context.Assets.Include(t => t.AssetType)
                                 .Include(l => l.Location)
-                                .Include(a=>a.PropertiesValues).ToList();
+                                .Include(a => a.PropertiesValues)
+                                .Include(n => n.SrNumber).ToList();
 
             return View(assets);
 
@@ -73,8 +74,6 @@ namespace StockHD.Controllers
             var Asset = new Asset
             {
                 Manufacturer = "",
-
-                SerialNumber = "",
                 Description = "",
             };
             Type();
@@ -92,7 +91,7 @@ namespace StockHD.Controllers
         //POST Asset
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string jsonPropValCreate)
+        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string SrNumberSelect, string jsonPropValCreate)
         {
 
             List<PropValue> pValues = JsonConvert.DeserializeObject<List<PropValue>>(jsonPropValCreate);
@@ -119,6 +118,9 @@ namespace StockHD.Controllers
             asset.Location = _context.Locations.SingleOrDefault(l => l.Id == LocationSelect)!;
 
             asset.AssetType = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect)!;
+
+            asset.SrNumber = _context.SrNumber.SingleOrDefault(n => n.SerialNumber == SrNumberSelect);
+
             if (!ModelState.IsValid)
             {
                 Type();
@@ -204,7 +206,7 @@ namespace StockHD.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, int id)
+        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string SrNumberSelect, int id)
         {
             if (id != asset.Id)
             {
@@ -224,7 +226,17 @@ namespace StockHD.Controllers
                             asset.AssetType = type;
                         }
                     }
-                    
+
+                    if (SrNumberSelect != null)
+                    {
+                        SrNumber sNumber = _context.SrNumber.SingleOrDefault(n => n.SerialNumber == SrNumberSelect);
+
+                        if (sNumber != null)
+                        {
+                            asset.SrNumber = sNumber;
+                        }
+                    }
+
                     if (LocationSelect > 0)
                     {
                         Location location = _context.Locations.SingleOrDefault(l => l.Id == LocationSelect);
@@ -274,6 +286,7 @@ namespace StockHD.Controllers
         {
             ViewData["Locations"] = _context.Locations.ToList();
             ViewData["AssetTypes"] = _context.Types.ToList();
+            ViewData["SrNumber"] = _context.SrNumber.ToList();
         }
     }
 }
