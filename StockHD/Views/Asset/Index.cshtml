@@ -33,7 +33,7 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.AssetType.Name)</td>
                         <td>@string.Join(",", item.PropertiesValues.Select(p => p.Value).ToList())</td>
-                        <td>@Html.DisplayFor(modelItem => item.SrNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.SrNumber.SerialNumber)</td>
                         <td>@Html.DisplayFor(modelItem => item.Location.Name)</td>
                         <td>
                             <a href="@Url.Action("Edit_Asset", "Asset", new{id = item.Id})">Modifier</a> |

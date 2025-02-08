@@ -82,7 +82,12 @@ namespace StockHD.Controllers
             Props props =  JsonConvert.DeserializeObject<Props>(jsonPropCreate);
 
             assetType.Properties = new Collection<ExtendedProperty>();
-            _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList().ForEach(assetType.Properties.Add);
+            _context.Properties
+                .AsEnumerable() // Switch to client-side evaluation
+                .Where(p => props.Properties.Contains(p.Id))
+                .ToList()
+                .ForEach(assetType.Properties.Add);
+            //_context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList().ForEach(assetType.Properties.Add);
 
             //Manière non factorisé de faire :
 

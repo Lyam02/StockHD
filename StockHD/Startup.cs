@@ -6,7 +6,8 @@ using StockHD.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Net;
 using StockHD.Models.Auth;
-
+using Pomelo.EntityFrameworkCore.MySql;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace StockHD
 {
@@ -26,11 +27,31 @@ namespace StockHD
                 options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
             });
 
-            services.AddDbContext<StockDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqlLiteDbContext")));
 
             var optionsBuilder = new DbContextOptionsBuilder<StockDbContext>();
-            optionsBuilder.UseSqlite(Configuration.GetConnectionString("SqlLiteDbContext"));
 
+            bool UseSqLite = Configuration.GetValue<bool>("UseSqLite");
+
+            if(UseSqLite)
+            {
+                optionsBuilder.UseSqlite(Configuration.GetConnectionString("SqlLiteDbContext"));
+                services.AddDbContext<StockDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqlLiteDbContext")));
+            }
+            else
+            {
+                optionsBuilder.UseMySql(
+                                    Configuration.GetConnectionString("MySqlDbContext")
+                                    , new MySqlServerVersion(Configuration.GetValue<string>("MySqlVersion"))
+                                    );
+                services.AddDbContext<StockDbContext>(options => options.UseMySql(
+                                    Configuration.GetConnectionString("MySqlDbContext")
+                                    , new MySqlServerVersion(Configuration.GetValue<string>("MySqlVersion"))
+                                    ));
+            }
+
+            
+
+           
             var context = new StockDbContext(optionsBuilder.Options);
 
             services.AddControllersWithViews();

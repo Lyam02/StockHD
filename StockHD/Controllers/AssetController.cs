@@ -120,6 +120,7 @@ namespace StockHD.Controllers
             asset.AssetType = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect)!;
 
             asset.SrNumber = _context.SrNumber.SingleOrDefault(n => n.SerialNumber == SrNumberSelect);
+            
 
             if (!ModelState.IsValid)
             {

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StockHD.Controllers.AdminMenu;
-
 //using NuGet.ContentModel;
 using StockHD.Data.Seeders;
 using StockHD.Models;
