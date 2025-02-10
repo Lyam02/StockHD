@@ -1,0 +1,2 @@
+for Laptop VM : "MySqlDbContext": "server=192.168.95.1;user=root;database=StockHD;port=3306;password=040505"
+"MySqlVersion": "8.0.40"
