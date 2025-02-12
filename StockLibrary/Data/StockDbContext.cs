@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using StockLibrary.Data.Seeders;
 using StockLibrary.Models;
 using StockLibrary.Data;
+using StockLibrary.Models.Auth;
 namespace StockLibrary
 {
 
@@ -30,7 +31,7 @@ namespace StockLibrary
 
 
         // Identity
-        public DbSet<IdentityRole> Roles { get; set; }
+        public DbSet<StockRole> Roles { get; set; }
         public DbSet<StockUser> Users { get; set; }
         public DbSet<IdentityUserRole<string>> UserRole {get; set;}
         public DbSet<IdentityUserClaim<string>> UserClaims{ get; set; }
@@ -52,7 +53,7 @@ namespace StockLibrary
             modelBuilder.Entity<CorpUser>().ToTable("CorpUser").HasKey(u=>u.CK);
 
             // Identity
-            modelBuilder.Entity<IdentityRole>().ToTable("Role");
+            modelBuilder.Entity<StockRole>().ToTable("Role").HasKey(r => r.Id);
             modelBuilder.Entity<StockUser>().ToTable("User");
             modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRole").HasNoKey();
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaim");

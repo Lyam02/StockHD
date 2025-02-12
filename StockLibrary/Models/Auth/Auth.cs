@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
 using Microsoft.AspNetCore.Identity;
 
 namespace StockLibrary.Models.Auth
@@ -49,7 +50,7 @@ namespace StockLibrary.Models.Auth
     }
 
     //Rôles Modele
-    public class RolesModel
+    public class StockRole : IdentityRole
     {
         [DataType(DataType.Text)]
         [Display(Name = "Nom")]
