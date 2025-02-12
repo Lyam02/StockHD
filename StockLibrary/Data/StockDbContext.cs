@@ -4,12 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using StockHD.Controllers.AdminMenu;
 //using NuGet.ContentModel;
-using StockHD.Data.Seeders;
-using StockHD.Models;
-
-namespace StockHD.Data
+using StockLibrary.Data.Seeders;
+using StockLibrary.Models;
+using StockLibrary.Data;
+namespace StockLibrary
 {
 
     public class StockDbContext : DbContext

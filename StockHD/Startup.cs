@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using StockHD.Data;
+using StockLibrary.Data;
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Net;
-using StockHD.Models.Auth;
+using StockLibrary.Models.Auth;
 using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.Extensions.DependencyInjection;
+using StockLibrary;
 
 namespace StockHD
 {

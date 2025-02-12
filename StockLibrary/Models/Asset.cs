@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace StockHD.Models
+namespace StockLibrary.Models
 {
     public class Asset
     {

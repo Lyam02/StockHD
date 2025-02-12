@@ -1,6 +1,6 @@
 ﻿
 
-namespace StockHD.Data.Seeders
+namespace StockLibrary.Data.Seeders
 {
     public class SeedData
     {

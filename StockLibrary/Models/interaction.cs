@@ -1,4 +1,4 @@
-﻿namespace StockHD.Models
+﻿namespace StockLibrary.Models
 {
     public class Interaction
     {

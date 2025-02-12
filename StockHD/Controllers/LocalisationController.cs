@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using StockHD.Data;
-using StockHD.Models;
+using StockLibrary;
+using StockLibrary.Data;
+using StockLibrary.Models;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 

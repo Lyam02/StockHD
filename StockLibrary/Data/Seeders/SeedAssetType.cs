@@ -1,8 +1,8 @@
 ﻿
-using StockHD.Models;
+using StockLibrary.Models;
 using System.Collections.ObjectModel;
 
-namespace StockHD.Data.Seeders
+namespace StockLibrary.Data.Seeders
 {
     public static class SeedAssetType
     {

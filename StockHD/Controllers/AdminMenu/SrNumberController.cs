@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StockHD.Data;
-using StockHD.Models;
+using StockLibrary;
+using StockLibrary.Data;
+using StockLibrary.Models;
 
 namespace StockHD.Controllers.AdminMenu
 {

@@ -2,9 +2,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
-using StockHD.Data;
-using StockHD.Data.Seeders;
+using StockLibrary.Data;
+using StockLibrary.Data.Seeders;
 using Microsoft.AspNetCore.Identity;
+using StockLibrary;
 
 namespace StockHD
 {

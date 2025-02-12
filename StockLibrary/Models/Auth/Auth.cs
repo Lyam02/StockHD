@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 
-namespace StockHD.Models.Auth
+namespace StockLibrary.Models.Auth
 {
     // Modele pour les Sign Up
     public class RegistrationUser

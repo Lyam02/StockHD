@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StockHD.Data;
-using StockHD.Models;
+using StockLibrary.Data;
+using StockLibrary.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using StockLibrary;
 
 namespace StockHD.Controllers.Auth
 {
