@@ -1,7 +1,5 @@
 ﻿@{
     StockUser CurrentUser = await UserManager.GetUserAsync(User);
-
-
 }
 
 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 " style="background-color:#FF6200;">
@@ -102,7 +100,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             @* <li><a class="dropdown-item" href="#">Paramètre</a></li> *@
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index">Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

@@ -13,10 +13,10 @@ namespace StockHD.Controllers.Auth
         private readonly ILogger<AuthController> _logger;
         private readonly StockDbContext _context;
         protected UserManager<StockUser> _UserManager { get; }
-        protected RoleManager<IdentityRole> _RoleManager { get; }
+        protected RoleManager<StockRole> _RoleManager { get; }
         protected SignInManager<StockUser> _SignInManager { get; }
 
-        public AuthController(ILogger<AuthController> logger, UserManager<StockUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<StockUser> signInManager, StockDbContext context)
+        public AuthController(ILogger<AuthController> logger, UserManager<StockUser> userManager, RoleManager<StockRole> roleManager, SignInManager<StockUser> signInManager, StockDbContext context)
         {
             _logger = logger;
             _RoleManager = roleManager;

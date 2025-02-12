@@ -58,8 +58,8 @@ namespace StockHD
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddIdentity<StockUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddRoles<IdentityRole>()
+            services.AddIdentity<StockUser, StockRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<StockRole>()
                 .AddEntityFrameworkStores<StockDbContext>();
 
 
