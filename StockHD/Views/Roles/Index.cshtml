@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StockRole>
+﻿@model IEnumerable<IdentityRole>
 
 
 @{
@@ -14,14 +14,14 @@
 <hr class="mb-5" />
 
 <div class="mt-3" style="display:inline">
-    <div class="mb-4" style="margin-right:95%">
+    <div class="mb-4" style="margin-right:60%">
 
         <div class="p-0 m-1 mb-3" style="float: right">
-            <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Roles")">Nouveau</a>
+            <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Role")">Nouveau</a>
         </div>
     </div>
 
-    <div style="margin-right:30%">
+    <div style="margin-right:70%">
         <table class="table table-striped">
 
 
@@ -36,19 +36,18 @@
             @{
                 foreach (var item in Model)
                 {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                            <td>
-                                <a href="@Url.Action("Delete_Roles", "Roles", new{id = item.Id})">Supprimer</a>
-                            @* 
-                            Permet d'indiquer l'action, le controlleur et la valeur
-                            ca crée ensuite une url en fonction de la nomenclature du Startup
-                            *@
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>
+                            <a href="@Url.Action("Delete_Role", "Roles", new{id = item.Id})">Supprimer</a>
+                        @* 
+                        Permet d'indiquer l'action, le controlleur et la valeur
+                        ca crée ensuite une url en fonction de la nomenclature du Startup
+                        *@
+                        </td>
+                    </tr>
                 }
             }
-
             </tbody>
         </table>
     </div>

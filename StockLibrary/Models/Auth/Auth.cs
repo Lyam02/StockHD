@@ -48,16 +48,4 @@ namespace StockLibrary.Models.Auth
         [Display (Name = "Mot de passe")]
         public string Password { get; set; }
     }
-
-    //Rôles Modele
-    public class StockRole : IdentityRole
-    {
-        [DataType(DataType.Text)]
-        [Display(Name = "Nom")]
-        public string Name { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Id")]
-        public string? Id { get; set; }
-    }
 }
