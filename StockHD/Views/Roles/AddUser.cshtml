@@ -1,0 +1,28 @@
+﻿@model StockLibrary.Models.Auth.AddUser;
+@using StockLibrary.Models;
+@using StockLibrary.Data;
+
+
+<form asp-action="AddUser">
+
+    <div class="mb-3 MargTop">
+
+        <div class="form-floating mb-3">
+
+            <select class="form-control assetType" name="rUserSelect" placeholder="">
+                <option selected=""></option>
+                @foreach (IdentityUser a in ViewBag.User)
+                {
+                    <option value="@a.Id">@a.UserName</option>
+                }
+            </select>
+            <label asp-for="Username"></label>
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <a class="btn btn-danger" asp-action="AddUser">Annuler</a>
+
+</form>
