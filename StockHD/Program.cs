@@ -75,6 +75,7 @@ namespace StockHD
                    webBuilder.UseStartup<Startup>();
                });
 
+        
 
     }
 }

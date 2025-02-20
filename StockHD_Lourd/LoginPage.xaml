@@ -18,7 +18,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBox x:Name="txtUsername" Margin="420,122,104,263" RenderTransformOrigin="0.5,0.5">
+        <TextBox Name="txtUsername" Margin="420,122,104,263" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -40,7 +40,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <PasswordBox x:Name="txtPassword" Margin="420,206,104,176" RenderTransformOrigin="0.5,0.5">
+        <PasswordBox Name="txtPassword" Margin="420,206,104,176" RenderTransformOrigin="0.5,0.5">
             <PasswordBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -51,7 +51,7 @@
             </PasswordBox.RenderTransform>
         </PasswordBox>
 
-        <Button Content="Se connecter" Margin="425,276,106,103" RenderTransformOrigin="0.5,0.5">
+        <Button Content="Se connecter" Click="LoginButton_Click" Margin="425,276,106,103" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

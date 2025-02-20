@@ -1,4 +1,4 @@
-﻿
+﻿@model List<AlertAsset>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -26,6 +26,38 @@
 
 </body>
 </html>
+
+
+
+<div id="alertContainer">
+    @foreach (var alert in Model)
+    {
+        if (alert.StockAssetCount == 0)
+        {
+            <div class="alert alert-warning">
+                <strong>Attention :</strong> Il n'y a plus de "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 1)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus qu'un "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+    }
+</div>
+
+<style>
+    .alert {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+</style>
 
 
 <style>

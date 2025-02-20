@@ -14,6 +14,10 @@ namespace StockLibrary
 
     public class StockDbContext : DbContext
     {
+        public StockDbContext()
+        {
+        }
+
         public StockDbContext(DbContextOptions<StockDbContext> options) : base(options)
         { 
             this.Database.EnsureCreated();
@@ -28,6 +32,8 @@ namespace StockLibrary
         public DbSet<ExtendedPropertyValue> PropertiesValues { get; set; }
         public DbSet<SrNumber> SrNumber { get; set; }
         public DbSet<CorpUser> CorpUser { get; set; }
+        public DbSet<AlertAsset> AlertAssets { get; set; }
+
 
 
         // Identity
@@ -51,6 +57,7 @@ namespace StockLibrary
             modelBuilder.Entity<ExtendedPropertyValue>().ToTable("PropertiesValues");
             modelBuilder.Entity<SrNumber>().ToTable("SrNumber").HasKey(s=>s.SerialNumber);
             modelBuilder.Entity<CorpUser>().ToTable("CorpUser").HasKey(u=>u.CK);
+            modelBuilder.Entity<AlertAsset>().ToTable("AlertAsset").HasNoKey();
 
             // Identity
             modelBuilder.Entity<IdentityRole>().ToTable("Role").HasKey(r => r.Id);

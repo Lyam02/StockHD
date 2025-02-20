@@ -48,4 +48,19 @@ namespace StockLibrary.Models.Auth
         [Display (Name = "Mot de passe")]
         public string Password { get; set; }
     }
+
+    public class ResetMDP
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+    }
+
+    public class ResetConfirm
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+    }
+
 }

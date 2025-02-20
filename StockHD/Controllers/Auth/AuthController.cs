@@ -23,6 +23,7 @@ namespace StockHD.Controllers.Auth
             _UserManager = userManager;
             _SignInManager = signInManager;
             _context = context;
+
         }
 
         // Sign Up
@@ -89,6 +90,68 @@ namespace StockHD.Controllers.Auth
         }
 
         //***************************************************************************************//
+
+        // Forgot Password
+        //***************************************************************************************//
+
+        public IActionResult ResetMDP()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RestMDP(string email)
+        {
+            var model = new ResetMDP { Email = email };
+
+            if (ModelState.IsValid)
+            {
+                var user = await _UserManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    // Si l'utilisateur existe, on le redirige vers la page de réinitialisation de mot de passe
+                    return RedirectToAction("ResetPassword", new { email = model.Email });
+                }
+                // Si l'email n'existe pas, on peut afficher un message d'erreur ou laisser l'utilisateur réessayer
+                ModelState.AddModelError(string.Empty, "Aucun utilisateur trouvé avec cette adresse e-mail.");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetConfirm model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _UserManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var result = await _UserManager.RemovePasswordAsync(user);
+                    if (result.Succeeded)
+                    {
+                        result = await _UserManager.AddPasswordAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            return RedirectToAction("ResetPasswordConfirmation");
+                        }
+                        else
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "L'email fourni est incorrect.");
+                }
+            }
+
+            return View(model);
+        }
 
     }
 }

@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+
+        <Button Content="Matériel" Click="AssetClick" Margin="10,10,698,380" RenderTransformOrigin="0.5,0.5"></Button>
+        <Button Content="Catégorie" Margin="400,10,308,380" RenderTransformOrigin="0.5,0.5"></Button>
+        <Button Content="Localisation" Margin="275,10,433,380" RenderTransformOrigin="0.5,0.5"></Button>
+        <Button Content="Propriété" Margin="142,10,566,380" RenderTransformOrigin="0.5,0.5"></Button>
+
+        <DataGrid Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                  Margin="275,92,0,0" AutoGenerateColumns="True" Height="294" Width="495" RenderTransformOrigin="0.463,0.479"/>
+
     </Grid>
 </Window>

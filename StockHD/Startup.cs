@@ -50,9 +50,8 @@ namespace StockHD
                                     ));
             }
 
-            
 
-           
+
             var context = new StockDbContext(optionsBuilder.Options);
 
             services.AddControllersWithViews();
