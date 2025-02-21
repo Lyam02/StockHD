@@ -21,8 +21,16 @@
     <div class="mb-4" style="margin-right:60%">
 
         <div class="p-0 m-1 mb-3" style="float: right">
-            <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("AddUser")">+</a>
+            <a class="btn btn-danger" style="margin-right : 100%" data-bs-toggle="tooltip" data-bs-placement="right"
+               data-bs-title="Retour aux rôles" href="@Url.Action("index")"><i class="fs-6 bi-box-arrow-left"></i></a>
         </div>
+
+        <div class="p-0 m-1 mb-3" style="float: right">
+            <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("AddUser", new {RoleId = Model.Role.Id} )">
+                <i class="fs-6 bi-plus-lg"></i>
+            </a>
+        </div>
+
     </div>
     <div style="margin-right:70%">
         <table class="table table-striped">
@@ -40,7 +48,7 @@
                     foreach (var item in Model.Users)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.UserName)</td>
                         
                         </tr>
                     }
@@ -49,3 +57,9 @@
         </table>
     </div>
 </div>
+
+@* For bootstrap tooltips button *@
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>

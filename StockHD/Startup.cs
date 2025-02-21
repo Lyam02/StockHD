@@ -9,6 +9,7 @@ using StockLibrary.Models.Auth;
 using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.Extensions.DependencyInjection;
 using StockLibrary;
+using StockLibrary.Data.Seeders;
 
 namespace StockHD
 {
@@ -57,8 +58,13 @@ namespace StockHD
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddIdentity<StockUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddRoles<IdentityRole>()
+            services.AddIdentity<StockUser, StockRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddUserStore<UserStore<StockUser, StockRole, StockDbContext, string,
+                                IdentityUserClaim<string>, StockUserRole, IdentityUserLogin<string>,
+                                IdentityUserToken<string>, IdentityRoleClaim<string>>>()
+                .AddRoleStore<RoleStore<StockRole, StockDbContext, string, StockUserRole, IdentityRoleClaim<string>>>()
+                .AddRoles<StockRole>()
+                .AddRoleManager<StockRole>()
                 .AddEntityFrameworkStores<StockDbContext>();
 
 
@@ -76,7 +82,7 @@ namespace StockHD
 
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -110,7 +116,8 @@ namespace StockHD
 
                 
             });
-
+            
+            SeedIdentity.SeedIdentityRoleUser(serviceProvider).Wait();
 
             app.UseEndpoints(endpoints =>
             {

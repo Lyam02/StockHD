@@ -19,5 +19,6 @@ namespace StockLibrary.Data
         [Display(Name = "Nom")]
         public string Name { get; set; }
 
+        public virtual ICollection<StockUserRole> Roles { get; } = new List<StockUserRole>();
     }
 }

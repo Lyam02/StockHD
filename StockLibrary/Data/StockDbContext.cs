@@ -37,9 +37,9 @@ namespace StockLibrary
 
 
         // Identity
-        public DbSet<IdentityRole> Roles { get; set; }
+        public DbSet<StockRole> Roles { get; set; }
         public DbSet<StockUser> Users { get; set; }
-        public DbSet<IdentityUserRole<string>> UserRole {get; set;}
+        public DbSet<StockUserRole> UserRoles {get; set;}
         public DbSet<IdentityUserClaim<string>> UserClaims{ get; set; }
         public DbSet<IdentityRoleClaim<string>> RoleClaims{ get; set; }
 
@@ -60,9 +60,9 @@ namespace StockLibrary
             modelBuilder.Entity<AlertAsset>().ToTable("AlertAsset").HasNoKey();
 
             // Identity
-            modelBuilder.Entity<IdentityRole>().ToTable("Role").HasKey(r => r.Id);
-            modelBuilder.Entity<StockUser>().ToTable("User");
-            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRole").HasNoKey();
+            modelBuilder.Entity<StockRole>().ToTable("Role").HasKey(r => r.Id);
+            modelBuilder.Entity<StockUser>().ToTable("User").HasKey(u => u.Id);
+            modelBuilder.Entity<StockUserRole>().ToTable("UserRole").HasKey(r => new {r.UserId, r.RoleId});
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaim");
             modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
         }

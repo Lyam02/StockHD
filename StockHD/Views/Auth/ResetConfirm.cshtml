@@ -1,10 +1,9 @@
-﻿@model StockLibrary.Models.Auth.ResetConfirm;
-@using StockLibrary.Models;
+﻿@using StockLibrary.Models;
 @using StockLibrary.Data;
 
 
 <form asp-action="ResetPassword" method="post">
-    <input type="hidden" name="Email" value="@Model.Email" />
+    <input type="hidden" name="Email" value="Email" />
 
     <div class="form-group">
         <label for="Password">Nouveau mot de passe</label>

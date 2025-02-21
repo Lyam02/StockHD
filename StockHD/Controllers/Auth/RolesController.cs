@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using StockLibrary;
 using StockLibrary.Models.Auth;
-using SQLitePCL;
 
 namespace StockHD.Controllers.Auth
 {
@@ -15,8 +14,8 @@ namespace StockHD.Controllers.Auth
     {
         private readonly StockDbContext _context;
         protected UserManager<StockUser> _UserManager { get; }
-        protected RoleManager<IdentityRole> _RoleManager { get; }
-        public RolesController(UserManager<StockUser> userManager, RoleManager<IdentityRole> roleManager, StockDbContext context)
+        protected RoleManager<StockRole> _RoleManager { get; }
+        public RolesController(UserManager<StockUser> userManager, RoleManager<StockRole> roleManager, StockDbContext context)
         {
             _UserManager = userManager;
             _RoleManager = roleManager;
@@ -34,7 +33,7 @@ namespace StockHD.Controllers.Auth
         public ActionResult Detail(string Id)
         {
             var role = _context.Roles.SingleOrDefault(r=>r.Id == Id);
-            var userIds = _context.UserRole.Where(r => r.RoleId == Id) 
+            var userIds = _context.UserRoles.Where(r => r.RoleId == Id) 
                                             .Select(r=>r.UserId).ToList();
             MV_RoleUsers roleUsers = new MV_RoleUsers
             {
@@ -44,14 +43,9 @@ namespace StockHD.Controllers.Auth
 
             if(userIds.Count()> 0)
             {
-                var users = _context.Users.Where(u => userIds.Contains(u.Id)).ToList();
+                var users = _context.Users.AsEnumerable().Where(u => userIds.Contains(u.Id)).ToList();
                 roleUsers.Users = users;
             }
-            
-
-
-
-
                                 //.Join(_context.Roles
                                 //    , ur => ur.RoleId
                                 //    , ur => ur.Id
@@ -77,13 +71,13 @@ namespace StockHD.Controllers.Auth
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Role(IdentityRole _sRole)
+        public async Task<IActionResult> Create_Role(StockRole _sRole)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var role = new IdentityRole { Name = _sRole.Name };
+                    var role = new StockRole { Name = _sRole.Name };
                     var result = await _RoleManager.CreateAsync(role);
                     if (result.Succeeded)
                     {
@@ -142,33 +136,35 @@ namespace StockHD.Controllers.Auth
         //******************************************************
 
         [HttpGet]
-        public IActionResult AddUser()
+        public IActionResult AddUser(string RoleId)
         {
             rUser();
-            return View();
+            return View(_context.Roles.SingleOrDefault(r => r.Id == RoleId));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser(MV_RoleUsers mvRoleUsers,string rUserSelect)
+        public async Task<IActionResult> AddUser(string roleId, string rUserSelect)
         {
-            mvRoleUsers.Users = _context.Users.SingleOrDefaultAsync(u => u.Id == rUserSelect);
+            StockUser user = await _context.Users.SingleOrDefaultAsync(u => u.Id == rUserSelect);
+            var role = await _context.Roles.SingleOrDefaultAsync(r => r.Id == roleId);
 
-            if (!ModelState.IsValid) 
+            if (user == null || role == null) 
             {
                 rUser();
-                return View(mvRoleUsers);
+                return View();
             }
 
-            _context.Add(mvRoleUsers);
-            await _context.SaveChangesAsync();
+            await _UserManager.AddToRoleAsync(user, role.Name);
             return RedirectToAction(nameof(Index));
         }
+
 
         //******************************************************
 
         public void rUser()
         {
-            ViewData["User"] = _context.Users.ToList();
+            ViewData["Users"] = _context.Users.ToList();
+
         }
     }
 }

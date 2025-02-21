@@ -52,7 +52,7 @@ namespace StockLibrary.Models.Auth
 
     public class MV_RoleUsers
     {
-        public IdentityRole Role { get; set; }
+        public StockRole Role { get; set; }
         [Display(Name = "Utilisateurs")]
         public List<StockUser> Users { get; set; }
     }

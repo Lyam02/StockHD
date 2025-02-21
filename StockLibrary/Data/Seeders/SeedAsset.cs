@@ -1,5 +1,4 @@
-﻿
-using StockLibrary.Models;
+﻿using StockLibrary.Models;
 using System.Collections.ObjectModel;
 
 namespace StockLibrary.Data.Seeders
@@ -9,19 +8,21 @@ namespace StockLibrary.Data.Seeders
         public static void Seed(StockDbContext context)
         {
 
-           /* if (!context.Assets.Any())
+            /*if (!context.Assets.Any())
             {
                 context.Assets.AddRange(
 
-                    new Asset() {
+                    new Asset()
+                    {
                         Manufacturer = "HP",
-                        SerialNumber = "6GFVSRY9CN", 
+                        
                         Description = "",
                         AssetType = context.Types.FirstOrDefault(a => a.Name == "PC")!,
-                        PropertiesValues = new ObservableCollection<ExtendedPropertyValue>(context.PropertiesValues.Where(p => p.Value == "")), 
-                        Location = context.Locations.FirstOrDefault(l => l.Name == "Stock" )!}
+                        PropertiesValues = new ObservableCollection<ExtendedPropertyValue>(context.PropertiesValues.Where(p => p.Value == "")),
+                        Location = context.Locations.FirstOrDefault(l => l.Name == "Stock")!
+                    }
                 );
-                
+
                 context.SaveChanges();
             }*/
         }
