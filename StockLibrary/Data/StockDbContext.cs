@@ -33,6 +33,7 @@ namespace StockLibrary
         public DbSet<SrNumber> SrNumber { get; set; }
         public DbSet<CorpUser> CorpUser { get; set; }
         public DbSet<AlertAsset> AlertAssets { get; set; }
+        public DbSet<Stat> Stat { get; set; }
 
 
 
@@ -43,7 +44,7 @@ namespace StockLibrary
         public DbSet<IdentityUserClaim<string>> UserClaims{ get; set; }
         public DbSet<IdentityRoleClaim<string>> RoleClaims{ get; set; }
 
-        // public DbSet<IdentityUserAsset> UserAssets { get; set; }
+        //public DbSet<IdentityUserAsset> UserAssets { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -58,6 +59,7 @@ namespace StockLibrary
             modelBuilder.Entity<SrNumber>().ToTable("SrNumber").HasKey(s=>s.SerialNumber);
             modelBuilder.Entity<CorpUser>().ToTable("CorpUser").HasKey(u=>u.CK);
             modelBuilder.Entity<AlertAsset>().ToTable("AlertAsset").HasNoKey();
+            modelBuilder.Entity<Stat>().ToView("Stat").HasKey(s => new {s.LocationName, s.AssetTypes});
 
             // Identity
             modelBuilder.Entity<StockRole>().ToTable("Role").HasKey(r => r.Id);
@@ -65,6 +67,7 @@ namespace StockLibrary
             modelBuilder.Entity<StockUserRole>().ToTable("UserRole").HasKey(r => new {r.UserId, r.RoleId});
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaim");
             modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaim");
+
         }
     }
 }
