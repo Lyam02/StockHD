@@ -7,14 +7,93 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="5" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="1" Grid.Column="1">
+            <TabItem Header="Matériel">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" MinWidth="100" />
+                        <ColumnDefinition Width="4" />
+                        <ColumnDefinition Width="1*" MinWidth="400"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    
+                    <DataGrid Name="dg_Hardware" Grid.Column="2" Grid.Row="0"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              ItemsSource="{Binding}"
+                              
+                              >
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="dg_Hardware_DoubleClick"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="#" Binding="{Binding Path=Id}" />
+                            <DataGridTextColumn Header="Constructeur" Binding="{Binding Path=Manufacturer}" />
+                            <DataGridTextColumn Header="Type" Binding="{Binding Path=AssetType.Name}" />
+                            <DataGridTextColumn Header="Emplacement" Binding="{Binding Path=Location.Name}" />
+                            <DataGridTextColumn Header="Numéro de série" Binding="{Binding Path=SrNumber.SerialNumber}" />
+                            
+                            
+                        </DataGrid.Columns>
+                        
+                    </DataGrid>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="5" >
+                        <TextBox x:Name="tb_hardware_Id" Visibility="Collapsed"  Margin="2" />
+                        <GroupBox Header="Constructeur" Margin="2">
+                            <TextBox x:Name="tb_Manufactureur"  />                            
+                        </GroupBox>
+                        <ComboBox  x:Name="cb_AssetType" ItemsSource="{Binding}" DisplayMemberPath="Name" Margin="2" SelectionChanged="cb_AssetType_SelectionChanged" />
+                        <ComboBox  x:Name="cb_Location" ItemsSource="{Binding}" DisplayMemberPath="Name" Margin="2" />
+                        <ComboBox  x:Name="cb_SrNumber" ItemsSource="{Binding}" DisplayMemberPath="SerialNumber"  Margin="2"/>
 
-        <Button Content="Matériel" Click="AssetClick" Margin="10,10,698,380" RenderTransformOrigin="0.5,0.5"></Button>
-        <Button Content="Catégorie" Margin="400,10,308,380" RenderTransformOrigin="0.5,0.5"></Button>
-        <Button Content="Localisation" Margin="275,10,433,380" RenderTransformOrigin="0.5,0.5"></Button>
-        <Button Content="Propriété" Margin="142,10,566,380" RenderTransformOrigin="0.5,0.5"></Button>
+                        <DataGrid x:Name="dg_Harware_Props" Margin="2" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nom" Binding="{Binding Path=Property.Name}" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Valeur" Binding="{Binding Path=Value}"  IsReadOnly="False"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-        <DataGrid Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                  Margin="275,92,0,0" AutoGenerateColumns="True" Height="294" Width="495" RenderTransformOrigin="0.463,0.479"/>
+
+                        <StackPanel  Orientation="Horizontal" Margin="2">
+                            <Button x:Name="bt_Hardware_Save" Visibility="Collapsed" Click="bt_Hardware_Save_Click" Margin="2">Save</Button>
+                            <Button x:Name="bt_Hardware_Add" Click="bt_Hardware_Add_Click" Margin="2">Add</Button>
+                            <Button Click="bt_Hardware_Cancel_Click" Margin="2">Cancel</Button>
+                            
+                        </StackPanel>
+                    </StackPanel>
+                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Background="Gray" /> 
+
+                </Grid>
+            
+            </TabItem>
+            <TabItem Header="Catégorie">
+
+            </TabItem>
+            <TabItem Header="Localisation">
+
+            </TabItem>
+            <TabItem Header="Propriété">
+
+            </TabItem>
+
+
+        </TabControl>
+
+
 
     </Grid>
 </Window>

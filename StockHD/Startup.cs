@@ -64,8 +64,8 @@ namespace StockHD
                                 IdentityUserToken<string>, IdentityRoleClaim<string>>>()
                 .AddRoleStore<RoleStore<StockRole, StockDbContext, string, StockUserRole, IdentityRoleClaim<string>>>()
                 .AddRoles<StockRole>()
-                .AddRoleManager<StockRole>()
-                .AddEntityFrameworkStores<StockDbContext>();
+                .AddEntityFrameworkStores<StockDbContext>()
+                .AddDefaultTokenProviders();
 
 
             services.Configure<IdentityOptions>(options =>
@@ -117,7 +117,7 @@ namespace StockHD
                 
             });
             
-            SeedIdentity.SeedIdentityRoleUser(serviceProvider).Wait();
+            //SeedIdentity.SeedIdentityRoleUser(serviceProvider).Wait();
 
             app.UseEndpoints(endpoints =>
             {

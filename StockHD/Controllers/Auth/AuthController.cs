@@ -51,6 +51,7 @@ namespace StockHD.Controllers.Auth
                     Email = rUser.Email,
                     Surname = rUser.Surname,
                     Name = rUser.Name,
+                    SecretSentense = rUser.SecretSentense
                 };
                 var result = await _UserManager.CreateAsync(user, rUser.Password);
                 if (result.Succeeded)
@@ -105,68 +106,50 @@ namespace StockHD.Controllers.Auth
 
         //***************************************************************************************//
 
-        // Forgot Password
+        // Confirm the request of the reset for the password
         //***************************************************************************************//
 
-        public IActionResult ResetMDP()
+        public IActionResult ConfirmResetPassWord()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> RestMDP(string Email, string Password, string ConfirmPassword)
+        public async Task<IActionResult> ConfirmResetPassWord (string email, string secretSentence)
         {
-            return View(null);
-            //var model = new ResetMDP { Email = email };
-
-            if (ModelState.IsValid)
+            var user = await _UserManager.FindByEmailAsync(email);
+            if (user != null && user.SecretSentense == secretSentence)
             {
-                var user = await _UserManager.FindByEmailAsync( Email);
-                if (user != null)
-                {
-                    // Si l'utilisateur existe, on le redirige vers la page de réinitialisation de mot de passe
-                    return RedirectToAction("ResetPassword", new { email = Email });
-                }
-                // Si l'email n'existe pas, on peut afficher un message d'erreur ou laisser l'utilisateur réessayer
-                ModelState.AddModelError(string.Empty, "Aucun utilisateur trouvé avec cette adresse e-mail.");
+                return RedirectToAction("ChangePassword");
             }
+            return RedirectToAction("ConfirmResetPassWord");
+        }
 
+        //***************************************************************************************//
+
+        // change PassWord
+        //***************************************************************************************//
+
+        public IActionResult ChangePassword()
+        {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> ResetPassword(string Email, string Password, string ConfirmPassword)
+        public async Task<IActionResult> ChangePassword(string email, string password)
         {
-            return View(null);
-            if (ModelState.IsValid)
+            var user = await _UserManager.FindByEmailAsync(email);
+            if (user != null)
             {
-                var user = await _UserManager.FindByEmailAsync(Email);
-                if (user != null)
+                var token = await _UserManager.GeneratePasswordResetTokenAsync(user);
+                var result = await _UserManager.ResetPasswordAsync(user, token, password);
+                if (result.Succeeded)
                 {
-                    var result = await _UserManager.RemovePasswordAsync(user);
-                    if (result.Succeeded)
-                    {
-                        result = await _UserManager.AddPasswordAsync(user, Password);
-                        if (result.Succeeded)
-                        {
-                            return RedirectToAction("ResetPasswordConfirmation");
-                        }
-                        else
-                        {
-                            foreach (var error in result.Errors)
-                            {
-                                ModelState.AddModelError(string.Empty, error.Description);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "L'email fourni est incorrect.");
+                    return RedirectToAction("SignInUser");
                 }
             }
-
-            return View();
+            return RedirectToAction("ChangePassword");
         }
+
     }
 }

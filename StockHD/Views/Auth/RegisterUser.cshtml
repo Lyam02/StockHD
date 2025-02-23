@@ -44,6 +44,12 @@
                                 </div>
 
                                 <div data-mdb-input-init class="form-floating mb-3">
+                                    <input asp-for="SecretSentense" type="text" id="form3Example3cg" class="form-control form-control-lg" placeholder="" />
+                                    <label asp-for="SecretSentense" class="form-label" for="form3Example3cg">Dans quel ville êtes vous née</label>
+                                    <span asp-validation-for="SecretSentense" class="text-danger"></span>
+                                </div>
+
+                                <div data-mdb-input-init class="form-floating mb-3">
                                     <input asp-for="Password" type="password" id="form3Example4cg" class="form-control form-control-lg" placeholder="" />
                                     <label asp-for="Password" class="form-label" for="form3Example4cg"></label>
                                     <span asp-validation-for="Password" class="text-danger"></span>

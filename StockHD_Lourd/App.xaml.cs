@@ -14,11 +14,14 @@ namespace StockHD_Lourd
     {
         public IServiceProvider ServiceProvider { get; private set; }
 
+
         public App()
         {
             ServiceProvider = ConfigureServices();
         }
 
+
+       
         private static IServiceProvider ConfigureServices()
         {
             var services = new ServiceCollection();
@@ -27,7 +30,6 @@ namespace StockHD_Lourd
             //services.AddDbContext<StockDbContext>(options =>
             //options.UseMySql("Server=MON_SERVEUR;Database=MA_BASE;User Id=MON_USER;Password=MON_MDP;"));
 
-
             IConfigurationRoot Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false)
@@ -35,7 +37,7 @@ namespace StockHD_Lourd
 
             var optionsBuilder = new DbContextOptionsBuilder<StockDbContext>();
             bool UseSqLite = Configuration.GetValue<bool>("UseSqLite");
-
+           
             if (UseSqLite)
             {
                 optionsBuilder.UseSqlite(Configuration.GetConnectionString("SqlLiteDbContext"));
@@ -45,10 +47,7 @@ namespace StockHD_Lourd
             }
             else
             {
-                optionsBuilder.UseMySql(
-                    Configuration.GetConnectionString("MySqlDbContext"),
-                    new MySqlServerVersion(Configuration.GetValue<string>("MySqlVersion"))
-                );
+                
                 services.AddDbContext<StockDbContext>(options =>
                     options.UseMySql(
                         Configuration.GetConnectionString("MySqlDbContext"),

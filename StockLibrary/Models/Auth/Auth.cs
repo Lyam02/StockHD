@@ -24,6 +24,10 @@ namespace StockLibrary.Models.Auth
         [Display(Name = "Adresse Email")]
         public string Email { get; set; }
 
+        [PersonalData]
+        [Display(Name = "Phrase secrète")]
+        public string SecretSentense { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe")]
@@ -60,5 +64,32 @@ namespace StockLibrary.Models.Auth
     public class AddUser
     {
         public string Username { get; set; }
+    }
+
+    // Pour la page de confirmation de reset mdp (avant le reste mdp)
+
+    public class ConfirmResetPassword
+    {
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string SecretSentence { get; set; }
+    }
+
+    // Pour la page de reset mdp
+
+    public class ResetPassword
+    {
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Nouveau Mot de passe")]
+        public string Password { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmation Nouveau Mot de passe")]
+        [Compare("Password", ErrorMessage = "Les deux mots de passe ne correspondent pas !")]
+        public string ConfirmPassword { get; set; }
     }
 }
