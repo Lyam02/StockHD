@@ -15,9 +15,11 @@ using System.Windows.Shapes;
 using StockLibrary;
 using Microsoft.EntityFrameworkCore;
 using StockHD_Lourd.Service;
+using StockLibrary.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace StockHD_Lourd
-{ 
+{
     public partial class LoginPage : Window
     {
         public LoginPage()
@@ -28,23 +30,26 @@ namespace StockHD_Lourd
         // Sign In
         //-------------------------------------------------------------------------------------//
 
-        private readonly AuthService _authService;
+        protected SignInManager<StockUser> _SignInManager { get; }
+        protected UserManager<StockUser> _UserManager { get; }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string username = txtUsername.Text;
-            string password = txtPassword.Password; 
+            string password = txtPassword.Password;
 
-            if (_authService.Login(username, password))
+            var user = await _UserManager.FindByNameAsync(username);
+            if (user != null && await _UserManager.CheckPasswordAsync(user, password))
             {
-                MessageBox.Show("Connexion réussie !");
+                await _SignInManager.SignInAsync(user, false);
+
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Identifiants incorrects !");
+                MessageBox.Show("Une Erreur est survenu, vérifiez vos identifiants");
             }
         }
 
