@@ -1,0 +1,1 @@
+Il faut ajouter ce fichier modele dans la StockLibrary puis Models

@@ -1,0 +1,118 @@
+@model List<AlertAsset>
+
+
+
+<div id="alertContainer" style="margin-right: 50%">
+    @foreach (var alert in Model)
+    {
+        if (alert.StockAssetCount == 0)
+        {
+            <div class="alert alert-warning">
+                <strong>Attention :</strong> Il n'y a plus de "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 1)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 1 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 2)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 2 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 3)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 3 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 4)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 4 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 5)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 5 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 6)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 6 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 7)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 7 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 8)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 8 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 9)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 9 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+        else if (alert.StockAssetCount == 10)
+        {
+            <div class="alert alert-info">
+                <strong>Attention :</strong> Il ne reste plus que 10 "@alert.AssetTypeName" en Stock.
+            </div>
+        }
+    }
+</div>
+
+<style>
+    .alert {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+</style>
+
+
+<style>
+    .banner {
+        position: relative;
+        text-align: left;
+    }
+
+        .banner img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+    .text-overlay {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+    }
+
+        .text-overlay span {
+            display: block;
+            background-color: #ff6600;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            width: fit-content;
+        }
+</style>

@@ -1,0 +1,3 @@
+Il faut ensuite, dans la NavBar, relier un onglet au controlleur Stat, soit
+je modifie un onglet existant, soit j'en crée un nouveau dans lequel je met le redirection
+vers ce controlleur.

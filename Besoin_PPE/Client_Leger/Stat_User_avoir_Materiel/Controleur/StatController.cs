@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+/* Il faut creer un fichier "StatController.cs" et y mettre le code suivant*/
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockLibrary;
 
