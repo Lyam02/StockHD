@@ -37,6 +37,7 @@ namespace StockHD_Lourd
         private Asset eAsset;
         private ExtendedProperty eProperty;
         private Location eLocation;
+        private AssetType eAssetType;
         public MainWindow()
         {
             
@@ -59,22 +60,31 @@ namespace StockHD_Lourd
             this.Locations = new ObservableCollection<Location>(_context.Locations.ToList());
             this.SrNumbers = new ObservableCollection<SrNumber>(_context.SrNumber.ToList());
             this.Property = new ObservableCollection<ExtendedProperty>(_context.Properties.ToList());
+            
 
             InitializeComponent();
 
+            //Asset
             dg_Hardware.DataContext = Assets;
             cb_AssetType.DataContext = AssetTypes;
             cb_Location.DataContext = Locations;
             cb_SrNumber.DataContext = SrNumbers;
 
+            //Property
             dg_Property.DataContext = Property;
+
+            //Location
             dg_Location.DataContext = Locations;
 
+            //AssetType
+            dg_AssetType.DataContext = AssetTypes;
+            cb_AssetType_Prop.DataContext = Property;
 
 
+                
         }
 
-        // Pour l'onglet méteriel.
+        // Pour l'onglet matériel.
         // _______________________________________________________________________________________________
 
         private void dg_Hardware_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -323,6 +333,7 @@ namespace StockHD_Lourd
         {
             Location l = new Location()
             {
+
                 Name = this.tb_NameLocation.Text,
                 Description = this.tb_DescriptionLocation.Text,
                 Code = this.tb_CodeLocation.Text
@@ -341,5 +352,88 @@ namespace StockHD_Lourd
 
         // _______________________________________________________________________________________________
 
+
+        // Pour l'onglet Catégorie
+        // _______________________________________________________________________________________________
+
+        private void dg_AssetType_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            eAssetType = (sender as DataGridRow).DataContext as AssetType;
+            tb_AssetType_Id.Text = eAssetType.Id.ToString();
+            this.tb_AssetType_Name.Text = eAssetType.Name;
+            this.tb_AssetType_Description.Text = eAssetType.Description;
+            this.cb_AssetType_Prop.SelectedItem = eAssetType.Properties;
+
+            bt_AssetType_Add.Visibility = Visibility.Collapsed;
+            bt_AssetType_Save.Visibility = Visibility.Visible;
+            bt_AssetType_Delete.Visibility = Visibility.Visible;
+        }
+
+        private void bt_AssetType_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            int aId = int.Parse(tb_AssetType_Id.Text);
+            AssetType a = _context.Types.SingleOrDefault(d => d.Id == aId);
+            _context.Remove(a);
+            _context.SaveChanges();
+
+            var AssetType = new ObservableCollection<AssetType>(_context.Types.ToList());
+
+            dg_AssetType.DataContext = AssetType;
+            resetFormAssetType();
+        }
+
+        private void bt_AssetType_Add_Click(object sender, RoutedEventArgs e)
+        {
+            AssetType a = new AssetType()
+            {
+                Name = tb_AssetType_Name.Text,
+                Properties = cb_AssetType_Prop.SelectedItem as Collection<ExtendedProperty>,
+                Description = tb_AssetType_Description.Text
+            };
+            _context.Add(a);
+            _context.SaveChanges();
+
+            var AssetType = new ObservableCollection<AssetType>(_context.Types.ToList());
+
+            dg_AssetType.DataContext = AssetType;
+            resetFormAssetType();
+
+        }
+
+        private void bt_AssetType_Save_Click(object sender, RoutedEventArgs e)
+        {
+            int aId = int.Parse (tb_AssetType_Id.Text);
+            AssetType a = _context.Types.SingleOrDefault (d => d.Id == aId);
+            a.Name = tb_AssetType_Name.Text;
+            a.Properties = cb_AssetType_Prop.SelectedItem as Collection<ExtendedProperty> ;
+            a.Description = tb_AssetType_Description.Text;
+            _context.Update(a);
+            _context.SaveChanges ();
+
+            var AssetType = new ObservableCollection<AssetType>(_context.Types.ToList());
+
+            dg_AssetType.DataContext = AssetType;
+            dg_AssetType.DataContext = AssetType;
+            resetFormAssetType();
+        }
+
+        private void resetFormAssetType()
+        {
+            tb_AssetType_Id.Text = "";
+            this.tb_AssetType_Name.Text = "";
+            this.tb_AssetType_Description.Text = "";
+            this.cb_AssetType_Prop.SelectedItem = null;
+            this.bt_AssetType_Delete.Visibility = Visibility.Collapsed;
+            this.bt_AssetType_Save.Visibility = Visibility.Collapsed;
+            this.bt_AssetType_Add.Visibility = Visibility.Visible;
+
+        }
+
+        private void bt_AssetType_Cancel_Click(object sender, EventArgs e)
+        {
+            resetFormAssetType();
+        }
+
+        // _______________________________________________________________________________________________
     }
 }
