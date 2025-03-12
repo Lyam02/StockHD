@@ -44,9 +44,23 @@
                             <DataGridTextColumn Header="Type" Binding="{Binding Path=AssetType.Name}" />
                             <DataGridTextColumn Header="Emplacement" Binding="{Binding Path=Location.Name}" />
                             <DataGridTextColumn Header="Numéro de série" Binding="{Binding Path=SrNumber.SerialNumber}" />
+                           
 
 
                         </DataGrid.Columns>
+
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <DataGrid IsReadOnly="True" AutoGenerateColumns="false" SelectionUnit="CellOrRowHeader" SelectionMode="Extended" ItemsSource="{Binding Path=PropertiesValues}" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn  Header="Property" Binding="{Binding Path=Property.Name}" />
+                                        <DataGridTextColumn  Header="Value" Binding="{Binding Path=Value}" />
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
 
                     </DataGrid>
                     <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="5,5,5,5" Grid.ColumnSpan="2" >
@@ -54,9 +68,15 @@
                         <GroupBox Header="Constructeur" Margin="2">
                             <TextBox x:Name="tb_Manufactureur"  />
                         </GroupBox>
-                        <ComboBox  x:Name="cb_AssetType" ItemsSource="{Binding}" DisplayMemberPath="Name" Margin="2" SelectionChanged="cb_AssetType_SelectionChanged" />
-                        <ComboBox  x:Name="cb_Location" ItemsSource="{Binding}" DisplayMemberPath="Name" Margin="2" />
-                        <ComboBox  x:Name="cb_SrNumber" ItemsSource="{Binding}" DisplayMemberPath="SerialNumber"  Margin="2"/>
+                        <GroupBox Header="Catégorie" Margin="2">
+                            <ComboBox  x:Name="cb_AssetType" ItemsSource="{Binding}" DisplayMemberPath="Name" Margin="2" SelectionChanged="cb_AssetType_SelectionChanged" />
+                        </GroupBox>
+                        <GroupBox Header="Localisation" Margin="2">
+                            <ComboBox  x:Name="cb_Location" ItemsSource="{Binding}" DisplayMemberPath="Name" Margin="2" />
+                        </GroupBox>
+                        <GroupBox Header="Numéro de série" Margin="2">
+                            <ComboBox  x:Name="cb_SrNumber" ItemsSource="{Binding}" DisplayMemberPath="SerialNumber"  Margin="2"/>
+                        </GroupBox>
 
                         <DataGrid x:Name="dg_Harware_Props" Margin="2" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" >
                             <DataGrid.Columns>
@@ -74,7 +94,7 @@
 
                         </StackPanel>
                     </StackPanel>
-                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Background="Gray" />
+                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="4" Grid.Column="1" Grid.Row="0" Background="Gray" />
 
                 </Grid>
 
@@ -104,11 +124,31 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="#" Binding="{Binding Path=Id}" />
                             <DataGridTextColumn Header="Nom" Binding="{Binding Path=Name}" />
-                            <DataGridTextColumn Header="Propeiété" Binding="{Binding Path=Properties.Name}" />
+                            <DataGridTextColumn Header="Propeiété" Binding="{Binding Path=Properties.Count}" />
                             <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
 
 
                         </DataGrid.Columns>
+
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <Border Margin="2" Padding="2"   CornerRadius="10">
+                                    <Border.Effect>
+                                        <DropShadowEffect/>
+                                    </Border.Effect>
+                                    <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Properties: " />
+                                    <DataGrid IsReadOnly="True" AutoGenerateColumns="false" SelectionUnit="CellOrRowHeader" SelectionMode="Extended" ItemsSource="{Binding Path=Properties}" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn  Header="Nom" Binding="{Binding Path=Name}" />
+                                        <DataGridTextColumn  Header="Description" Binding="{Binding Path=Description}" />
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+                                </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
 
                     </DataGrid>
                     <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="5,5,5,5" Grid.ColumnSpan="2" >
