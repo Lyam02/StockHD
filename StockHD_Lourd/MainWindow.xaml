@@ -104,7 +104,7 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"  MinWidth="100"/>
+                        <ColumnDefinition Width="auto"  MinWidth="200"/>
                         <ColumnDefinition Width="4"/>
                         <ColumnDefinition Width="1*" MinWidth="400"/>
                     </Grid.ColumnDefinitions>
@@ -124,28 +124,114 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="#" Binding="{Binding Path=Id}" />
                             <DataGridTextColumn Header="Nom" Binding="{Binding Path=Name}" />
-                            <DataGridTextColumn Header="Propeiété" Binding="{Binding Path=Properties.Count}" />
+                            <DataGridTextColumn Header="Propriété" Binding="{Binding Path=Properties.Count}" />
                             <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
-
-
                         </DataGrid.Columns>
 
                         <DataGrid.RowDetailsTemplate>
                             <DataTemplate>
-                                <Border Margin="2" Padding="2"   CornerRadius="10">
+                                <Border Margin="2" Padding="2" CornerRadius="10">
                                     <Border.Effect>
                                         <DropShadowEffect/>
                                     </Border.Effect>
                                     <StackPanel Orientation="Vertical">
                                     <TextBlock Text="Properties: " />
                                     <DataGrid IsReadOnly="True" AutoGenerateColumns="false" SelectionUnit="CellOrRowHeader" SelectionMode="Extended" ItemsSource="{Binding Path=Properties}" >
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn  Header="Nom" Binding="{Binding Path=Name}" />
-                                        <DataGridTextColumn  Header="Description" Binding="{Binding Path=Description}" />
-                                    </DataGrid.Columns>
-
-                                </DataGrid>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn  Header="Nom" Binding="{Binding Path=Name}" />
+                                                <DataGridTextColumn  Header="Description" Binding="{Binding Path=Description}" />
+                                            </DataGrid.Columns>
+                                    </DataGrid>
                                 </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
+
+                    </DataGrid>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="5,5,5,5" Grid.ColumnSpan="2" >
+                        <TextBox x:Name="tb_AssetType_Id" Visibility="Collapsed"  Margin="2" />
+                        <GroupBox Header="Nom" Margin="2">
+                            <TextBox x:Name="tb_AssetType_Name"  />
+                        </GroupBox>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="2">
+
+                            <ListBox x:Name="lb_cat_AllCat" MinWidth="50" DisplayMemberPath="Name" SelectionMode="Multiple" ScrollViewer.CanContentScroll="True" />
+                            
+                            <StackPanel Orientation="Vertical">
+                                <Button x:Name="bt_cat_Addprop" Margin="5" Click="bt_cat_Addprop_Click" >+</Button>
+                                <Button x:Name="bt_cat_Rmprop" Margin="5" Click="bt_cat_Rmprop_Click">-</Button>
+                            </StackPanel>
+                            <ListBox x:Name="lb_cat_UsedCat" MinWidth="50" DisplayMemberPath="Name"  SelectionMode="Multiple" ScrollViewer.CanContentScroll="True" />
+                            
+                        </StackPanel>
+                        
+                        
+                       
+                        <GroupBox Header="Description" Margin="2">
+                            <TextBox x:Name="tb_AssetType_Description"></TextBox>
+                        </GroupBox>
+
+                        <StackPanel  Orientation="Horizontal" Margin="2">
+                            <Button x:Name="bt_AssetType_Save" Visibility="Collapsed" Click="bt_AssetType_Save_Click" Margin="2">Save</Button>
+                            <Button x:Name="bt_AssetType_Add" Click="bt_AssetType_Add_Click" Margin="2">Add</Button>
+                            <Button Click="bt_AssetType_Cancel_Click" Margin="2">Cancel</Button>
+                            <Button x:Name="bt_AssetType_Delete" Visibility="Collapsed" Click="bt_AssetType_Delete_Click" Margin="2">Delete</Button>
+
+                        </StackPanel>
+                    </StackPanel>
+                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="4" Grid.Column="1" Grid.Row="0" Background="Gray" />
+
+                </Grid>
+
+            </TabItem>
+
+
+
+
+
+            <!--<TabItem Header="Catégorie">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"  MinWidth="100"/>
+                        <ColumnDefinition Width="4"/>
+                        <ColumnDefinition Width="1*" MinWidth="400"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Name="dg_AssetType" Grid.Column="2" Grid.Row="0" Margin="10,10,0,10"
+  AutoGenerateColumns="False" IsReadOnly="True"
+  ItemsSource="{Binding}">
+
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="dg_AssetType_DoubleClick"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="#" Binding="{Binding Path=Id}" />
+                            <DataGridTextColumn Header="Nom" Binding="{Binding Path=Name}" />
+                            <DataGridTextColumn Header="Propriété" Binding="{Binding Path=Properties.Count}" />
+                            <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
+                        </DataGrid.Columns>
+
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <Border Margin="2" Padding="2" CornerRadius="10">
+                                    <Border.Effect>
+                                        <DropShadowEffect/>
+                                    </Border.Effect>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Properties: " />
+                                        <DataGrid IsReadOnly="True" AutoGenerateColumns="false" SelectionUnit="CellOrRowHeader" SelectionMode="Extended" ItemsSource="{Binding Path=Properties}" >
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn  Header="Nom" Binding="{Binding Path=Name}" />
+                                                <DataGridTextColumn  Header="Description" Binding="{Binding Path=Description}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </DataGrid.RowDetailsTemplate>
@@ -169,11 +255,12 @@
 
                         </StackPanel>
                     </StackPanel>
-                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Background="Gray" />
+                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="4" Grid.Column="1" Grid.Row="0" Background="Gray" />
 
                 </Grid>
 
-            </TabItem>
+            </TabItem>-->
+
 
             <TabItem Header="Propriété">
 
@@ -224,7 +311,7 @@
 
                         </StackPanel>
                     </StackPanel>
-                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Background="Gray" />
+                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="4" Grid.Column="1" Grid.Row="0" Background="Gray" />
 
                 </Grid>
 
@@ -283,7 +370,7 @@
 
                         </StackPanel>
                     </StackPanel>
-                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Background="Gray" />
+                    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="4" Grid.Column="1" Grid.Row="0" Background="Gray" />
 
                 </Grid>
 

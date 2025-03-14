@@ -43,7 +43,8 @@ namespace StockHD_Lourd
             
             App app = (App)Application.Current;
             
-            _context = app.ServiceProvider.GetService<StockDbContext>();
+            
+                _context = app.ServiceProvider.GetService<StockDbContext>();
 
             this.DataContext = this;    
             this.Assets = new ObservableCollection<Asset>(_context.Assets
@@ -78,8 +79,9 @@ namespace StockHD_Lourd
 
             //AssetType
             dg_AssetType.DataContext = AssetTypes;
-            cb_AssetType_Prop.DataContext = Property;
-
+            // lb_cat_AllCat.DataContext = Property;
+            // cb_AssetType_Prop.DataContext = Property;
+            Property.ToList().ForEach(i=>lb_cat_AllCat.Items.Add(i));
 
                 
         }
@@ -362,11 +364,25 @@ namespace StockHD_Lourd
             tb_AssetType_Id.Text = eAssetType.Id.ToString();
             this.tb_AssetType_Name.Text = eAssetType.Name;
             this.tb_AssetType_Description.Text = eAssetType.Description;
-            this.cb_AssetType_Prop.SelectedItem = eAssetType.Properties;
+           // this.cb_AssetType_Prop.SelectedItem = eAssetType.Properties;
 
             bt_AssetType_Add.Visibility = Visibility.Collapsed;
             bt_AssetType_Save.Visibility = Visibility.Visible;
             bt_AssetType_Delete.Visibility = Visibility.Visible;
+
+            lb_cat_AllCat.Items .Clear();
+            lb_cat_UsedCat.Items.Clear();
+            Property.ToList().ForEach(i => lb_cat_AllCat.Items.Add(i));
+
+            foreach (var p in eAssetType.Properties)
+            {
+
+                lb_cat_AllCat.Items.Remove(p);
+                lb_cat_UsedCat.Items.Add(p);
+            }
+
+
+
         }
 
         private void bt_AssetType_Delete_Click(object sender, RoutedEventArgs e)
@@ -386,16 +402,23 @@ namespace StockHD_Lourd
         {
             AssetType a = new AssetType()
             {
-                Name = tb_AssetType_Name.Text,
-                Properties = cb_AssetType_Prop.SelectedItem as Collection<ExtendedProperty>,
-                Description = tb_AssetType_Description.Text
+                Name = this.tb_AssetType_Name.Text,
+                Properties = new Collection<ExtendedProperty> (lb_cat_UsedCat.Items.Cast<ExtendedProperty>().ToList()),
+                Description = this.tb_AssetType_Description.Text
             };
+
+            // ExtendedProperty p = this.cb_AssetType_Prop.SelectedItem as ExtendedProperty;
+
+            //if(p != null)
+            //{
+            //    a.Properties.Add(p);
+            //}
             _context.Add(a);
             _context.SaveChanges();
 
-            var AssetType = new ObservableCollection<AssetType>(_context.Types.ToList());
+            this.AssetTypes = new ObservableCollection<AssetType>(_context.Types.Include(t => t.Properties).ToList());
 
-            dg_AssetType.DataContext = AssetType;
+            dg_AssetType.DataContext = AssetTypes;
             resetFormAssetType();
 
         }
@@ -403,16 +426,16 @@ namespace StockHD_Lourd
         private void bt_AssetType_Save_Click(object sender, RoutedEventArgs e)
         {
             int aId = int.Parse (tb_AssetType_Id.Text);
-            AssetType a = _context.Types.SingleOrDefault (d => d.Id == aId);
+            AssetType a = _context.Types.Include(a=>a.Properties).SingleOrDefault (d => d.Id == aId);
             a.Name = tb_AssetType_Name.Text;
-            a.Properties = cb_AssetType_Prop.SelectedItem as Collection<ExtendedProperty> ;
+           // a.Properties = cb_AssetType_Prop.SelectedItem as Collection<ExtendedProperty> ;
             a.Description = tb_AssetType_Description.Text;
+            a.Properties = new Collection<ExtendedProperty>(lb_cat_UsedCat.Items.Cast<ExtendedProperty>().ToList());
             _context.Update(a);
             _context.SaveChanges ();
 
-            var AssetType = new ObservableCollection<AssetType>(_context.Types.ToList());
+            var AssetType = new ObservableCollection<AssetType>(_context.Types.Include(t => t.Properties).ToList());
 
-            dg_AssetType.DataContext = AssetType;
             dg_AssetType.DataContext = AssetType;
             resetFormAssetType();
         }
@@ -422,10 +445,13 @@ namespace StockHD_Lourd
             tb_AssetType_Id.Text = "";
             this.tb_AssetType_Name.Text = "";
             this.tb_AssetType_Description.Text = "";
-            this.cb_AssetType_Prop.SelectedItem = null;
+           // this.cb_AssetType_Prop.SelectedItem = null;
             this.bt_AssetType_Delete.Visibility = Visibility.Collapsed;
             this.bt_AssetType_Save.Visibility = Visibility.Collapsed;
             this.bt_AssetType_Add.Visibility = Visibility.Visible;
+            lb_cat_UsedCat.Items.Clear ();
+            lb_cat_AllCat.Items.Clear();
+            Property.ToList().ForEach(i => lb_cat_AllCat.Items.Add(i));
 
         }
 
@@ -434,6 +460,25 @@ namespace StockHD_Lourd
             resetFormAssetType();
         }
 
+        private void bt_cat_Addprop_Click(object sender, RoutedEventArgs e)
+        {
+
+            foreach (ExtendedProperty p in lb_cat_AllCat.SelectedItems.Cast<object>().ToList())
+            {
+                    lb_cat_UsedCat.Items.Add(p);
+                lb_cat_AllCat.Items.Remove(p);
+            }
+        }
+
+        private void bt_cat_Rmprop_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (ExtendedProperty p in lb_cat_UsedCat.SelectedItems.Cast<object>().ToList())
+            {
+                lb_cat_AllCat.Items.Add(p);
+                lb_cat_UsedCat.Items.Remove(p);
+            }
+        }
+
         // _______________________________________________________________________________________________
     }
-}
+}   
