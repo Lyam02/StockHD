@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<StockLibrary.Models.CorpUser>
-
+@inject SignInManager<StockUser> signInManager;
+@inject UserManager<StockUser> userManager;
 
 @{
     ViewData["Title"] = "ING Users";
@@ -14,8 +15,12 @@
 <hr class="mb-5" />
 
 <div class="mt-3" style="display:inline">
-    <div class="mb-4" style="margin-right:95%">
 
+    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+       
+    }
+    <div class="mb-4" style="margin-right:95%">
         <div class="p-0 m-1 mb-3" style="float: right">
             <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_CorpUser")">Nouveau</a>
         </div>

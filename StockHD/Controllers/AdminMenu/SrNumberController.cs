@@ -8,7 +8,7 @@ using StockLibrary.Models;
 
 namespace StockHD.Controllers.AdminMenu
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class SrNumberController : Controller
     {
 

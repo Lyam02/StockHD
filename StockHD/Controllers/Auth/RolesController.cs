@@ -9,7 +9,7 @@ using StockLibrary.Models.Auth;
 
 namespace StockHD.Controllers.Auth
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
         private readonly StockDbContext _context;

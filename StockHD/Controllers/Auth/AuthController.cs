@@ -31,6 +31,9 @@ namespace StockHD.Controllers.Auth
             _context = context;
         }
 
+
+
+
         // Sign Up
         //***************************************************************************************//
         [HttpGet]
@@ -67,10 +70,54 @@ namespace StockHD.Controllers.Auth
         // Sign In
         //***************************************************************************************//
         [HttpGet]
-        public IActionResult SignInUser()
+        public async Task<IActionResult> SignInUser()
         {
+            /*if (!_context.Roles.Any())*/ await CreateUserRole();
+            
+
             ViewData["ErrMsg"] = "";
             return View();
+        }
+
+        private async Task<bool> CreateUserRole()
+        {
+            if (!_context.Roles.Any())
+            {
+                foreach (string roleName in new List<string> { "Admin", "Proximité", "IAM", "Invité" })
+                {
+                    var result = await _RoleManager.CreateAsync(new StockRole { Name = roleName });
+                }
+
+                // (new List<string> { "Admin", "Proximité", "IAM", "Invité" }).ForEach(n => _RoleManager.CreateAsync(new StockRole { Name = n }));
+
+            }
+
+            if (!_context.Users.Any())
+            {
+                var result = await _UserManager.CreateAsync(new StockUser { Name = "Admin", Surname = "Admin", SecretSentense = "Admin", Email = "Admin@ing.me", UserName = "Admin" }, "Admin123#");
+                if (result.Succeeded)
+                {
+                    var result2 = await _UserManager.AddToRoleAsync(await _UserManager.FindByNameAsync("Admin"), "Admin");
+                }
+            }
+
+            //List<StockRole> roles = new List<StockRole>();
+
+            //roles.Add(new StockRole { Name = "Admin" });
+            //roles.Add(new StockRole { Name = "Proximité" });
+            //roles.Add(new StockRole { Name = "IAM" });
+            //roles.Add(new StockRole { Name = "Invité" });
+
+            //if (!_context.Roles.Any())
+            //{
+            //    foreach (StockRole stockRole in roles)
+            //    {
+            //        var role = new StockRole { Name = stockRole.Name };
+            //        var result = await _RoleManager.CreateAsync(role);
+            //    }   
+            //}
+
+            return true;
         }
 
         [HttpPost]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StockLibrary;
@@ -15,16 +16,18 @@ namespace StockHD.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly StockDbContext _context;
+        protected RoleManager<StockRole> _RoleManager { get; }
 
-        public HomeController(ILogger<HomeController> logger,StockDbContext context)
+        public HomeController(ILogger<HomeController> logger, RoleManager<StockRole> roleManager,StockDbContext context)
         {
+            _RoleManager = roleManager;
             _logger = logger;
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var query = @"
+            /*var query = @"
             SELECT 
                 at.Name AS AssetTypeName, 
                 COUNT(a.Id) AS AssetCount,
@@ -54,9 +57,16 @@ namespace StockHD.Controllers
 
             var alertAssets = _context.AlertAssets
                                   .FromSqlRaw(query)
-                                  .ToList();
+                                  .ToList();*/
 
-            return View(alertAssets);
+
+
+            
+
+
+
+
+            return View();
         }
 
         public IActionResult Privacy()

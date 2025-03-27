@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Data.Sqlite;
@@ -38,7 +39,7 @@ namespace StockHD.Controllers.AdminMenu
 
         //CREATE CorpUser
         /*********************************************************/
-
+        [Authorize(Roles = "Admin")]
         //GET
         public IActionResult Create_CorpUser()
         {
@@ -55,6 +56,7 @@ namespace StockHD.Controllers.AdminMenu
             return View(corpUser);
         }
 
+        [Authorize(Roles = "Admin")]
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
