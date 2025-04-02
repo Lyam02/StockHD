@@ -10,7 +10,11 @@
     <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Loc")">Nouveau</a>
     </div>
 
-    <table class="table table-striped">
+    <div class="p-0 m-1 mb-3">
+        <a class="btn btn-primary" id="PDF" style="margin-right : 100%">PDF</a>
+    </div>
+
+    <table id="content" class="table table-striped">
 
 
         <thead>
@@ -40,3 +44,24 @@
     </table>
 
 </div>
+
+<div id="editor"></div>
+
+<script>
+
+        var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    $('#PDF').click(function () {
+        doc.fromHTML($('#content').html(), 15, 15, {
+            'width': 170,
+                'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });
+
+</script>

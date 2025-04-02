@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -7,6 +7,17 @@
     <StartupObject>StockHD.Program</StartupObject>
     <UserSecretsId>df93d77b-c072-43e7-aeb0-23b2fe7c289f</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\AdminMenu\**" />
+    <Compile Remove="Views\Assign\**" />
+    <Content Remove="Views\AdminMenu\**" />
+    <Content Remove="Views\Assign\**" />
+    <EmbeddedResource Remove="Views\AdminMenu\**" />
+    <EmbeddedResource Remove="Views\Assign\**" />
+    <None Remove="Views\AdminMenu\**" />
+    <None Remove="Views\Assign\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.4" />
@@ -40,11 +51,6 @@
 
   <ItemGroup>
     <Content Include="Views\Auth\richelieu.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\AdminMenu\" />
-    <Folder Include="Views\Assign\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,6 +15,6 @@ namespace StockLibrary.Models
         public Collection<ExtendedPropertyValue> PropertiesValues { get; set; } = new Collection<ExtendedPropertyValue>();
         [Display(Name = "Numéro de Série")]
         public SrNumber? SrNumber { get; set; }
-        
+        public Assignation Assignations { get; set; }         
     }
 }
