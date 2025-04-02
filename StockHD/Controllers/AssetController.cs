@@ -53,7 +53,7 @@ namespace StockHD.Controllers
         //GET
 
         public async Task<IActionResult> GetPropertiesEx(int Id = 0)
-        {
+        { 
             if (Id == 0) return NotFound();
 
             var aType = await _context.Types.Include(p => p.Properties).SingleOrDefaultAsync(t => t.Id == Id);

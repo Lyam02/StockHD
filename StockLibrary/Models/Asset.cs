@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StockLibrary.Models
 {
@@ -15,6 +16,5 @@ namespace StockLibrary.Models
         public Collection<ExtendedPropertyValue> PropertiesValues { get; set; } = new Collection<ExtendedPropertyValue>();
         [Display(Name = "Numéro de Série")]
         public SrNumber? SrNumber { get; set; }
-        public Assignation Assignations { get; set; }         
     }
 }

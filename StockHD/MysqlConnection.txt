@@ -1,2 +1,38 @@
-for Laptop VM : "MySqlDbContext": "server=192.168.95.1;user=root;database=StockHD;port=3306;password=040505"
-"MySqlVersion": "8.0.40"
+______________________________________________________________________________________________________________________________
+For Mac : 
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+    "ConnectionStrings": {
+        "SqlLiteDbContext": "Filename=../../stockData/Stock.db",
+        "MySqlDbContext": "server=192.168.190.1;user=root;database=StockHD;port=3306;password=040505"
+
+    },
+  "UseSqLite": false,
+  "MySqlVersion": "9.2.0",
+  "AllowedHosts": "*"
+}
+______________________________________________________________________________________________________________________________
+
+______________________________________________________________________________________________________________________________
+For ING Laptop :
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "SqlLiteDbContext": "Filename=../../stockData/Stock.db",
+    "MySqlDbContext": "server=127.0.0.0;user=root;database=StockHD;port=3306;password=040505"
+  },
+  "UseSqLite": false,
+  "MySqlVersion": "8.0.41",
+  "AllowedHosts": "*"
+}
+______________________________________________________________________________________________________________________________
