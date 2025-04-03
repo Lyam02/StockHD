@@ -10,6 +10,7 @@ using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.Extensions.DependencyInjection;
 using StockLibrary;
 using StockLibrary.Data.Seeders;
+using System.Globalization;
 
 namespace StockHD
 {
@@ -102,6 +103,11 @@ namespace StockHD
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+
+            var cultureInfo = new CultureInfo("fr-FR");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 
             app.UseStatusCodePages(async contextAccessor =>

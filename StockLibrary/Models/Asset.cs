@@ -7,6 +7,7 @@ namespace StockLibrary.Models
     public class Asset
     {
         public int Id { get; set; }
+        [Display(Name = "Catégorie")]
         public AssetType AssetType { get; set; } = new AssetType();
         [Display(Name = "Constructeur")]
         public string Manufacturer { get; set; } = "";
@@ -16,5 +17,7 @@ namespace StockLibrary.Models
         public Collection<ExtendedPropertyValue> PropertiesValues { get; set; } = new Collection<ExtendedPropertyValue>();
         [Display(Name = "Numéro de Série")]
         public SrNumber? SrNumber { get; set; }
+        [Display(Name = "Corporate Key")]
+        public CorpUser? CorpUser { get; set; }
     }
 }

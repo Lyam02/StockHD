@@ -22,8 +22,8 @@ namespace StockLibrary.Models
         [Display(Name = "Service")]
         public string Departement { get; set; }
         [Display(Name = "Date d'effet")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public string? StartDate { get; set; }
     }
 }

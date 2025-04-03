@@ -58,6 +58,19 @@
         </div>
 
         <div class="form-floating mb-3">
+
+            <select class="form-control" name="CorpUserSelect" placeholder="">
+                <option selected=""></option>
+                @foreach (CorpUser l in ViewBag.CorpUser)
+                {
+                    <option value="@l.CK">@l.CK</option>
+                }
+            </select>
+            <label asp-for="CorpUser"></label>
+            <span asp-validation-for="CorpUser" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
         <input asp-for="Description" class="form-control" placeholder="" />
         <label asp-for="Description" for="Description"></label>
         <span asp-validation-for="Description" class="text-danger"></span>

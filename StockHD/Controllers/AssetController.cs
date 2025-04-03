@@ -32,10 +32,10 @@ namespace StockHD.Controllers
             var assets = _context.Assets.Include(t => t.AssetType)
                                 .Include(l => l.Location)
                                 .Include(a => a.PropertiesValues)
-                                .Include(n => n.SrNumber).ToList();
+                                .Include(n => n.SrNumber)
+                                .Include(c => c.CorpUser).ToList();
 
             return View(assets);
-
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -92,7 +92,7 @@ namespace StockHD.Controllers
         //POST Asset
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string SrNumberSelect, string jsonPropValCreate)
+        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string CorpUserSelect, string SrNumberSelect, string jsonPropValCreate)
         {
 
             List<PropValue> pValues = JsonConvert.DeserializeObject<List<PropValue>>(jsonPropValCreate);
@@ -114,14 +114,13 @@ namespace StockHD.Controllers
                 
             /*_context.PropertiesValues.Where(p => pValues.Contains(v => v.Id == p.Id)).ToList().ForEach(asset.PropertiesValues.Add);*/
 
-            
-
             asset.Location = _context.Locations.SingleOrDefault(l => l.Id == LocationSelect)!;
 
             asset.AssetType = _context.Types.SingleOrDefault(t => t.Id == AssetTypeSelect)!;
 
             asset.SrNumber = _context.SrNumber.SingleOrDefault(n => n.SerialNumber == SrNumberSelect);
-            
+
+            asset.CorpUser = _context.CorpUser.SingleOrDefault(n => n.CK == CorpUserSelect);
 
             if (!ModelState.IsValid)
             {
@@ -208,7 +207,7 @@ namespace StockHD.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string SrNumberSelect, int id)
+        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string CorpuserSelect,string SrNumberSelect, int id)
         {
             if (id != asset.Id)
             {
@@ -248,6 +247,17 @@ namespace StockHD.Controllers
                             asset.Location = location;
                         }
                     }
+
+                    if (CorpuserSelect != null)
+                    {
+                        CorpUser corpUser = _context.CorpUser.SingleOrDefault(c => c.CK == CorpuserSelect);
+
+                        if (corpUser != null)
+                        {
+                            asset.CorpUser = corpUser;
+                        }
+                    }
+
                     _context.Update(asset);
                     await _context.SaveChangesAsync();
 
@@ -289,6 +299,7 @@ namespace StockHD.Controllers
             ViewData["Locations"] = _context.Locations.ToList();
             ViewData["AssetTypes"] = _context.Types.ToList();
             ViewData["SrNumber"] = _context.SrNumber.ToList();
+            ViewData["CorpUser"] = _context.CorpUser.ToList();
         }
     }
 }
