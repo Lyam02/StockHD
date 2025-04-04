@@ -39,6 +39,7 @@
                     <th>@Html.DisplayNameFor(Model => Model.EmailAddress)</th>
                     <th>@Html.DisplayNameFor(Model => Model.Departement)</th>
                     <th>@Html.DisplayNameFor(Model => Model.StartDate)</th>
+                    <th>@Html.DisplayNameFor(Model => Model.Assets)</th>
                     <th></th>
                 </tr>
             </thead>
@@ -54,11 +55,12 @@
                             <td>@Html.DisplayFor(modelItem => item.EmailAddress)</td>
                             <td>@Html.DisplayFor(modelItem => item.Departement)</td>
                             <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                            <td>@string.Join(",", item.Assets.Select(p => p.AssetType.Name).ToList())</td>
                             <td>
                                 <a href="@Url.Action("Edit_CorpUser", "CorpUser", new{CK = item.CK})">Modifier</a> |
                                 <a href="@Url.Action("Delete_CorpUser", "CorpUser", new{CK = item.CK})">Supprimer</a>
                             @* 
-                            Permet d'indiquer l'action, le controlleur et la valeur
+                            Permet d'indiquer l'action, le contrôleur et la valeur
                             ca crée ensuite une url en fonction de la nomenclature du Startup
                             *@
                             </td>

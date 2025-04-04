@@ -28,10 +28,11 @@ namespace StockHD.Controllers.AdminMenu
         }
 
         // GET: SerialNumber
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
 
-            var cUser = _context.CorpUser.ToList();
+            var cUser = await _context.CorpUser
+                                      .Include(a => a.Assets).ToListAsync();
 
             return View(cUser);
 

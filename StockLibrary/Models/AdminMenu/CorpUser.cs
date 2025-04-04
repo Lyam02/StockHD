@@ -25,5 +25,7 @@ namespace StockLibrary.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public string? StartDate { get; set; }
+        [Display(Name = "Matériels")]
+        public Collection<Asset>? Assets { get; set; } = new Collection<Asset>();
     }
 }
