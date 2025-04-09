@@ -32,11 +32,28 @@ namespace StockHD.Controllers.AdminMenu
         {
 
             var cUser = await _context.CorpUser
-                                      .Include(a => a.Assets).ToListAsync();
+                            .Include(a => a.Assets).ToListAsync();
 
+            Corp();
             return View(cUser);
 
         }
+
+        //DETAIL CorpUser
+        /*********************************************************/
+
+        public async Task<IActionResult> Detail_CorpUser(string CK)
+        {
+            var dUser = await _context.CorpUser
+                            .Include(a => a.Assets)
+                            .FirstOrDefaultAsync(u=>u.CK == CK);
+
+            Corp();
+            return View(dUser);
+        }
+
+        /*********************************************************/
+
 
         //CREATE CorpUser
         /*********************************************************/
@@ -165,5 +182,13 @@ namespace StockHD.Controllers.AdminMenu
         }
 
         /*********************************************************/
+
+        private void Corp()
+        {
+            ViewData["SrNumbers"] = _context.SrNumber.ToList();
+            ViewData["AssetTypes"] = _context.Types.ToList();
+            ViewData["PropertieValue"] = _context.PropertiesValues.ToList();
+        }
+
     }
 }

@@ -26,8 +26,14 @@
             <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_CorpUser")">Nouveau</a>
         </div>
     </div>
+    <div class="mb-4" style="margin-left : 55%">
+        <form class="form-inline my-2 my-lg-0" style="display : inline-flex">
+            <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+    </div>
 
-    <div style="margin-right:30%">
+    <div style="margin-right:20%">
         <table class="table table-striped">
 
 
@@ -55,8 +61,9 @@
                             <td>@Html.DisplayFor(modelItem => item.EmailAddress)</td>
                             <td>@Html.DisplayFor(modelItem => item.Departement)</td>
                             <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-                            <td>@string.Join(",", item.Assets.Select(p => p.AssetType.Name).ToList())</td>
+                            <td>@string.Join(", ", item.Assets.Select(p => p.AssetType.Name).ToList())</td>
                             <td>
+                                <a href="@Url.Action("Detail_CorpUser", "CorpUser", new{CK = item.CK})">Detail</a> |
                                 <a href="@Url.Action("Edit_CorpUser", "CorpUser", new{CK = item.CK})">Modifier</a> |
                                 <a href="@Url.Action("Delete_CorpUser", "CorpUser", new{CK = item.CK})">Supprimer</a>
                             @* 

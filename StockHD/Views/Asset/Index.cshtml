@@ -6,50 +6,60 @@
 }
 
 
-<div class="" style="margin-right:400px">
-    <h1 class="display-4 text-center">Matériels</h1>
+<div>
+    <h1 class="display-4 text-center" style="margin-right:400px">Matériels</h1>
+
+    <hr class="mb-5" />
 
     <div class="p-0 m-1 mb-3">
-    <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Asset")">Nouveau</a>
+        <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("Create_Asset")">Nouveau</a>
     </div>
+    <div class="mb-4" style="margin-left : 55%">
+        <form class="form-inline my-2 my-lg-0" style="display : inline-flex">
+            <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+    </div>
+    
 
-    <table class="table table-striped">
+    <div style="margin-right:450px">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(Model => Model.AssetType)</th>
+                    <th>@Html.DisplayNameFor(Model => Model.PropertiesValues)</th>
+                    <th>@Html.DisplayNameFor(model => model.SrNumber)</th>
+                    <th>@Html.DisplayNameFor(Model => Model.Location.Name)</th>
+                    <th>@Html.DisplayNameFor(Model => Model.CorpUser)</th>
+                    <th></th>
+                </tr> 
+            </thead>
 
+            <tbody class="table-group-divider">
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.AssetType.Name)</td>
+                            <td>@string.Join(",", item.PropertiesValues.Select(p => p.Value).ToList())</td>
+                            <td>@Html.DisplayFor(modelItem => item.SrNumber.SerialNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Location.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CorpUser.CK)</td>
+                            <td>
 
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(Model => Model.AssetType)</th>
-                <th>@Html.DisplayNameFor(Model => Model.PropertiesValues)</th>
-                <th>@Html.DisplayNameFor(model => model.SrNumber)</th>
-                <th>@Html.DisplayNameFor(Model => Model.Location.Name)</th>
-                <th>@Html.DisplayNameFor(Model => Model.CorpUser)</th>
-                <th></th>
-            </tr> 
-        </thead>
-
-        <tbody>
-            @{
-                foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.AssetType.Name)</td>
-                        <td>@string.Join(",", item.PropertiesValues.Select(p => p.Value).ToList())</td>
-                        <td>@Html.DisplayFor(modelItem => item.SrNumber.SerialNumber)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Location.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.CorpUser.CK)</td>
-                        <td>
-                            <a href="@Url.Action("Edit_Asset", "Asset", new{id = item.Id})">Modifier</a> |
-                            <a href="@Url.Action("Delete_Asset", "Asset", new{id = item.Id})">Supprimer</a><br>
-                            | <a href="@Url.Action("Detail_Asset", "Asset", new{id = item.Id})">Detail</a>
-                            @* 
-                            Permet d'indiquer l'action, le controlleur et la valeur
-                            ca crée ensuite une url en fonction de la nomenclature du Startup
-                            *@
-                        </td>
-                    </tr>
+                                <a href="@Url.Action("Detail_Asset", "Asset", new{id = item.Id})">Detail</a> |
+                                <a href="@Url.Action("Edit_Asset", "Asset", new{id = item.Id})">Modifier</a> |
+                                <a href="@Url.Action("Delete_Asset", "Asset", new{id = item.Id})">Supprimer</a>
+                                @* 
+                                Permet d'indiquer l'action, le controlleur et la valeur
+                                ca crée ensuite une url en fonction de la nomenclature du Startup
+                                *@
+                            </td>
+                        </tr>
+                    }
                 }
-            }
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
