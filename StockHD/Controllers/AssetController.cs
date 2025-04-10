@@ -92,7 +92,7 @@ namespace StockHD.Controllers
         //POST Asset
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string CorpUserSelect, string SrNumberSelect, string jsonPropValCreate)
+        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string? CorpUserSelect, string SrNumberSelect, string jsonPropValCreate)
         {
 
             List<PropValue> pValues = JsonConvert.DeserializeObject<List<PropValue>>(jsonPropValCreate);
@@ -121,6 +121,14 @@ namespace StockHD.Controllers
             asset.SrNumber = _context.SrNumber.SingleOrDefault(n => n.SerialNumber == SrNumberSelect);
 
             asset.CorpUser = _context.CorpUser.SingleOrDefault(n => n.CK == CorpUserSelect);
+
+            /*if (CorpUserSelect == null)
+            {
+                _context.Assets.Add(asset);
+                await _context.SaveChangesAsync(); //Sauvegarde des changements
+
+                return RedirectToAction(nameof(Index));
+            }*/
 
             if (!ModelState.IsValid)
             {
@@ -207,7 +215,7 @@ namespace StockHD.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string CorpuserSelect,string SrNumberSelect, int id)
+        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string? CorpuserSelect,string SrNumberSelect, int id)
         {
             if (id != asset.Id)
             {

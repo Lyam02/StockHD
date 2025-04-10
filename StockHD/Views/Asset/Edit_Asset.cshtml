@@ -68,9 +68,10 @@
 
         <div class="form-floating mb-3">
             <select class="form-control" name="CorpuserSelect">
+                <option selected=""></option>
                 @foreach (CorpUser c in ViewBag.CorpUser)
                 {
-                    if (Model.CorpUser.CK == c.CK)
+                    if (Model.CorpUser != null && Model.CorpUser.CK == c.CK)
                     {
                         <option value ="@c.CK" selected>@c.CK</option>
                     }
