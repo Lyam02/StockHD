@@ -57,8 +57,4 @@
     <ProjectReference Include="..\StockLibrary\StockLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\NewFolder\" />
-  </ItemGroup>
-
 </Project>

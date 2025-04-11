@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Newtonsoft.Json;
 using StockLibrary.Data;
 using StockLibrary.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using StockLibrary;
 
 
@@ -45,11 +42,11 @@ namespace StockHD.Controllers
         }
 
         //--------------------------------------------------
-
+       
         // Create Asset
 
         //--------------------------------------------------
-
+        
         //GET
 
         public async Task<IActionResult> GetPropertiesEx(int Id = 0)
@@ -70,7 +67,6 @@ namespace StockHD.Controllers
 
         public IActionResult Create_Asset()
         {
-            
 
             var Asset = new Asset
             {
