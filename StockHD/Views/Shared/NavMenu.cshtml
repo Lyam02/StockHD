@@ -12,7 +12,7 @@
 
             <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <img id="Lion" src="/css/picture/imageL.png" />
-                <span class="fs-5 d-none d-sm-inline m-lg-2" style="color:black"  >  -StockHD</span>
+                <span class="fs-5 d-none d-sm-inline m-lg-2" style="color:black">  -StockHD</span>
             </a>
              @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Proxi") || User.IsInRole("IAM") || User.IsInRole("Guest")))
             { 
@@ -27,21 +27,32 @@
                     </a>
 
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link text-dark align-middle px-0 text-black" asp-area="" asp-controller="Asset" asp-action="Index">
-                        <i class="fs-4 bi-box-seam"></i> <span class="ms-1 d-none d-sm-inline">Matériels</span>
-                    </a>
+                    <div style="display : inline-flex ">
+                        <a class="nav-link text-dark align-middle px-0 text-black" asp-area="" asp-controller="Asset" asp-action="Index">
+                                <i class="fs-4 bi-box-seam"></i> <span class="ms-1 d-none d-sm-inline">Stock</span>
+                        </a>
+                        <a style="margin-top : 13px; margin-left : 4px" href="#submenu0" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-black">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </a>
+                    </div>
+                    <ul class="collapse nav flex-column ms-1" id="submenu0" data-bs-parent="#menu">
+                            <li class="w-100"><a class="nav-link px-0" asp-area="" asp-controller="" asp-action="" style="color:black"> <span class="d-none d-sm-inline">Accessoires</span></a></li>
+                    </ul>
+                        
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark align-middle px-0 text-black" asp-area="" asp-controller="Assignation" asp-action="Index">
-                        <i class="fs-4 bi-person-badge"></i> <span class="ms-1 d-none d-sm-inline">Assignation</span>
+                        <a class="nav-link text-dark align-middle px-0 text-black" asp-controller="CorpUser" asp-action="Index">
+                            <i class="fs-4 bi-person-badge"></i> <span class="ms-1 d-none d-sm-inline">Utilisateurs</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-black">
-                        <i class="fs-4 bi-layers"></i> <span class="ms-1 d-none d-sm-inline">Attribut</span>
+                        <i class="fs-4 bi-layers"></i> <span class="ms-1 d-none d-sm-inline">Attribut</span> 
+
                     </a>
                     <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                         <li class="w-100"><a class="nav-link px-0" asp-area="" asp-controller="Type" asp-action="Index" style="color:black"> <span class="d-none d-sm-inline">Catégories</span></a></li>
@@ -102,9 +113,7 @@
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li><a class="dropdown-item" asp-controller="SrNumber" asp-action="Index">Numéros de séries</a></li>
-                            <hr>
                         }
-                        <li><a class="dropdown-item" asp-controller="CorpUser" asp-action="Index">Utilisateurs ING</a></li>
                         @if (signInManager.IsSignedIn(User) &&  (User.IsInRole("Admin") || User.IsInRole("IAM")))
                         {
                             <hr>

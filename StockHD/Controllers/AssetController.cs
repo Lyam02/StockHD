@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Newtonsoft.Json;
 using StockLibrary.Data;
 using StockLibrary.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using StockLibrary;
 
 
@@ -45,11 +42,11 @@ namespace StockHD.Controllers
         }
 
         //--------------------------------------------------
-
+       
         // Create Asset
 
         //--------------------------------------------------
-
+        
         //GET
 
         public async Task<IActionResult> GetPropertiesEx(int Id = 0)
@@ -70,7 +67,6 @@ namespace StockHD.Controllers
 
         public IActionResult Create_Asset()
         {
-            
 
             var Asset = new Asset
             {
@@ -92,7 +88,7 @@ namespace StockHD.Controllers
         //POST Asset
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string CorpUserSelect, string SrNumberSelect, string jsonPropValCreate)
+        public async Task<IActionResult> Create_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string? CorpUserSelect, string SrNumberSelect, string jsonPropValCreate)
         {
 
             List<PropValue> pValues = JsonConvert.DeserializeObject<List<PropValue>>(jsonPropValCreate);
@@ -121,6 +117,14 @@ namespace StockHD.Controllers
             asset.SrNumber = _context.SrNumber.SingleOrDefault(n => n.SerialNumber == SrNumberSelect);
 
             asset.CorpUser = _context.CorpUser.SingleOrDefault(n => n.CK == CorpUserSelect);
+
+            /*if (CorpUserSelect == null)
+            {
+                _context.Assets.Add(asset);
+                await _context.SaveChangesAsync(); //Sauvegarde des changements
+
+                return RedirectToAction(nameof(Index));
+            }*/
 
             if (!ModelState.IsValid)
             {
@@ -207,7 +211,7 @@ namespace StockHD.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string CorpuserSelect,string SrNumberSelect, int id)
+        public async Task<IActionResult> Edit_Asset(Asset asset, int AssetTypeSelect, int LocationSelect, string? CorpuserSelect,string SrNumberSelect, int id)
         {
             if (id != asset.Id)
             {
