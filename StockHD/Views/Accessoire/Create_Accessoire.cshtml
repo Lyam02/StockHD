@@ -1,0 +1,27 @@
+﻿@model StockLibrary.Models.Accessoire
+
+
+<!--Création d'un formulaire de création d'un Asset avec un AssetType -->
+
+<form asp-action="Create_Accessoire" id="formData">
+
+    <div class="mb-3 MargTop">
+
+        <div class="form-floating mb-2">
+            <input asp-for="Name" class="form-control" placeholder="" />
+            <label asp-for="Name"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-2">
+            <input asp-for="Quantite" type="number" class="form-control" placeholder="" />
+            <label asp-for="Quantite"></label>
+            <span asp-validation-for="Quantite" class="text-danger"></span>
+        </div>
+
+        <input type="submit" value="Ajouter" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-danger">Annuler</a>
+        
+    </div>
+
+</form>

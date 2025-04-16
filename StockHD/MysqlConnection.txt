@@ -29,7 +29,7 @@ For ING Laptop :
   },
   "ConnectionStrings": {
     "SqlLiteDbContext": "Filename=../../stockData/Stock.db",
-    "MySqlDbContext": "server=127.0.0.0;user=root;database=StockHD;port=3306;password=040505"
+    "MySqlDbContext": "server=127.0.0.1;user=root;database=StockHD;port=3306;password=040505"
   },
   "UseSqLite": false,
   "MySqlVersion": "8.0.41",

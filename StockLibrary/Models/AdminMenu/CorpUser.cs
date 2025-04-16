@@ -27,5 +27,6 @@ namespace StockLibrary.Models
         public string? StartDate { get; set; }
         [Display(Name = "Matériels")]
         public Collection<Asset>? Assets { get; set; } = new Collection<Asset>();
+        public Collection<AccessoireAssignement>? Accessoires { get; set; } 
     }
 }

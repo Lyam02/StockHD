@@ -34,7 +34,7 @@ namespace StockLibrary
         public DbSet<AlertAsset> AlertAssets { get; set; }
         public DbSet<Stat> Stat { get; set; }
         public DbSet<Accessoire> Accessoire { get; set; }
-
+        public DbSet<AccessoireAssignement> AccessoireAssignement { get; set; }
 
 
         // Identity
@@ -61,6 +61,7 @@ namespace StockLibrary
             modelBuilder.Entity<AlertAsset>().ToTable("AlertAsset").HasNoKey();
             modelBuilder.Entity<Stat>().ToView("Stat").HasKey(s => new {s.LocationName, s.AssetTypes});
             modelBuilder.Entity<Accessoire>().ToTable("Accessoire").HasKey(a => a.Name);
+            modelBuilder.Entity<AccessoireAssignement>().ToTable("AccessoireAssignement").HasKey(a => new { a.CorpUserCK, a.AccessoireName });
 
             // Identity
             modelBuilder.Entity<StockRole>().ToTable("Role").HasKey(r => r.Id);
