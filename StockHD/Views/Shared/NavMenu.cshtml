@@ -14,8 +14,8 @@
                 <img id="Lion" src="/css/picture/imageL.png" />
                 <span class="fs-5 d-none d-sm-inline m-lg-2" style="color:black">  -StockHD</span>
             </a>
-             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Proxi") || User.IsInRole("IAM") || User.IsInRole("Guest")))
-            { 
+              @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Proxi") || User.IsInRole("IAM") || User.IsInRole("Guest")))
+            {
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu" >
 
                 <li class="nav-item ">
@@ -117,7 +117,7 @@
                         @if (signInManager.IsSignedIn(User) &&  (User.IsInRole("Admin") || User.IsInRole("IAM")))
                         {
                             <hr>
-                            <li><a href="../Html/test.html" class="dropdown-item" >Droits et accès</a></li>
+                            <li><a asp-controller="Roles" asp-action="Index" class="dropdown-item">Droits et accès</a></li>
                         }
                     </ul>
                     
@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            } 
+             }
         </div>
     </div>
 </div>

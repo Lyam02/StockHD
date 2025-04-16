@@ -58,7 +58,7 @@ namespace StockHD.Controllers.Auth
             return View(roleUsers);
         }
 
-        // CREATE ROLE
+        /*// CREATE ROLE
         //******************************************************
 
         //GET
@@ -130,7 +130,7 @@ namespace StockHD.Controllers.Auth
             return RedirectToAction(nameof(Index));
         }
         //******************************************************
-
+*/
 
         //AddUser
         //******************************************************
@@ -158,6 +158,24 @@ namespace StockHD.Controllers.Auth
             return RedirectToAction(nameof(Index));
         }
 
+
+        //******************************************************
+
+        //RemoveUser
+        //******************************************************
+
+        [HttpGet]
+        public IActionResult RemoveUser(string RoleId)
+        {
+            rUser();
+            return View(_context.Roles.SingleOrDefault(r => r.Id == RoleId));
+        }
+
+        [HttpPost]
+       /* public Task<IActionResult> RemoveUser()
+        {
+
+        }*/
 
         //******************************************************
 
