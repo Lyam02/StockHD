@@ -12,7 +12,7 @@
 
     <h4 class="display-5">Information utilisateur</h4>
 
-        <a class="btn btn-success mt-4" asp-action="index"><i class="bi bi-arrow-return-left"></i> Retour</a>
+    <a class="btn btn-success mt-4" asp-action="index"><i class="bi bi-arrow-return-left"></i> Retour</a>
 
     <div class="mt-2">
 
@@ -57,14 +57,17 @@
 
     </div>
 
+
+    <a class="btn btn-danger mt-2 mb-3" data-bs-toggle="tooltip" data-bs-placement="right"
+    data-bs-title="En cas d'un départ utilisateur, cliquez ici pour libérer le matériel ci-dessous"><i class="bi bi-x-octagon"></i> Depart</a>
+
+
     <hr class="mb-5" />
 
     <h4 class="display-5">Matériels possédé</h4>
 
     <div style="margin-right : 40%">
 
-        <a class="btn btn-danger mt-2 mb-3" style="margin-left : 90%" data-bs-toggle="tooltip" data-bs-placement="right"
-           data-bs-title="En cas d'un départ utilisateur, cliquez ici pour libérer le matériel ci-dessous"><i class="bi bi-x-octagon"></i> Depart</a>
         <table class="table table-striped" >
 
             <thead>
@@ -90,7 +93,35 @@
 
         </table>
 
-    </div>     
+    </div>
+
+    <hr class="mb-5 mt-5" />
+
+    <h4 class="display-5">Accessoires possédé</h4>
+
+    <div style="margin-right : 60%">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Accessoire</th>
+                    <th>Quantité</th>
+                </tr>
+            </thead>
+
+            <tbody class="table-group-divider">
+                @{
+                    foreach (AccessoireAssignement accessoireAssignement in Model.Accessoires)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(acc => accessoireAssignement.AccessoireName)</td>
+                            <td>@Html.DisplayFor(acc => accessoireAssignement.Quantite)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 @* For bootstrap tooltips button *@

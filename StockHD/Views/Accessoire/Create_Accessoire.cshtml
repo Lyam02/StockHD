@@ -1,9 +1,10 @@
 ﻿@model StockLibrary.Models.Accessoire
 
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
 
 <!--Création d'un formulaire de création d'un Asset avec un AssetType -->
 
-<form asp-action="Create_Accessoire" id="formData">
+<form asp-action="Create_Accessoire" id="formData" class="styled-form">
 
     <div class="mb-3 MargTop">
 
@@ -19,8 +20,8 @@
             <span asp-validation-for="Quantite" class="text-danger"></span>
         </div>
 
-        <input type="submit" value="Ajouter" class="btn btn-primary" />
-        <a asp-action="Index" class="btn btn-danger">Annuler</a>
+        <input type="submit" value="Ajouter" class=" bouton btn btn-primary" />
+        <a asp-action="Index" class="bouton btn btn-danger">Annuler</a>
         
     </div>
 

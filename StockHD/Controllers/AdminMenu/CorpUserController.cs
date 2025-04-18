@@ -46,6 +46,7 @@ namespace StockHD.Controllers.AdminMenu
         {
             var dUser = await _context.CorpUser
                             .Include(a => a.Assets)
+                            .Include(ac => ac.Accessoires)
                             .FirstOrDefaultAsync(u=>u.CK == CK);
 
             Corp();
@@ -121,7 +122,7 @@ namespace StockHD.Controllers.AdminMenu
             }
 
             return View(CorpKey);
-
+                
         }
 
         //POST

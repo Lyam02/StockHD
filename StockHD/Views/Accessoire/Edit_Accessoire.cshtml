@@ -1,0 +1,27 @@
+﻿@model StockLibrary.Models.Accessoire;
+@using StockLibrary.Models;
+@using StockLibrary.Data;
+
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
+
+
+<form asp-action="Edit_Accessoire" class="styled-form">
+
+    <div class="mt-4">
+
+        <div class="form-floating mb-5">
+            <h2><strong>@Html.DisplayFor(model => model.Name)</strong></h2>
+            <input type="hidden" asp-for="Name" class="form-control" placeholder="" />
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Quantite" class="form-control" placeholder="" />
+            <label asp-for="Quantite"></label>
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Confirmer" class=" bouton btn btn-primary" />
+    <a class=" bouton btn btn-danger" asp-action="Index">Annuler</a>
+
+</form>

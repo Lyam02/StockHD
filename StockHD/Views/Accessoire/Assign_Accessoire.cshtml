@@ -1,0 +1,43 @@
+﻿@model StockLibrary.Models.AccessoireAssignement;
+
+
+
+<form asp-action="Assign_Accessoire">
+
+    <div class="mb-3 MargTop">
+
+        <div class="form_floating mb-5">
+
+            <h2><strong>@Html.DisplayFor(model => model.Accessoire.Name)</strong></h2>
+
+            <input type="hidden" asp-for="Accessoire" class="form-control" placeholder="" />
+
+        </div>
+
+        <div class="form-floating mb-2">
+
+            <select class="form-control" name="CorpUserSelect" placeholder="">
+                <option selected=" "></option>
+                @foreach(CorpUser c in ViewBag.CorpUser)
+                {
+                    <option value="@c.CK">@c.CK</option>
+                }
+            </select>
+            <label asp-for="CorpUser.CK"></label>
+            <span asp-validation-for="CorpUser.CK" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Quantite" type="number" class="form-control" placeholder="" />
+            <label asp-for="Quantite"></label>
+
+        </div>
+
+        <input id="submit" type="submit" value="Valider" class="btn btn-primary" />
+        <a class="btn btn-danger" asp-action="Index">Annuler</a>
+
+    </div>
+
+</form>
