@@ -13,5 +13,6 @@ namespace StockLibrary.Models
         public string Name { get; set; }
         [Display(Name = "Quantité")]
         public int Quantite { get; set; }
+        public AccessoireAssignement? AccessoireAssignement { get; set; }
     }
 }

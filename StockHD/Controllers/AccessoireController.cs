@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using StockLibrary;
 using Humanizer;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace StockHD.Controllers
 {
@@ -22,7 +23,7 @@ namespace StockHD.Controllers
             _Logger = logger;
             _context = context;
         }
-
+        
         public IActionResult Index()
         {
             var accessoire = _context.Accessoire.ToList();
@@ -80,20 +81,23 @@ namespace StockHD.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Assign_Accessoire(AccessoireAssignement accessoireAssign, string CorpUserSelect)
+        public async Task<IActionResult> Assign_Accessoire(AccessoireAssignement accessoireAssign, string CorpUserSelect, string AccessoireName, int AccessoireQuantite)
         {
 
             accessoireAssign.CorpUser = _context.CorpUser.SingleOrDefault(c => c.CK == CorpUserSelect);
-
-            if (!ModelState.IsValid)
-            {
-
-                Access();
-                return RedirectToAction(nameof(Assign_Accessoire));
-            }
+            accessoireAssign.Accessoire = _context.Accessoire.SingleOrDefault(a => a.Name == AccessoireName);
+            accessoireAssign.Accessoire.Quantite = AccessoireQuantite - accessoireAssign.Quantite;
 
             _context.Add(accessoireAssign);
-            await _context.SaveChangesAsync();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                
+            }
             return RedirectToAction(nameof(Index));
 
         }

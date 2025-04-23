@@ -26,7 +26,7 @@ namespace StockLibrary.Models.Auth
 
         [PersonalData]
         [Display(Name = "Phrase secrète")]
-        public string SecretSentense { get; set; }
+        public string? SecretSentense { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

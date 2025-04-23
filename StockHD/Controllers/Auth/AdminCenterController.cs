@@ -19,5 +19,10 @@ namespace StockHD.Controllers.Auth
             return View();
         }
 
+        public async Task<IActionResult> UserIndex()
+        {
+            return View();
+        }
+
     }
 }

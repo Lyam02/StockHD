@@ -10,7 +10,8 @@
 
             <h2><strong>@Html.DisplayFor(model => model.Accessoire.Name)</strong></h2>
 
-            <input type="hidden" asp-for="Accessoire" class="form-control" placeholder="" />
+            <input type="hidden" name="AccessoireName" value="@Model.Accessoire.Name" />
+            <input type="hidden" name="AccessoireQuantite" value="@Model.Accessoire.Quantite" />
 
         </div>
 

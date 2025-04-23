@@ -56,6 +56,7 @@ namespace StockHD.Controllers.Auth
                     Name = rUser.Name,
                     SecretSentense = rUser.SecretSentense
                 };
+
                 var result = await _UserManager.CreateAsync(user, rUser.Password);
                 if (result.Succeeded)
                 {
