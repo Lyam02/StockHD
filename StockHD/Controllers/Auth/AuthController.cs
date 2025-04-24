@@ -54,7 +54,7 @@ namespace StockHD.Controllers.Auth
                     Email = rUser.Email,
                     Surname = rUser.Surname,
                     Name = rUser.Name,
-                    SecretSentense = rUser.SecretSentense
+                    SecretSentense = ""
                 };
 
                 var result = await _UserManager.CreateAsync(user, rUser.Password);

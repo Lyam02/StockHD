@@ -63,9 +63,9 @@
                             <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
                             <td>@string.Join(", ", item.Assets.Select(p => p.AssetType.Name).ToList())</td>
                             <td>
-                                <a href="@Url.Action("Detail_CorpUser", "CorpUser", new{CK = item.CK})">Detail</a> |
-                                <a href="@Url.Action("Edit_CorpUser", "CorpUser", new{CK = item.CK})">Modifier</a> |
-                                <a href="@Url.Action("Delete_CorpUser", "CorpUser", new{CK = item.CK})">Supprimer</a>
+                                <a href="@Url.Action("Detail_CorpUser", "CorpUser", new{CK = item.CK})"><i class="fs-5 bi-info-circle"></i></a>
+                                <a href="@Url.Action("Edit_CorpUser", "CorpUser", new{CK = item.CK})"><i class="fs-5 bi-pencil-square"></i></a>
+                                <a href="@Url.Action("Delete_CorpUser", "CorpUser", new{CK = item.CK})"><i class="fs-5 bi-trash3"></i></a>
                             @* 
                             Permet d'indiquer l'action, le contrôleur et la valeur
                             ca crée ensuite une url en fonction de la nomenclature du Startup

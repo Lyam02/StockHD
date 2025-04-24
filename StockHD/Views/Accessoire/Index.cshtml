@@ -34,9 +34,9 @@
                             <td>@Html.DisplayFor(modelItem => item.Quantite)</td>
                             <td>
 
-                                <a href="@Url.Action("Edit_Accessoire", "Accessoire", new{id = item.Name})"><i class="bi bi-pencil-square"></i></a> 
-                                <a href="@Url.Action("Assign_Accessoire", "Accessoire", new{id = item.Name})"><i class="bi bi-person-add"></i></a> 
-                                <a href="@Url.Action("Delete_Accessoire", "Accessoire", new{id = item.Name})"><i class="bi bi-trash3"></i></a>
+                                <a href="@Url.Action("Edit_Accessoire", "Accessoire", new{id = item.Name})"><i class="fs-5 bi-pencil-square"></i></a>
+                                <a href="@Url.Action("Assign_Accessoire", "Accessoire", new{id = item.Name})"><i class="fs-5 bi-person-add"></i></a>
+                                <a href="@Url.Action("Delete_Accessoire", "Accessoire", new{id = item.Name})"><i class="fs-5 bi-trash3"></i></a>
                                 @* 
                                 Permet d'indiquer l'action, le controlleur et la valeur
                                 ca crée ensuite une url en fonction de la nomenclature du Startup

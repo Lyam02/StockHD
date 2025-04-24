@@ -115,7 +115,7 @@ namespace StockHD.Controllers
             {
                 return NotFound();
             }
-
+            
             var accessoireDel = _context.Accessoire.SingleOrDefault(a => a.Name == id);
 
             if (accessoireDel == null)
