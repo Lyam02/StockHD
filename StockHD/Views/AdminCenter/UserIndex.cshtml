@@ -51,7 +51,7 @@
                     <th></th>
                 </tr>
             </thead>
-
+            
             <tbody>
                 @{
                     foreach (var item in Model)
@@ -59,7 +59,7 @@
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.UserName)</td>
                             <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Roles)</td>
+                            <td>@string.Join(", ", item.UserRoles.Select(r => r.Role).ToList())</td>
                             <td>
                                 <a href="@Url.Action("Detail_User", "AdminCenter", new{id = item.Id})"><i class="fs-5 bi-info-circle"></i></a>
                                 <a href="@Url.Action("Edit_User", "AdminCenter", new{id = item.Id})"><i class="fs-5 bi-pencil-square"></i></a>

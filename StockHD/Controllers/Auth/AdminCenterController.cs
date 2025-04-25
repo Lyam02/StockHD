@@ -5,6 +5,9 @@ using StockLibrary;
 using StockLibrary.Data;
 using StockLibrary.Models.Auth;
 using SQLitePCL;
+using System.Data.Entity;
+using System.Globalization;
+using StockLibrary.Models;
 
 namespace StockHD.Controllers.Auth
 {
@@ -21,6 +24,8 @@ namespace StockHD.Controllers.Auth
             _UserManager = userManager;
             _context = context;
         }
+        
+        
 
         public async Task<IActionResult> Index()
         {
@@ -67,15 +72,11 @@ namespace StockHD.Controllers.Auth
         }
 
 
-        public void role()
-        {
-            ViewData["UserRoles"] = _context.UserRoles.ToList();
-        }
-
         // Delete User
         //***************************************************************************************//
         public async Task<IActionResult> Delete_User(string id="")
         {
+
             if (id == "") return NotFound();
 
             var user = _context.Users.SingleOrDefault(u => u.Id == id);
@@ -86,7 +87,70 @@ namespace StockHD.Controllers.Auth
             }
             role();
             return View(user);
-
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete_UserConfirm(string id = "")
+        {
+            var delUser = _context.Users.FirstOrDefault(u => u.Id == id);
+
+            if (User.Identity.Name == delUser.Name)
+            {
+                return PartialView();
+            }
+
+            if (id == "") return NotFound();
+
+            _context.Remove(delUser);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("UserIndex");
+        }
+
+        // Detail User
+        //***************************************************************************************//
+
+        public async Task<IActionResult> Detail_User(string id = "")
+        {
+            if (id == "") return NotFound();
+
+            var dUser = _context.Users.SingleOrDefault(d => d.Id == id);
+
+            if (dUser == null) return NotFound();
+
+            role();
+            return View(dUser);
+        }
+
+        public void role()
+        {
+            ViewData["UserRoles"] = _context.UserRoles.ToList();
+            ViewData["Roles"] = _context.Roles.ToList();
+        }
+
+        public async Task<IActionResult> Add_RoleUser(string id = "")
+        {
+            if (id == "") return NotFound();
+
+            var user = _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add_RoleUser(string id="", string selectRole="")
+        {
+            StockRole role = await _context.Roles.SingleOrDefaultAsync(r => r.Id == selectRole);
+            var user = _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+
+            if (id == "" || selectRole == "")
+            {
+                return View();
+            }
+
+            await _UserManager.AddToRoleAsync(user, role.Name);
+        }
+
     }
 }

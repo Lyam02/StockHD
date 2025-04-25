@@ -136,10 +136,14 @@ namespace StockHD.Controllers.Auth
         //******************************************************
 
         [HttpGet]
-        public IActionResult AddUser(string RoleId)
+        public IActionResult AddUser(string RoleId = "")
         {
+            if (RoleId == "") return NotFound();
+
+            var role = _context.Roles.SingleOrDefault(r => r.Id == RoleId);
+
             rUser();
-            return View(_context.Roles.SingleOrDefault(r => r.Id == RoleId));
+            return View(role);
         }
 
         [HttpPost]
@@ -164,7 +168,6 @@ namespace StockHD.Controllers.Auth
         //RemoveUser
         //******************************************************
 
-        [HttpGet]
         public IActionResult RemoveUser(string RoleId)
         {
             rUser();

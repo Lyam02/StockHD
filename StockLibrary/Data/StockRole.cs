@@ -18,5 +18,6 @@ namespace StockLibrary.Data
     public class StockRole : IdentityRole
     {
         public virtual ICollection<StockUserRole> Users { get; } = new List<StockUserRole>();
+        
     }
 }

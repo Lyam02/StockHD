@@ -17,6 +17,7 @@ namespace StockLibrary.Data
         [Display(Name = "Phrase secrète")]
         public string SecretSentense { get; set; }
 
-        public virtual ICollection<StockUserRole> Roles { get; } = new List<StockUserRole>();
+        public virtual ICollection<StockUserRole> UserRoles { get; } = new List<StockUserRole>();
+        public virtual ICollection<StockRole> Roles { get; } = new List<StockRole>();
     }
 }
