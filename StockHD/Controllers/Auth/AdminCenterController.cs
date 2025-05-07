@@ -8,6 +8,7 @@ using SQLitePCL;
 using System.Data.Entity;
 using System.Globalization;
 using StockLibrary.Models;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace StockHD.Controllers.Auth
 {
@@ -122,35 +123,72 @@ namespace StockHD.Controllers.Auth
             return View(dUser);
         }
 
-        public void role()
-        {
-            ViewData["UserRoles"] = _context.UserRoles.ToList();
-            ViewData["Roles"] = _context.Roles.ToList();
-        }
-
         public async Task<IActionResult> Add_RoleUser(string id = "")
         {
             if (id == "") return NotFound();
 
-            var user = _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            var user =  _context.Users.SingleOrDefault(u => u.Id == id);
 
+            role();
             return View(user);
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add_RoleUser(string id="", string selectRole="")
+        public async Task<IActionResult> Add_RoleUser(string idUser = "", string selectRole = "")
         {
-            StockRole role = await _context.Roles.SingleOrDefaultAsync(r => r.Id == selectRole);
-            var user = _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            var role = _context.Roles.SingleOrDefault(r => r.Id == selectRole);
+            StockUser user = _context.Users.SingleOrDefault(u => u.Id == idUser);
 
-            if (id == "" || selectRole == "")
+            if (idUser == "" || selectRole == "")
             {
                 return View();
             }
 
             await _UserManager.AddToRoleAsync(user, role.Name);
+            return RedirectToAction(nameof(UserIndex));
         }
 
+        public async Task<IActionResult> Delete_RoleUser(string id = "", string uid = "")
+        {
+            if (id == "" || uid=="")
+            {
+                return NotFound();
+            }
+
+            var role = _context.Roles.SingleOrDefault(u => u.Id == id);
+            ViewData["UID"] = uid;
+
+            return View(role);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete_RoleUserConfirm(string id = "", string uid = "")
+        {
+            if (id == "" || uid == "")
+            {
+                return NotFound();
+            }
+
+            StockUser stockUser = _context.Users.SingleOrDefault(s=>s.Id == uid);
+            StockRole stockRole = _context.Roles.SingleOrDefault(r => r.Id == id);
+            if (stockUser == null || stockRole == null)
+            {
+                return NotFound();
+            }
+            
+
+            await _UserManager.RemoveFromRoleAsync(stockUser, stockRole.Name);
+            return RedirectToAction(nameof(UserIndex));
+        }
+
+
+        public void role()
+        {
+            ViewData["UserRoles"] = _context.UserRoles.ToList();
+            ViewData["Roles"] = _context.Roles.ToList();
+            ViewData["Users"] = _context.Users.ToList();
+        }
     }
 }

@@ -39,6 +39,7 @@
             <thead class="table-dark">
                 <tr>
                     <th>@Html.DisplayNameFor(Model => Model.Users)</th>
+                    <th></th>
                 
                 </tr>
             </thead>
@@ -49,7 +50,10 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.UserName)</td>
-                        
+                            <td>
+                                <a href="@Url.Action("Detail_User", "AdminCenter", new{id = item.Id})"><i style="color : blue" class="fs-5 bi-info-circle"></i></a>
+                                <a href="@Url.Action("RemoveUser", "Roles", new{id = item.Id, rid = Model.Role.Id})"><i style="color : red" class="fs-5 bi-trash3"></i></a>
+                            </td>
                         </tr>
                     }
                 }

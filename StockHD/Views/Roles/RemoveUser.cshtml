@@ -1,0 +1,19 @@
+﻿@model StockUser;
+@using StockLibrary.Data;
+
+<dl class="row MargTop">
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.UserName)
+    </dt>
+    <dd class="col-sm-5">
+        @Html.DisplayFor(model => model.UserName)
+    </dd>
+</dl>
+
+<form asp-action="Delete_RoleUserConfirm">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" name="rid" value="@ViewBag.RID" />
+    <input type="submit" value="Supprimer" class="btn btn-danger" /> |
+    <a class="btn btn-success" asp-action="Detail">Annuler</a>
+</form>

@@ -1,0 +1,27 @@
+﻿@model StockUser;
+
+<form asp-action="Add_RoleUser">
+
+    <div class="mb-3 MargTop">
+
+        <div class="form-floating mb-3">
+
+            <select class="form-control assetType" name="selectRole" placeholder="">
+                <option selected=""></option>
+                @foreach (StockRole a in ViewBag.Roles)
+                {
+                    <option value="@a.Id">@a.Name</option>
+                }
+            </select>
+            <label>Rôle</label>
+
+        </div>
+
+        <input type="hidden" name="idUser" value="@Model.Id" />
+
+    </div>
+
+    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <a class="btn btn-danger" asp-action="index">Annuler</a>
+
+</form>

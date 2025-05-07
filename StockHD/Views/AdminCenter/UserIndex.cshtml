@@ -61,9 +61,9 @@
                             <td>@Html.DisplayFor(modelItem => item.Email)</td>
                             <td>@string.Join(", ", item.UserRoles.Select(r => r.Role).ToList())</td>
                             <td>
-                                <a href="@Url.Action("Detail_User", "AdminCenter", new{id = item.Id})"><i class="fs-5 bi-info-circle"></i></a>
-                                <a href="@Url.Action("Edit_User", "AdminCenter", new{id = item.Id})"><i class="fs-5 bi-pencil-square"></i></a>
-                                <a href="@Url.Action("Delete_User", "AdminCenter", new{id = item.Id})"><i class="fs-5 bi-trash3"></i></a>
+                                <a href="@Url.Action("Detail_User", "AdminCenter", new{id = item.Id})"><i style="color : blue" class="fs-5 bi-info-circle"></i></a>
+                                <a href="@Url.Action("Edit_User", "AdminCenter", new{id = item.Id})"><i style="color : black" class="fs-5 bi-pencil-square"></i></a>
+                                <a href="@Url.Action("Delete_User", "AdminCenter", new{id = item.Id})"><i style="color : red" class="fs-5 bi-trash3"></i></a>
                             @* 
                             Permet d'indiquer l'action, le contrôleur et la valeur
                             ca crée ensuite une url en fonction de la nomenclature du Startup

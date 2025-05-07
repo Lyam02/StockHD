@@ -168,10 +168,13 @@ namespace StockHD.Controllers.Auth
         //RemoveUser
         //******************************************************
 
-        public IActionResult RemoveUser(string RoleId)
+        public IActionResult RemoveUser(string Id)
         {
+
+            var User = _context.Users.SingleOrDefault(r => r.Id == Id);
+
             rUser();
-            return View(_context.Roles.SingleOrDefault(r => r.Id == RoleId));
+            return View(User);
         }
 
         [HttpPost]
