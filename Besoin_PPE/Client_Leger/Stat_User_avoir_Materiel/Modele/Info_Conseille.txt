@@ -1,2 +1,0 @@
-Il faut créer le fichier Stat.cs dans la Librairi StockLibrary puis dans Models
-tu peux tout simplment copier coler le fichier qui est dans le même dossier que ce fichier txt
