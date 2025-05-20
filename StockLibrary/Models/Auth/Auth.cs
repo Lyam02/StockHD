@@ -66,8 +66,6 @@ namespace StockLibrary.Models.Auth
         public string Username { get; set; }
     }
 
-    // Pour la page de confirmation de reset mdp (avant le reste mdp)
-
     public class ConfirmResetPassword
     {
         [Required]
@@ -75,8 +73,6 @@ namespace StockLibrary.Models.Auth
         [Required]
         public string SecretSentence { get; set; }
     }
-
-    // Pour la page de reset mdp
 
     public class ResetPassword
     {
