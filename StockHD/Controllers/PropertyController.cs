@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StockHD.Data;
-using StockHD.Models;
+using StockLibrary;
+using StockLibrary.Data;
+using StockLibrary.Models;
 using System.Diagnostics;
 
 namespace StockHD.Controllers
 {
+    [Authorize]
     public class PropertyController : Controller
     {
         private readonly ILogger<PropertyController> _logger;

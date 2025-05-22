@@ -1,0 +1,49 @@
+﻿@model StockLibrary.Models.CorpUser;
+@using StockLibrary.Models;
+@using StockLibrary.Data;
+
+
+<dl class="row MargTop">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.CK)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.CK)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Surname)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Surname)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.EmailAddress)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.EmailAddress)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Departement)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Departement)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.StartDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.StartDate)
+    </dd>
+</dl>
+
+<form asp-action="DeleteCorpuserConfirm">
+    <input type="hidden" asp-for="CK" />
+    <input type="submit" value="Supprimer" class="btn btn-danger" /> |
+    <a class="btn btn-success" asp-action="Index">Annuler</a>
+</form>

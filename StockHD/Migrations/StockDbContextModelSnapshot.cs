@@ -2,7 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using StockHD.Data;
+using StockLibrary;
+using StockLibrary.Data;
 
 #nullable disable
 
@@ -31,7 +32,7 @@ namespace StockHD.Migrations
                     b.ToTable("AssetTypeExtendedProperty");
                 });
 
-            modelBuilder.Entity("StockHD.Models.Asset", b =>
+            modelBuilder.Entity("StockLibrary.Models.Asset", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +69,7 @@ namespace StockHD.Migrations
                     b.ToTable("Assets", (string)null);
                 });
 
-            modelBuilder.Entity("StockHD.Models.AssetType", b =>
+            modelBuilder.Entity("StockLibrary.Models.AssetType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,7 +88,7 @@ namespace StockHD.Migrations
                     b.ToTable("AssetType", (string)null);
                 });
 
-            modelBuilder.Entity("StockHD.Models.ExtendedProperty", b =>
+            modelBuilder.Entity("StockLibrary.Models.ExtendedProperty", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -102,7 +103,7 @@ namespace StockHD.Migrations
                     b.ToTable("Properties", (string)null);
                 });
 
-            modelBuilder.Entity("StockHD.Models.ExtendedPropertyValue", b =>
+            modelBuilder.Entity("StockLibrary.Models.ExtendedPropertyValue", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -127,7 +128,7 @@ namespace StockHD.Migrations
                     b.ToTable("PropertiesValues", (string)null);
                 });
 
-            modelBuilder.Entity("StockHD.Models.Location", b =>
+            modelBuilder.Entity("StockLibrary.Models.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -152,28 +153,28 @@ namespace StockHD.Migrations
 
             modelBuilder.Entity("AssetTypeExtendedProperty", b =>
                 {
-                    b.HasOne("StockHD.Models.AssetType", null)
+                    b.HasOne("StockLibrary.Models.AssetType", null)
                         .WithMany()
                         .HasForeignKey("AssetTypesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StockHD.Models.ExtendedProperty", null)
+                    b.HasOne("StockLibrary.Models.ExtendedProperty", null)
                         .WithMany()
                         .HasForeignKey("Propertiesid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StockHD.Models.Asset", b =>
+            modelBuilder.Entity("StockLibrary.Models.Asset", b =>
                 {
-                    b.HasOne("StockHD.Models.AssetType", "AssetType")
+                    b.HasOne("StockLibrary.Models.AssetType", "AssetType")
                         .WithMany("Assets")
                         .HasForeignKey("AssetTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StockHD.Models.Location", "Location")
+                    b.HasOne("StockLibrary.Models.Location", "Location")
                         .WithMany("Assets")
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -184,15 +185,15 @@ namespace StockHD.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("StockHD.Models.ExtendedPropertyValue", b =>
+            modelBuilder.Entity("StockLibrary.Models.ExtendedPropertyValue", b =>
                 {
-                    b.HasOne("StockHD.Models.Asset", "Asset")
+                    b.HasOne("StockLibrary.Models.Asset", "Asset")
                         .WithMany("PorpertiesValues")
                         .HasForeignKey("AssetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StockHD.Models.ExtendedProperty", "Property")
+                    b.HasOne("StockLibrary.Models.ExtendedProperty", "Property")
                         .WithMany()
                         .HasForeignKey("Propertyid")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -203,17 +204,17 @@ namespace StockHD.Migrations
                     b.Navigation("Property");
                 });
 
-            modelBuilder.Entity("StockHD.Models.Asset", b =>
+            modelBuilder.Entity("StockLibrary.Models.Asset", b =>
                 {
                     b.Navigation("PorpertiesValues");
                 });
 
-            modelBuilder.Entity("StockHD.Models.AssetType", b =>
+            modelBuilder.Entity("StockLibrary.Models.AssetType", b =>
                 {
                     b.Navigation("Assets");
                 });
 
-            modelBuilder.Entity("StockHD.Models.Location", b =>
+            modelBuilder.Entity("StockLibrary.Models.Location", b =>
                 {
                     b.Navigation("Assets");
                 });

@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using StockHD.Data;
-using StockHD.Models;
+using StockLibrary;
+using StockLibrary.Data;
+using StockLibrary.Models;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace StockHD.Controllers
 {
+    [Authorize]
     public class LocalisationController : Controller
     {
         private readonly ILogger<LocalisationController> _logger;
@@ -92,7 +95,7 @@ namespace StockHD.Controllers
         }
 
         //POST
-        [HttpPost, ActionName("Delete_Loc")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete_Loc(int Id)
         {

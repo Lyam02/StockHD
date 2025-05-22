@@ -1,0 +1,56 @@
+﻿@model StockLibrary.Models.CorpUser;
+@using StockLibrary.Models;
+@using StockLibrary.Data;
+
+
+<form asp-action="Create_CorpUser">
+
+    <div class="mb-3 MargTop">
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="CK" class="form-control" placeholder="" />
+            <label asp-for="CK">Corporate Key</label>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Surname" class="form-control" placeholder="" />
+            <label asp-for="Surname"></label>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Name" class="form-control" placeholder="" />
+            <label asp-for="Name"></label>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="EmailAddress" class="form-control" placeholder="" />
+            <label asp-for="EmailAddress"></label>
+
+        </div>
+        <div class="form-floating mb-3">
+
+            <input asp-for="Departement" class="form-control" placeholder="" />
+            <label asp-for="Departement"></label>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="StartDate" class="form-control" placeholder="" />
+            <label asp-for="StartDate"></label>
+
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <a class="btn btn-danger" asp-action="Index">Annuler</a>
+
+</form>

@@ -1,0 +1,31 @@
+﻿
+
+<nav class="nava navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid navb">
+        <a class="navbar-brand nav-link active" asp-controller="AdminCenter" asp-action="Index"><h3>Admin Center</h3></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" asp-controller="Roles" asp-action="Index"><h5>Rôles</h5></a>
+                <a class="nav-link active" aria-current="page" asp-controller="AdminCenter" asp-action="UserIndex"><h5>Utilisateurs</h5></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+<style>
+
+    .navb{
+        background-color : darkgray;
+    }
+
+    .nava{
+        padding : 0;
+        margin-left: -12px;
+    }
+
+</style>

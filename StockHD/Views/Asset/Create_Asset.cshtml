@@ -1,4 +1,4 @@
-﻿@model StockHD.Models.Asset
+﻿@model StockLibrary.Models.Asset
 
 
 <!--Création d'un formulaire de création d'un Asset avec un AssetType -->
@@ -32,9 +32,16 @@
         </div>
 
         <div class="form-floating mb-3">
-        <input asp-for="SerialNumber" class="form-control" placeholder="" />
-        <label asp-for="SerialNumber" for="Numéro de série"></label>
-        <span asp-validation-for="SerialNumber" class="text-danger"></span>
+
+            <select class="form-control" name="SrNumberSelect" placeholder="">
+                <option selected=""></option>
+                @foreach (SrNumber l in ViewBag.SrNumber)
+                {
+                    <option value="@l.SerialNumber">@l.SerialNumber</option>
+                }
+            </select>
+            <label asp-for="SrNumber"></label>
+            <span asp-validation-for="SrNumber" class="text-danger"></span>
         </div>
 
         <div class="form-floating mb-3">
@@ -48,6 +55,19 @@
         </select>
         <label asp-for="Location"></label>
         <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <select class="form-control" name="CorpUserSelect" placeholder="">
+                <option selected=""></option>
+                @foreach (CorpUser l in ViewBag.CorpUser)
+                {
+                    <option value="@l.CK">@l.CK</option>
+                }
+            </select>
+            <label asp-for="CorpUser"></label>
+            <span asp-validation-for="CorpUser" class="text-danger"></span>
         </div>
 
         <div class="form-floating mb-3">

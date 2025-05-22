@@ -1,0 +1,54 @@
+﻿@model StockLibrary.Models.Auth.RegistrationUser;
+
+@using StockLibrary.Models;
+@using StockLibrary.Data;
+
+<form asp-action="Create_User">
+
+    <div class="mb-3 MargTop">
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Surname" class="form-control" placeholder="" />
+            <label asp-for="Surname"></label>
+            <span asp-validation-for="Surname" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Name" class="form-control" placeholder="" />
+            <label asp-for="Name"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Email" class="form-control" placeholder="" />
+            <label asp-for="Email"></label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+        </div>
+        <div class="form-floating mb-3">
+
+            <input asp-for="Password" class="form-control" placeholder="" />
+            <label asp-for="Password"></label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="ConfirmPassword" class="form-control" placeholder="" />
+            <label asp-for="ConfirmPassword"></label>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Ajouter" class="btn btn-primary" />
+    <a class="btn btn-danger" asp-action="UserIndex">Annuler</a>
+
+</form>

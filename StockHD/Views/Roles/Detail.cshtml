@@ -1,0 +1,69 @@
+﻿@model MV_RoleUsers;
+
+
+@{
+    ViewData["Title"] = "User Rôle";
+}
+
+<div class="mb-5 me-5 m-3">
+
+    <h1 class="display-4 text-center">User Rôle</h1>
+
+</div>
+
+<hr class="mb-5" />
+
+<div class="mb-5">
+    <h2><strong>@Html.DisplayFor(model => model.Role.NormalizedName)</strong></h2>
+</div>
+
+<div class="mt-3" style="display:inline">
+    <div class="mb-4" style="margin-right:60%">
+
+        <div class="p-0 m-1 mb-3" style="float: right">
+            <a class="btn btn-danger" style="margin-right : 100%" data-bs-toggle="tooltip" data-bs-placement="right"
+               data-bs-title="Retour aux rôles" href="@Url.Action("index")"><i class="fs-6 bi-box-arrow-left"></i></a>
+        </div>
+
+        <div class="p-0 m-1 mb-3" style="float: right">
+            <a class="btn btn-primary" style="margin-right : 100%" href="@Url.Action("AddUser", new {RoleId = Model.Role.Id} )">
+                <i class="fs-6 bi-plus-lg"></i>
+            </a>
+        </div>
+
+    </div>
+    <div style="margin-right:70%">
+        <table class="table table-striped">
+
+
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(Model => Model.Users)</th>
+                    <th></th>
+                
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    foreach (var item in Model.Users)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                            <td>
+                                <a href="@Url.Action("Detail_User", "AdminCenter", new{id = item.Id})"><i style="color : blue" class="fs-5 bi-info-circle"></i></a>
+                                <a href="@Url.Action("RemoveUser", "Roles", new{id = item.Id, rid = Model.Role.Id})"><i style="color : red" class="fs-5 bi-trash3"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@* For bootstrap tooltips button *@
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>

@@ -1,0 +1,32 @@
+﻿@model StockLibrary.Models.SrNumber;
+@using StockLibrary.Models;
+@using StockLibrary.Data;
+
+
+<form asp-action="Edit_SrNumber">
+
+    <div class="mb-3 MargTop">
+
+        <div class="form-floating mb-3 ms-3" style="text-align: center;">
+
+            <h2><strong>@Html.DisplayFor(model => model.SerialNumber)</strong></h2>
+
+            <div>
+                <input asp-for="SerialNumber" type="hidden" class="form-control" />
+            </div>
+
+        </div>
+
+        <div class="form-floating mb-3">
+
+            <input asp-for="Description" class="form-control" placeholder="" />
+            <label asp-for="Description"></label>
+
+        </div>
+
+    </div>
+
+    <input id="submit" type="submit" value="Confirmer" class="btn btn-primary" />
+    <a class="btn btn-danger" asp-action="Index">Annuler</a>
+
+</form>

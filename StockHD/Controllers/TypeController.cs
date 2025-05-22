@@ -1,18 +1,21 @@
 ﻿using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 using Newtonsoft.Json;
 using NuGet.ContentModel;
-using StockHD.Data;
-using StockHD.Models;
+using StockLibrary;
+using StockLibrary.Data;
+using StockLibrary.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace StockHD.Controllers
 {
+    [Authorize]
     public class TypeController : Controller
     {
         private readonly ILogger<TypeController> _logger;
@@ -80,7 +83,12 @@ namespace StockHD.Controllers
             Props props =  JsonConvert.DeserializeObject<Props>(jsonPropCreate);
 
             assetType.Properties = new Collection<ExtendedProperty>();
-            _context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList().ForEach(assetType.Properties.Add);
+            _context.Properties
+                .AsEnumerable() // Switch to client-side evaluation
+                .Where(p => props.Properties.Contains(p.Id))
+                .ToList()
+                .ForEach(assetType.Properties.Add);
+            //_context.Properties.Where(p => props.Properties.Contains(p.Id)).ToList().ForEach(assetType.Properties.Add);
 
             //Manière non factorisé de faire :
 

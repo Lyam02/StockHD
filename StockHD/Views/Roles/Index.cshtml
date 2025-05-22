@@ -1,0 +1,76 @@
+﻿@model IEnumerable<StockRole>
+
+
+@{
+    ViewData["Title"] = "Rôles Manager";
+}
+
+<nav class="nava navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid navb">
+        <a class="navbar-brand nav-link active" asp-controller="AdminCenter" asp-action="Index"><h3>Admin Center</h3></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" asp-controller="Roles" asp-action="Index"><h5>Rôles</h5></a>
+                <a class="nav-link active" aria-current="page" asp-controller="AdminCenter" asp-action="UserIndex"><h5>Utilisateurs</h5></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+<style>
+
+    .navb {
+        background-color: darkgray;
+    }
+
+    .nava {
+        padding: 0;
+        margin-left: -12px;
+    }
+
+</style>
+
+<div class="mb-4 me-5 m-2">
+
+    <h1 class="display-4 text-center">Rôles Manager</h1>
+
+</div>
+
+<hr class="mb-5" />
+
+<div style="margin-right:70%">
+    <table class="table table-striped">
+
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(Model => Model.Name)</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>
+                        @*<a href="@Url.Action("Delete_Role", "Roles", new{id = item.Id})">Supprimer</a> |*@
+                        <a href="@Url.Action("Detail", "Roles", new{id = item.Id})">Detail</a>
+                    @* 
+                    Permet d'indiquer l'action, le controlleur et la valeur
+                    ca crée ensuite une url en fonction de la nomenclature du Startup
+                    *@
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
+
