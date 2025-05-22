@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>StockHD.Program</StartupObject>
     <UserSecretsId>df93d77b-c072-43e7-aeb0-23b2fe7c289f</UserSecretsId>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
