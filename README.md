@@ -11,7 +11,7 @@ Ce dépôt GitHub contient deux applications (Web et Desktop) ainsi qu'une libra
   Application Desktop (client lourd)
 
 - **`StockLibrary`**  
-  Librairie personnalisée commune aux deux applications (modèles, etc.)
+  Librairie personnalisée commune aux deux applications (Models, Seeders, DbContext partagé, etc.)
 
 ---
 
