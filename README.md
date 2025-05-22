@@ -1,4 +1,4 @@
-# Brance de Développement du projet
+# Branche de Développement du projet
 
 ---
 
