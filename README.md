@@ -18,5 +18,3 @@ Ce dépôt GitHub contient deux applications (Web et Desktop) ainsi qu'une libra
   Librairie personnalisée commune aux deux applications (Models, Seeders, DbContext partagé, etc.)
 
 ---
-
-Ce projet a été réalisé dans le cadre du BTS SIO SLAM.
