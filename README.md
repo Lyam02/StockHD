@@ -1,3 +1,7 @@
+# Branche Principale du projet
+
+---
+
 # StockHD – Structure du dépôt
 
 Ce dépôt GitHub contient deux applications (Web et Desktop) ainsi qu'une librairie partagée utilisée par les deux projets.
