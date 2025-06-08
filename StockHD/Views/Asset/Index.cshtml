@@ -35,39 +35,6 @@
                 </tr> 
             </thead>
 
-<<<<<<< HEAD
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(Model => Model.AssetType.Name)</th>
-                <th>@Html.DisplayNameFor(Model => Model.Manufacturer)</th>
-                <th>@Html.DisplayNameFor(Model => Model.PropertiesValues)</th>
-                <th>@Html.DisplayNameFor(model => model.SerialNumber)</th>
-                <th>@Html.DisplayNameFor(Model => Model.Location.Name)</th>
-                <th></th>
-            </tr> 
-        </thead>
-
-        <tbody>
-            @{
-                foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.AssetType.Name)</td>
-                        <td>@Html.DisplayNameFor(Model => Model.Manufacturer)</td>
-                        <td>@string.Join(",", item.PropertiesValues.Select(p => p.Value).ToList())</td>
-                        <td>@Html.DisplayFor(modelItem => item.SerialNumber)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Location.Name)</td>
-                        <td>
-                            <a href="@Url.Action("Edit_Asset", "Asset", new{id = item.Id})">Modifier</a> |
-                            <a href="@Url.Action("Delete_Asset", "Asset", new{id = item.Id})">Supprimer</a><br>
-                            | <a href="@Url.Action("Detail_Asset", "Asset", new{id = item.Id})">Detail</a>
-                            @*
-                            Permet d'indiquer l'action, le controlleur et la valeur
-                            ca crée ensuite une url en fonction de la nomenclature du Startup
-                            *@
-                        </td>
-                    </tr>
-=======
             <tbody class="table-group-divider">
                 @{
                     foreach (var item in Model)
@@ -90,7 +57,6 @@
                             </td>
                         </tr>
                     }
->>>>>>> Dev
                 }
 
             </tbody>

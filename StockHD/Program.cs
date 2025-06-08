@@ -1,16 +1,11 @@
 
 
-using Microsoft.AspNetCore.Connections;
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
-using StockHD.Data;
-=======
 using Microsoft.Extensions.Hosting;
 using StockLibrary.Data;
 using StockLibrary.Data.Seeders;
 using Microsoft.AspNetCore.Identity;
 using StockLibrary;
->>>>>>> Dev
 
 namespace StockHD
 {
@@ -19,34 +14,14 @@ namespace StockHD
 
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: false)
-            .Build();
 
-            Console.WriteLine("debug: "+config.GetConnectionString("SqlLiteDbContext"));
-
-#if DEBUG
             var app = CreateHostBuilder(args).Build();
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = new System.Globalization.CultureInfo("fr-FR");
 
-<<<<<<< HEAD
-#else
-            var app = (config.GetValue<bool>("SelfHosting")) ? CreateHostBuilderSelf(args).Build() : CreateHostBuilder(args).Build();
-#endif
-
-            // Add services to the container.
-            // builder.Services.AddControllersWithViews();
-
-            //var app = builder.Build();
-
-
-
-=======
             // _________________________________________________________________________________________________________________________________________________
             // Add services to the container.
             // builder.Services.AddControllersWithViews();
             //var app = builder.Build();
->>>>>>> Dev
             // Configure the HTTP request pipeline.
             //if (!app.Environment.IsDevelopment())
             //{
@@ -95,38 +70,10 @@ namespace StockHD
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
            Host.CreateDefaultBuilder(args)
-           .ConfigureWebHostDefaults(webBuilder =>
-           {
-               webBuilder.UseStartup<Startup>();
-           });
-
-
-
-
-        public static IHostBuilder CreateHostBuilderSelf(string[] args) =>
-         Host.CreateDefaultBuilder(args)
-             //.UseSystemd()
-             //.UseWindowsService()
-             //.UseContentRoot(Directory.GetCurrentDirectory())
-
-             .ConfigureWebHostDefaults(webBuilder =>
-             {
-
-                //webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
-                // webBuilder.UseIISIntegration();
-                 webBuilder.UseKestrel(options =>
-                 {
-                     // HTTP 5000
-                     options.ListenLocalhost(5000);
-
-                     // HTTPS 5001
-                     options.ListenLocalhost(5001, builder =>
-                     {
-                         builder.UseHttps();
-                     });
-                 });
-                 webBuilder.UseStartup<Startup>(); ;
-             });
+               .ConfigureWebHostDefaults(webBuilder =>
+               {
+                   webBuilder.UseStartup<Startup>();
+               });
 
         
 
